@@ -7,6 +7,8 @@ import navneetPortrait from './assets/images/navneet_portrait_1777827174428.png'
 import nishikantPortrait from './assets/images/nishikant_portrait_1777827198758.png';
 import craftImage from './assets/images/workspace_craft_1777827220745.png';
 import teamImage from './assets/images/workspace_team_1777827283644.png';
+import logoImg from './assets/images/logo.png';
+import CustomCursor from './CustomCursor';
 
 const FadeIn = ({ children, delay = 0, y = 30 }) => (
   <motion.div
@@ -45,13 +47,17 @@ export default function App() {
 
   return (
     <main>
+      <CustomCursor />
       {/* Navigation */}
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '2vw 5vw', display: 'flex', justifyContent: 'space-between', zIndex: 100, mixBlendMode: 'difference' }}>
+      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '2vw 5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, mixBlendMode: 'difference' }}>
         <motion.div 
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}
-          style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', letterSpacing: '0.1em' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
         >
-          SUI DHAGA
+          <img src={logoImg} alt="Sui Dhaga Global Logo" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
+          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', letterSpacing: '0.1em', marginTop: '4px' }}>
+            SUI DHAGA GLOBAL
+          </span>
         </motion.div>
         <motion.a 
           href="#book"

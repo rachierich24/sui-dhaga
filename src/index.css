@@ -20,7 +20,12 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  cursor: crosshair;
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='s'%3E%3CfeDropShadow dx='1' dy='1' stdDeviation='1' flood-color='rgba(0,0,0,0.5)'/%3E%3C/filter%3E%3Cpath d='M2 2 L26 28 C28 30 30 28 28 26 Z' fill='%23E0E0E0' filter='url(%23s)'/%3E%3Cline x1='23' y1='23' x2='26' y2='26' stroke='%23030303' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") 2 2, auto;
+}
+
+/* Make sure links show pointer but don't lose the theme */
+a, button {
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {
