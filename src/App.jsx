@@ -1,21 +1,56 @@
 import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
+// Import components
+import CustomCursor from './CustomCursor';
+import CinematicHero from './components/CinematicHero';
+import TextReveal from './components/TextReveal';
+import ImageReveal from './components/ImageReveal';
+import HorizontalScrollProcess from './components/HorizontalScrollProcess';
+import PageTransition from './components/PageTransition';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 // Import images directly for Vite bundling
-import heroBg from './assets/images/hero_bg_1777827156134.png';
 import navneetPortrait from './assets/images/navneet_portrait_1777827174428.png';
 import nishikantPortrait from './assets/images/nishikant_portrait_1777827198758.png';
 import craftImage from './assets/images/workspace_craft_1777827220745.png';
 import teamImage from './assets/images/workspace_team_1777827283644.png';
+import creativeImage from './assets/images/workspace_creative_1777827300802.png';
 import logoImg from './assets/images/logo.png';
-import CustomCursor from './CustomCursor';
 
-const FadeIn = ({ children, delay = 0, y = 30 }) => (
+const FloatContainer = ({ children }) => {
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  return (
+    <motion.div ref={ref} style={{ y, width: '100%', position: 'relative' }}>
+      {children}
+    </motion.div>
+  );
+};
+
+const MassiveBackgroundText = ({ text }) => {
+  const { scrollYProgress } = useScroll();
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  return (
+    <div className="massive-bg-text-container">
+      <motion.div className="massive-bg-text" style={{ x }}>
+        {text}
+      </motion.div>
+    </div>
+  );
+};
+
+const FadeIn = ({ children, delay = 0, y = 50 }) => (
   <motion.div
     initial={{ opacity: 0, y }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay }}
+    transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay }}
   >
     {children}
   </motion.div>
@@ -27,9 +62,9 @@ const ParallaxMaskImage = ({ src, alt, className = "" }) => {
 
   return (
     <div className={`image-container editorial-mask ${className}`}>
-      <motion.img 
-        src={src} 
-        alt={alt} 
+      <motion.img
+        src={src}
+        alt={alt}
         className="image-cover"
         style={{ y, scale: 1.15 }}
       />
@@ -47,71 +82,57 @@ export default function App() {
 
   return (
     <main>
+      <div className="global-grain"></div>
+      <PageTransition />
       <CustomCursor />
-      {/* Navigation */}
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '2vw 5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, mixBlendMode: 'difference' }}>
-        <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-        >
-          <img src={logoImg} alt="Sui Dhaga Global Logo" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
-          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', letterSpacing: '0.1em', marginTop: '4px' }}>
-            SUI DHAGA GLOBAL
-          </span>
-        </motion.div>
-        <motion.a 
-          href="#book"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.2 }}
-        >
-          BOOK CONSULTATION
-        </motion.a>
-      </nav>
 
-      {/* 1. Static Hero Banner */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden', padding: 0, zIndex: 1 }}>
-        {/* Static Image Background */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: -2 }}>
-           <img 
-             src={heroBg} 
-             alt="Luxury Fabric" 
-             className="image-cover"
-           />
-        </div>
-        {/* Dark overlay for text readability */}
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(5, 5, 5, 0.4)', zIndex: -1 }} />
+      <Navbar />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1, height: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center', padding: '10vw 5vw' }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-          >
-            <h1 className="display-1" style={{ marginBottom: '2rem' }}>
-              Bespoke.<br />
-              <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Personalised.</span><br />
-              Empowering.
-            </h1>
-            <p className="lead text-muted" style={{ margin: '0 auto', maxWidth: '500px' }}>
-              We craft exquisite, custom-fitted women's clothing—where every thread honors your unique silhouette and our artisans' resilience.
-            </p>
-          </motion.div>
+      {/* Cinematic Hero Section - Fixed to background for transition */}
+      <div style={{ height: '100vh', position: 'relative', zIndex: 0 }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh' }}>
+          <CinematicHero />
         </div>
-      </section>
+      </div>
 
-      {/* The Hook Section with Image Background */}
-      <section className="section" style={{ position: 'relative', textAlign: 'center', padding: '15vw 5vw', overflow: 'hidden', zIndex: 1 }}>
-        <div style={{ position: 'absolute', inset: 0, zIndex: -2 }}>
-          <ParallaxMaskImage src={teamImage} alt="Our Team" className="image-cover" />
-        </div>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.7)', zIndex: -1 }} />
-        
-        <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
-          <FadeIn>
-            <h2 className="display-2" style={{ lineHeight: 1.3 }}>
-              A single thread can mend a tear.<br/>
-              But in the right hands, it can weave a future. 
-            </h2>
-          </FadeIn>
+      {/* Content that slides over the hero */}
+      <div style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--bg)' }}>
+
+      {/* The Redesigned Hook Section */}
+      <section className="section" style={{ position: 'relative', padding: '15vw 5vw', overflow: 'hidden' }}>
+        <MassiveBackgroundText text="BESPOKE" />
+
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '8vw', position: 'relative', zIndex: 1 }}>
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '4vw' }}>
+            <div style={{ maxWidth: '500px', paddingTop: '5vw' }}>
+              <FadeIn delay={0.1}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                  <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)' }}></div>
+                  <p className="micro-typography" style={{ color: 'var(--gold)', letterSpacing: '0.2em', margin: 0 }}>01 — THE PHILOSOPHY</p>
+                </div>
+                <h2 className="display-2" style={{ marginBottom: '2rem', lineHeight: 1.1 }}>The Architecture of the Individual Form</h2>
+                <p className="lead text-muted">
+                  We do not believe in standard sizing. We believe in your size. Every garment is constructed from the ground up to amplify your presence and tell your story.
+                </p>
+              </FadeIn>
+            </div>
+
+            <FadeIn delay={0.3}>
+              <div style={{ width: '40vw', minWidth: '300px', height: '60vh' }}>
+                <ParallaxMaskImage src={teamImage} alt="Bespoke Design" className="image-cover" />
+              </div>
+            </FadeIn>
+          </div>
+
+          <div style={{ alignSelf: 'center', maxWidth: '1000px', textAlign: 'center', marginTop: '5vw' }}>
+            <TextReveal className="display-1" style={{ lineHeight: 1.1 }}>
+              A SINGLE THREAD CAN MEND A TEAR. <br/>
+              <span className="italic-text text-gold" style={{ textTransform: 'lowercase', fontSize: '1.2em' }}>but in the right hands,</span> <br/>
+              IT CAN WEAVE A FUTURE.
+            </TextReveal>
+          </div>
+
         </div>
       </section>
 
@@ -119,9 +140,9 @@ export default function App() {
       <section className="section" style={{ padding: '10vw 5vw' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center' }}>
           <div>
-            <FadeIn>
-              <h3 className="display-2" style={{ marginBottom: '3vw' }}>The Art of Personalization</h3>
-            </FadeIn>
+            <TextReveal className="display-2" style={{ marginBottom: '3vw' }}>
+              The Art of Personalization
+            </TextReveal>
             <FadeIn delay={0.1}>
               <p className="lead text-muted" style={{ marginBottom: '2vw' }}>
                 True luxury is clothing that understands your body. We do not believe in standard sizing; we believe in your size.
@@ -141,42 +162,46 @@ export default function App() {
         </div>
       </section>
 
-      {/* The Process */}
-      <section className="section" style={{ backgroundColor: '#050505', padding: '15vw 5vw' }}>
+      {/* High-Contrast Portrait Gallery */}
+      <section className="gallery-section">
         <div className="container">
-          <FadeIn>
-            <h2 className="display-2" style={{ textAlign: 'center', marginBottom: '10vw' }}>How It Works</h2>
-          </FadeIn>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4vw' }}>
-            <FadeIn delay={0.1}>
-              <span className="process-number">01</span>
-              <h4 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Consultation</h4>
-              <p className="text-muted">Connect with our stylists. We discuss your vision, preferred fabrics, and guide you through taking perfect measurements from the comfort of your home.</p>
-            </FadeIn>
-            
-            <FadeIn delay={0.3}>
-              <span className="process-number">02</span>
-              <h4 style={{ fontSize: '2rem', marginBottom: '1rem' }}>The Stitch</h4>
-              <p className="text-muted">Our resilient women artisans take over. Every seam is sewn with precision, transforming premium fabrics into your bespoke garment.</p>
-            </FadeIn>
-            
-            <FadeIn delay={0.5}>
-              <span className="process-number">03</span>
-              <h4 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Delivery</h4>
-              <p className="text-muted">Your custom-stitched clothing arrives at your door. A perfect fit, crafted exclusively for you, carrying a story of empowerment.</p>
-            </FadeIn>
+          <div className="gallery-grid">
+            <div className="gallery-item left">
+              <FloatContainer>
+                <div className="portrait-mask">
+                  <ImageReveal src={creativeImage} alt="Editorial Fashion 1" />
+                </div>
+                <div className="gallery-caption">
+                  <span className="text-muted">01</span>
+                  <span>VISION</span>
+                </div>
+              </FloatContainer>
+            </div>
+            <div className="gallery-item right">
+              <FloatContainer>
+                <div className="portrait-mask">
+                  <ImageReveal src={teamImage} alt="Editorial Fashion 2" delay={0.2} />
+                </div>
+                <div className="gallery-caption">
+                  <span className="text-muted">02</span>
+                  <span>STRUCTURE</span>
+                </div>
+              </FloatContainer>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Horizontal GSAP Process Section */}
+      <HorizontalScrollProcess />
+
       {/* Founders */}
       <section className="section" style={{ padding: '15vw 5vw' }}>
         <div className="container">
-          <FadeIn>
-            <h2 className="display-2" style={{ textAlign: 'center', marginBottom: '10vw' }}>The Visionaries</h2>
-          </FadeIn>
-          
+          <TextReveal className="display-2" style={{ textAlign: 'center', marginBottom: '10vw' }}>
+            The Visionaries
+          </TextReveal>
+
           {/* Navneet */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center', marginBottom: '15vw' }}>
             <FadeIn delay={0.2}>
@@ -230,33 +255,38 @@ export default function App() {
       </section>
 
       {/* Book an Order (Conversion Section) */}
-      <section id="book" className="section fluid-bg" style={{ minHeight: '80vh', textAlign: 'center', justifyContent: 'center', padding: '10vw 5vw' }}>
-        <FadeIn>
-          <h2 className="display-1" style={{ marginBottom: '2vw' }}>Begin Your<br/>Journey</h2>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p className="lead text-muted" style={{ margin: '0 auto 4vw', maxWidth: '600px' }}>
-            Ready for a wardrobe that truly fits? Book a consultation via WhatsApp to start the personalization process.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.4}>
-          <a 
-            href="https://wa.me/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            style={{ 
-              display: 'inline-block',
-              padding: '1.5rem 4rem',
-              border: '1px solid var(--gold)',
-              color: 'var(--gold)',
-              fontSize: '1rem',
-              letterSpacing: '0.2em'
-            }}
-          >
-            BOOK CONSULTATION
-          </a>
-        </FadeIn>
+      <section id="book" className="section inverted-section" style={{ minHeight: '80vh', textAlign: 'center', justifyContent: 'center', padding: '10vw 5vw', position: 'relative', overflow: 'hidden' }}>
+        <MassiveBackgroundText text="SUI DHAGA" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <TextReveal className="display-1" style={{ marginBottom: '2vw' }}>
+            Begin Your Journey
+          </TextReveal>
+          <FadeIn delay={0.2}>
+            <p className="lead text-muted" style={{ margin: '0 auto 4vw', maxWidth: '600px' }}>
+              Ready for a wardrobe that truly fits? Book a consultation via WhatsApp to start the personalization process.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <a
+              href="https://wa.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="book-btn"
+              style={{
+                display: 'inline-block',
+                padding: '1.5rem 4rem',
+                border: '1px solid',
+                fontSize: '1rem',
+                letterSpacing: '0.2em'
+              }}
+            >
+              BOOK CONSULTATION
+            </a>
+          </FadeIn>
+        </div>
       </section>
+      <Footer />
+      </div>
     </main>
   );
 }
