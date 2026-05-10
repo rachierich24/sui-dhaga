@@ -36,7 +36,7 @@ const HowWeWork = () => {
               <motion.div
                 initial={{ scale: 1.05, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "0px" }}
                 transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
                 style={{ borderRadius: '4px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.8)' }}
               >

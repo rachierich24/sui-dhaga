@@ -5,7 +5,7 @@ export const FadeIn = ({ children, delay = 0, y = 50 }) => (
   <motion.div
     initial={{ opacity: 0, y }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
+    viewport={{ once: true, margin: "50px" }}
     transition={{ 
       duration: 1.2, 
       ease: [0.16, 1, 0.3, 1], // Even smoother custom cubic bezier

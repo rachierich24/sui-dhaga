@@ -10,7 +10,7 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10% " }}
+        viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay }}
         className={className}
         style={{ ...style, willChange: 'transform, opacity' }}
@@ -55,7 +55,7 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-10%" }}
+      viewport={{ once: true, margin: "0px" }}
       className={className}
     >
       {words.map((word, index) => (
