@@ -45,6 +45,7 @@ const ParallaxMaskImage = ({ src, alt, className = "" }) => {
         className="image-cover"
         style={{ y, scale: 1.1, willChange: 'transform' }}
         decoding="async"
+        loading="lazy"
       />
     </div>
   );

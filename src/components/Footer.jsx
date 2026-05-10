@@ -149,11 +149,7 @@ const Footer = () => {
           </div>
 
           {/* Right: Links Columns */}
-          <div style={{
-            display: 'flex',
-            gap: 'var(--gap-responsive)',
-            flexWrap: 'wrap'
-          }}>
+          <div className="footer-links-grid">
             {/* Column 1 */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em' }}>BRAND</h4>

@@ -5,8 +5,8 @@
   --gold: #d4af37;
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Inter', sans-serif;
-  --section-padding-y: clamp(5rem, 15vw, 12rem);
-  --section-padding-x: clamp(1.5rem, 5vw, 4rem);
+  --section-padding-y: clamp(4rem, 15vw, 12rem);
+  --section-padding-x: clamp(1rem, 5vw, 4rem);
   --gap-responsive: clamp(2rem, 6vw, 6rem);
 }
 
@@ -401,7 +401,7 @@ a:hover {
 
 .massive-bg-text {
   font-family: var(--font-serif);
-  font-size: clamp(10rem, 25vw, 40rem);
+  font-size: clamp(4rem, 22vw, 40rem);
   font-weight: 300;
   color: rgba(255, 255, 255, 0.03);
   white-space: nowrap;
@@ -441,6 +441,19 @@ a:hover {
   height: 80vh;
   overflow: hidden;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    width: 90%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-self: center !important;
+  }
+  
+  .portrait-mask {
+    height: 60vh;
+  }
 }
 
 .portrait-mask img {
@@ -487,7 +500,7 @@ a:hover {
 
 .massive-center-text {
   font-family: var(--font-serif);
-  font-size: clamp(3rem, 15vw, 25rem);
+  font-size: clamp(2rem, 12vw, 25rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -630,6 +643,14 @@ a:hover {
 
 .footer-submit-btn:hover {
   opacity: 0.6;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
+  width: 100%;
+  flex: 1;
 }
 
 /* Horizontal Process Section - Mobile Optimization */
