@@ -71,10 +71,10 @@ const Footer = () => {
       <div style={{
         position: 'relative',
         zIndex: 1,
-        padding: '0 5vw',
+        padding: '0 var(--section-padding-x)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '8vw'
+        gap: 'var(--gap-responsive)'
       }}>
 
         <div style={{
@@ -85,7 +85,7 @@ const Footer = () => {
         }}>
 
           {/* Left: Newsletter */}
-          <div style={{ flex: '1 1 400px', maxWidth: '500px' }}>
+          <div style={{ flex: '1 1 250px', maxWidth: '500px' }}>
             <h3 style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '1.2rem',
@@ -151,7 +151,7 @@ const Footer = () => {
           {/* Right: Links Columns */}
           <div style={{
             display: 'flex',
-            gap: '6vw',
+            gap: 'var(--gap-responsive)',
             flexWrap: 'wrap'
           }}>
             {/* Column 1 */}

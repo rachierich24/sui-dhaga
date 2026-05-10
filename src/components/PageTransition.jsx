@@ -1,72 +1,58 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const PageTransition = () => {
-  const columns = 5;
-  
-  const container = {
-    initial: {},
-    animate: {
-      transition: {
-        staggerChildren: 0.1,
-      }
-    }
-  };
-
-  const column = {
-    initial: { top: 0 },
-    animate: { 
-      top: "-100vh",
-      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } 
-    }
-  };
+  const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <motion.div
-      variants={container}
-      initial="initial"
-      animate="animate"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        display: 'flex',
-        zIndex: 999999,
-        pointerEvents: 'none'
-      }}
-    >
-      {[...Array(columns)].map((_, i) => (
+    <AnimatePresence>
+      {isVisible && (
         <motion.div
-          key={i}
-          variants={column}
-          style={{
-            position: 'relative',
-            height: '100vh',
-            width: `${100 / columns}vw`,
-            backgroundColor: '#050505',
+          onAnimationComplete={() => setIsVisible(false)}
+          initial={{ y: 0 }}
+          animate={{ y: "-100vh" }}
+          exit={{ display: "none" }}
+          transition={{ 
+            duration: 1.4, 
+            ease: [0.76, 0, 0.24, 1], // Luxury snap curve
+            delay: 1.2 
           }}
-        />
-      ))}
-      
-      {/* Brand Text */}
-      <motion.div
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          color: '#D4AF37',
-          fontFamily: 'var(--font-serif)',
-          fontSize: '2rem',
-          letterSpacing: '0.2em',
-          zIndex: 10
-        }}
-      >
-        SUI DHAGA
-      </motion.div>
-    </motion.div>
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: '#020202',
+            zIndex: 999999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            willChange: 'transform'
+          }}
+        >
+          {/* Aesthetic Minimal Text Reveal */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
+            <motion.div
+              animate={{ opacity: 0, y: -15, scale: 0.95 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
+              style={{
+                color: '#D4AF37',
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(1.2rem, 3vw, 2rem)',
+                letterSpacing: '0.4em',
+                fontWeight: 300,
+                textTransform: 'uppercase',
+                textShadow: '0 0 20px rgba(212, 175, 55, 0.2)'
+              }}
+            >
+              Sui Dhaga
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

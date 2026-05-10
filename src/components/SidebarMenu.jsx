@@ -75,9 +75,9 @@ const SidebarMenu = ({ isOpen, setMenuOpen }) => {
               >
                 <motion.img
                   src={hoveredLink.image}
-                  initial={{ scale: 1.1, filter: 'grayscale(100%) brightness(0.2)' }}
-                  animate={{ scale: 1, filter: 'grayscale(100%) brightness(0.4)' }}
-                  transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 0.3 }}
+                  transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                   style={{
                     width: '100%',
                     height: '100%',

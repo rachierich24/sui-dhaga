@@ -7,9 +7,17 @@ import CinematicHero from './components/CinematicHero';
 import TextReveal from './components/TextReveal';
 import ImageReveal from './components/ImageReveal';
 import HorizontalScrollProcess from './components/HorizontalScrollProcess';
+import HowWeWork from './components/HowWeWork';
 import PageTransition from './components/PageTransition';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 // Import images directly for Vite bundling
 import navneetPortrait from './assets/images/navneet_portrait_1777827174428.png';
@@ -19,54 +27,24 @@ import teamImage from './assets/images/workspace_team_1777827283644.png';
 import creativeImage from './assets/images/workspace_creative_1777827300802.png';
 import logoImg from './assets/images/logo.png';
 
-const FloatContainer = ({ children }) => {
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  return (
-    <motion.div ref={ref} style={{ y, width: '100%', position: 'relative' }}>
-      {children}
-    </motion.div>
-  );
-};
-
-const MassiveBackgroundText = ({ text }) => {
-  const { scrollYProgress } = useScroll();
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  return (
-    <div className="massive-bg-text-container">
-      <motion.div className="massive-bg-text" style={{ x }}>
-        {text}
-      </motion.div>
-    </div>
-  );
-};
-
-const FadeIn = ({ children, delay = 0, y = 50 }) => (
-  <motion.div
-    initial={{ opacity: 0, y }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay }}
-  >
-    {children}
-  </motion.div>
-);
+import { FadeIn, FloatContainer, MassiveBackgroundText } from './components/MotionHelpers';
 
 const ParallaxMaskImage = ({ src, alt, className = "" }) => {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const containerRef = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <div className={`image-container editorial-mask ${className}`}>
+    <div ref={containerRef} className={`image-container editorial-mask ${className}`}>
       <motion.img
         src={src}
         alt={alt}
         className="image-cover"
-        style={{ y, scale: 1.15 }}
+        style={{ y, scale: 1.1, willChange: 'transform' }}
+        decoding="async"
       />
     </div>
   );
@@ -74,9 +52,28 @@ const ParallaxMaskImage = ({ src, alt, className = "" }) => {
 
 export default function App() {
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
+    // Initialize Lenis for maximum "buttery" feel
+    const lenis = new Lenis({
+      lerp: 0.06, // The golden ratio for buttery smooth inertia
+      smoothWheel: true,
+      wheelMultiplier: 1.1, // Slightly amplified for premium glide
+      smoothTouch: true,
+      touchMultiplier: 1.5,
+    });
+
+    // Synchronize Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+    ScrollTrigger.config({ limitCallbacks: true });
+
     return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
     };
   }, []);
 
@@ -88,24 +85,22 @@ export default function App() {
 
       <Navbar />
 
-      {/* Cinematic Hero Section - Fixed to background for transition */}
-      <div style={{ height: '100vh', position: 'relative', zIndex: 0 }}>
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh' }}>
-          <CinematicHero />
-        </div>
+      {/* Cinematic Hero Section - Optimized for performance */}
+      <div style={{ height: '100vh', position: 'relative', zIndex: 0, overflow: 'hidden' }}>
+        <CinematicHero />
       </div>
 
       {/* Content that slides over the hero */}
       <div style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--bg)' }}>
 
       {/* The Redesigned Hook Section */}
-      <section className="section" style={{ position: 'relative', padding: '15vw 5vw', overflow: 'hidden' }}>
+      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
         <MassiveBackgroundText text="BESPOKE" />
 
-        <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '8vw', position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-responsive)', position: 'relative', zIndex: 1 }}>
           
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '4vw' }}>
-            <div style={{ maxWidth: '500px', paddingTop: '5vw' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'calc(var(--gap-responsive) / 2)' }}>
+            <div style={{ maxWidth: '500px', flex: '1 1 300px' }}>
               <FadeIn delay={0.1}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                   <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)' }}></div>
@@ -118,15 +113,15 @@ export default function App() {
               </FadeIn>
             </div>
 
-            <FadeIn delay={0.3}>
-              <div style={{ width: '40vw', minWidth: '300px', height: '60vh' }}>
+            <FadeIn delay={0.3} style={{ flex: '1 1 300px', width: '100%' }}>
+              <div style={{ width: '100%', minWidth: '300px', height: '60vh' }}>
                 <ParallaxMaskImage src={teamImage} alt="Bespoke Design" className="image-cover" />
               </div>
             </FadeIn>
           </div>
 
           <div style={{ alignSelf: 'center', maxWidth: '1000px', textAlign: 'center', marginTop: '5vw' }}>
-            <TextReveal className="display-1" style={{ lineHeight: 1.1 }}>
+            <TextReveal className="display-1" style={{ lineHeight: 1.1 }} split={true}>
               A SINGLE THREAD CAN MEND A TEAR. <br/>
               <span className="italic-text text-gold" style={{ textTransform: 'lowercase', fontSize: '1.2em' }}>but in the right hands,</span> <br/>
               IT CAN WEAVE A FUTURE.
@@ -137,8 +132,8 @@ export default function App() {
       </section>
 
       {/* The Art of Personalization */}
-      <section className="section" style={{ padding: '10vw 5vw' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center' }}>
+      <section className="section">
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-responsive)', alignItems: 'center' }}>
           <div>
             <TextReveal className="display-2" style={{ marginBottom: '3vw' }}>
               The Art of Personalization
@@ -195,15 +190,18 @@ export default function App() {
       {/* Horizontal GSAP Process Section */}
       <HorizontalScrollProcess />
 
+      {/* New: How We Work Section */}
+      <HowWeWork />
+
       {/* Founders */}
-      <section className="section" style={{ padding: '15vw 5vw' }}>
+      <section className="section">
         <div className="container">
-          <TextReveal className="display-2" style={{ textAlign: 'center', marginBottom: '10vw' }}>
+          <TextReveal className="display-2" style={{ textAlign: 'center', marginBottom: 'var(--gap-responsive)' }}>
             The Visionaries
           </TextReveal>
 
           {/* Navneet */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center', marginBottom: '15vw' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-responsive)', alignItems: 'center', marginBottom: 'var(--gap-responsive)' }}>
             <FadeIn delay={0.2}>
               <div style={{ height: '60vh' }}>
                 <ParallaxMaskImage src={navneetPortrait} alt="NavneetJit Kaur" className="image-cover" />
@@ -233,7 +231,7 @@ export default function App() {
           </div>
 
           {/* Nishikant */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-responsive)', alignItems: 'center' }}>
             <div style={{ order: 2 }}>
               <FadeIn>
                 <h3 className="display-2" style={{ marginBottom: '2vw' }}>Nishikant Grover</h3>
@@ -255,7 +253,7 @@ export default function App() {
       </section>
 
       {/* Book an Order (Conversion Section) */}
-      <section id="book" className="section inverted-section" style={{ minHeight: '80vh', textAlign: 'center', justifyContent: 'center', padding: '10vw 5vw', position: 'relative', overflow: 'hidden' }}>
+      <section id="book" className="section inverted-section" style={{ minHeight: '80vh', textAlign: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
         <MassiveBackgroundText text="SUI DHAGA" />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <TextReveal className="display-1" style={{ marginBottom: '2vw' }}>

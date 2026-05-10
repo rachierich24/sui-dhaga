@@ -3,8 +3,12 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'fram
 import '../index.css';
 
 const CinematicHero = () => {
-  const { scrollYProgress } = useScroll();
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const containerRef = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -23,6 +27,9 @@ const CinematicHero = () => {
   const textY = useTransform(smoothMouseY, [0, 1], ["-3%", "3%"]);
 
   const handleMouseMove = (e) => {
+    // Disable on touch devices to save battery/performance
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX / innerWidth);
@@ -30,7 +37,7 @@ const CinematicHero = () => {
   };
 
   return (
-    <section className="cinematic-hero-section" onMouseMove={handleMouseMove} style={{ perspective: 1200, position: 'relative' }}>
+    <section ref={containerRef} className="cinematic-hero-section" onMouseMove={handleMouseMove} style={{ perspective: 1200, position: 'relative' }}>
 
       {/* Immersive Background */}
       <motion.div
@@ -41,7 +48,9 @@ const CinematicHero = () => {
           src="/woman.png"
           alt="Luxury Cinematic Fashion"
           className="cinematic-bg-image"
-          style={{ x: bgX, y: bgY, scale: 1.05 }}
+          style={{ x: bgX, y: bgY, scale: 1.05, willChange: 'transform' }}
+          decoding="async"
+          loading="eager"
         />
         <div className="vignette-overlay"></div>
         <div className="grain-overlay"></div>

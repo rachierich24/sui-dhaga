@@ -5,6 +5,11 @@ export default function CustomCursor() {
   const svgRef = useRef(null);
   const pathRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
   
   // High-performance Motion Values (bypasses React state/re-renders)
   const mouseX = useMotionValue(-1000);
@@ -15,10 +20,12 @@ export default function CustomCursor() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
   
-  const NUM_POINTS = 80;
+  const NUM_POINTS = 25;
   const points = useRef(Array.from({ length: NUM_POINTS }, () => ({ x: -1000, y: -1000 })));
 
   useEffect(() => {
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e) => {
       // Prevent snapping from top-left on initial entrance
       if (mouseX.get() === -1000) {
@@ -110,11 +117,14 @@ export default function CustomCursor() {
     render();
 
     return () => {
+      if (isTouchDevice) return;
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseover', handleMouseOver);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mouseX, mouseY, smoothX, smoothY]);
+  }, [mouseX, mouseY, smoothX, smoothY, isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <>
@@ -130,12 +140,6 @@ export default function CustomCursor() {
           zIndex: 99998,
         }}
       >
-        <defs>
-          <filter id="goldenGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
         <path
           ref={pathRef}
           fill="none"
@@ -143,7 +147,7 @@ export default function CustomCursor() {
           strokeWidth="1.2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={{ filter: 'url(#goldenGlow)', opacity: 0.85 }}
+          style={{ opacity: 0.6 }}
         />
       </svg>
 

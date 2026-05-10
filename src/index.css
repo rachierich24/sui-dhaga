@@ -5,6 +5,9 @@
   --gold: #d4af37;
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Inter', sans-serif;
+  --section-padding-y: clamp(5rem, 15vw, 12rem);
+  --section-padding-x: clamp(1.5rem, 5vw, 4rem);
+  --gap-responsive: clamp(2rem, 6vw, 6rem);
 }
 
 * {
@@ -23,6 +26,13 @@ body {
   overflow-x: hidden;
   cursor: none !important;
   /* Hide default cursor to use CustomCursor.jsx */
+}
+
+/* Re-enable default cursor on touch devices where custom cursor is hidden */
+@media (pointer: coarse) {
+  html, body, a, button {
+    cursor: auto !important;
+  }
 }
 
 /* Ensure links and buttons don't show the default pointer either */
@@ -75,11 +85,27 @@ a:hover {
 
 /* Layout utilities */
 .section {
-  padding: 20vw 5vw;
+  padding: var(--section-padding-y) var(--section-padding-x);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .container {
@@ -103,25 +129,31 @@ a:hover {
   max-width: 800px;
 }
 
-/* Fluid Hero Background */
+/* Optimized Fluid Hero Background */
 .fluid-bg {
-  background: linear-gradient(120deg, #020202, #181818, #050505, #111111);
-  background-size: 400% 400%;
-  animation: gradientFlow 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+  background-color: #020202;
 }
 
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
+.fluid-bg::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, #020202, #181818, #050505, #111111);
+  background-size: 50% 50%;
+  animation: transformFlow 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+  will-change: transform;
+}
 
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+@keyframes transformFlow {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(5deg); }
 }
 
 /* Images & Masks */
@@ -139,21 +171,8 @@ a:hover {
 .editorial-mask {
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   overflow: hidden;
-  animation: organicShape 12s ease-in-out infinite alternate;
-}
-
-@keyframes organicShape {
-  0% {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  }
-
-  50% {
-    border-radius: 60% 40% 30% 70% / 60% 50% 40% 50%;
-  }
-
-  100% {
-    border-radius: 40% 60% 50% 50% / 50% 30% 70% 50%;
-  }
+  /* Simplified or removed animation for performance */
+  transition: border-radius 1s ease;
 }
 
 /* Process Section Numbering */
@@ -193,37 +212,19 @@ a:hover {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  animation: slowZoom 12s infinite alternate ease-in-out;
-}
-
-@keyframes slowZoom {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(1.04);
-  }
+  /* Removed slowZoom animation for performance */
 }
 
 .vignette-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 70% 30%, rgba(180, 120, 40, 0.12), transparent 35%),
-    radial-gradient(circle at 20% 50%, rgba(255, 215, 120, 0.04), transparent 40%),
-    radial-gradient(circle at 70% 50%, rgba(0, 0, 0, 0) 30%, rgba(5, 5, 5, 0.4) 80%, rgba(3, 3, 3, 0.7) 100%);
+  background: radial-gradient(circle at center, transparent 20%, rgba(3, 3, 3, 0.7) 100%);
   pointer-events: none;
 }
 
+/* Removed heavy global-grain filter for performance */
 .global-grain {
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  z-index: 99999;
+  display: none;
 }
 
 .glass-panel {
@@ -234,9 +235,7 @@ a:hover {
   display: flex;
   align-items: center;
   padding-left: 8vw;
-  background: linear-gradient(90deg, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.6) 60%, transparent 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(90deg, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.7) 60%, transparent 100%);
 }
 
 @media (max-width: 768px) {
@@ -488,7 +487,7 @@ a:hover {
 
 .massive-center-text {
   font-family: var(--font-serif);
-  font-size: clamp(6rem, 20vw, 25rem);
+  font-size: clamp(3rem, 15vw, 25rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -631,4 +630,104 @@ a:hover {
 
 .footer-submit-btn:hover {
   opacity: 0.6;
-}
+}
+
+/* Horizontal Process Section - Mobile Optimization */
+.horizontal-process-section {
+  min-height: 100vh;
+}
+
+.horizontal-wrapper {
+  display: flex;
+  width: fit-content;
+  height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+.horizontal-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10vw;
+  gap: 5vw;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.process-number {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(4rem, 15vw, 10rem);
+  color: var(--gold);
+  opacity: 0.1;
+  line-height: 1;
+  margin-bottom: -1rem;
+  display: block;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .horizontal-process-section {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  
+  .horizontal-wrapper {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .horizontal-step {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 80vh;
+    padding: calc(var(--section-padding-y) + 2rem) var(--section-padding-x) var(--section-padding-y) !important;
+    gap: var(--gap-responsive) !important;
+    width: 100% !important;
+  }
+
+  .horizontal-step:nth-child(even) {
+    flex-direction: column !important;
+  }
+
+  .horizontal-step > div {
+    width: 100% !important;
+    flex: none !important;
+    height: auto !important;
+  }
+
+  .horizontal-step .parallax-item {
+    height: 40vh !important;
+  }
+
+  .stitch-line-mobile {
+    position: absolute;
+    left: 4vw;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--gold) 0,
+      var(--gold) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    opacity: 0.2;
+    z-index: 1;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
