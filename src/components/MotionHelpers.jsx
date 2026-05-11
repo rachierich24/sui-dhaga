@@ -6,10 +6,10 @@ export const FadeIn = ({ children, delay = 0, y = 50 }) => (
     initial={{ opacity: 0, y }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "100px" }}
-    transition={{ 
-      duration: 1.4, 
+    transition={{
+      duration: 1.4,
       ease: [0.16, 1, 0.3, 1], // Even smoother custom cubic bezier
-      delay 
+      delay
     }}
     style={{}}
   >
@@ -39,8 +39,8 @@ export const MassiveBackgroundText = ({ text }) => {
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   return (
     <div ref={containerRef} className="massive-bg-text-container">
-      <motion.div 
-        className="massive-bg-text" 
+      <motion.div
+        className="massive-bg-text"
         style={{ x }}
       >
         {text}

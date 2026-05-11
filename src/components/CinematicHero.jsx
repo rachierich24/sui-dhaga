@@ -29,7 +29,7 @@ const CinematicHero = () => {
   const handleMouseMove = (e) => {
     // Disable on touch devices to save battery/performance
     if (window.matchMedia("(pointer: coarse)").matches) return;
-    
+
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX / innerWidth);

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const TextReveal = ({ children, delay = 0, className = "", style = {}, split = false }) => {
   const isLongText = typeof children === 'string' && children.length > 100;
-  
+
   // If it's a block or long text or not requested to split, just do a simple block reveal
   if (!split || isLongText || typeof children !== 'string') {
     return (
@@ -26,10 +26,10 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.04, 
+      transition: {
+        staggerChildren: 0.04,
         delayChildren: delay,
-        ease: [0.16, 1, 0.3, 1] 
+        ease: [0.16, 1, 0.3, 1]
       }
     }
   };
