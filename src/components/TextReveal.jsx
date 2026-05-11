@@ -10,10 +10,10 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "0px" }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay }}
+        viewport={{ once: true, margin: "50px" }}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay }}
         className={className}
-        style={{ ...style, willChange: 'transform, opacity' }}
+        style={{ ...style }}
       >
         {children}
       </motion.div>
@@ -27,9 +27,9 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.03, 
+        staggerChildren: 0.04, 
         delayChildren: delay,
-        ease: [0.22, 1, 0.36, 1] 
+        ease: [0.16, 1, 0.3, 1] 
       }
     }
   };
@@ -39,8 +39,8 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
       opacity: 1,
       y: 0,
       transition: {
-        ease: [0.22, 1, 0.36, 1],
-        duration: 1.2
+        ease: [0.16, 1, 0.3, 1],
+        duration: 1.4
       }
     },
     hidden: {
@@ -60,7 +60,7 @@ const TextReveal = ({ children, delay = 0, className = "", style = {}, split = f
     >
       {words.map((word, index) => (
         <span style={{ overflow: 'hidden' }} key={index}>
-          <motion.span style={{ display: 'inline-block', willChange: 'transform, opacity' }} variants={child}>
+          <motion.span style={{ display: 'inline-block' }} variants={child}>
             {word}
           </motion.span>
         </span>

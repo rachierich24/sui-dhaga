@@ -1,13 +1,13 @@
 :root {
-  --bg: #030303;
-  --text: #ffffff;
-  --text-muted: #888888;
-  --gold: #d4af37;
+  --bg: #000000;
+  --text: #f0f0f0;
+  --text-muted: #666666;
+  --gold: #bda030;
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Inter', sans-serif;
-  --section-padding-y: clamp(4rem, 15vw, 12rem);
-  --section-padding-x: clamp(1rem, 5vw, 4rem);
-  --gap-responsive: clamp(2rem, 6vw, 6rem);
+  --section-padding-y: clamp(8rem, 20vw, 18rem);
+  --section-padding-x: clamp(2rem, 8vw, 8rem);
+  --gap-responsive: clamp(4rem, 10vw, 10rem);
 }
 
 * {
@@ -49,15 +49,16 @@ h5,
 h6 {
   font-family: var(--font-serif);
   font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
 }
 
 p {
   font-family: var(--font-sans);
-  font-weight: 200;
-  line-height: 1.7;
-  letter-spacing: 0.02em;
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
 }
 
 .text-gold {
@@ -92,20 +93,19 @@ a:hover {
   justify-content: center;
 }
 
-/* Glassmorphism Utilities */
+/* Minimal Layout Utilities */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  padding: 2rem 0;
+  transition: border-color 0.8s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border-top: 1px solid rgba(189, 160, 48, 0.4);
 }
 
 .container {
@@ -116,17 +116,22 @@ a:hover {
 
 /* Typography styles */
 .display-1 {
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-size: clamp(3rem, 8vw, 7.5rem);
   text-transform: uppercase;
+  font-weight: 300;
+  line-height: 0.85;
 }
 
 .display-2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 0.95;
 }
 
 .lead {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  max-width: 800px;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  max-width: 600px;
+  font-weight: 300;
+  color: #a0a0a0;
 }
 
 /* Optimized Fluid Hero Background */

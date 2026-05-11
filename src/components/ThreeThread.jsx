@@ -10,7 +10,7 @@ const ThreadLine = ({ offsetSpeed = 1, thickness = 0.08 }) => {
   const curve = useMemo(() => {
     const p = [];
     for (let i = 0; i <= 80; i++) {
-      const x = (i - 40) * 0.4; // Spread across X axis
+      const x = (i - 20) * 0.8; // Spread across X axis
       const y = Math.sin(i * 0.15) * 2.5 + Math.cos(i * 0.05) * 1.5;
       const z = Math.cos(i * 0.15) * 2.5 + Math.sin(i * 0.08) * 1.5;
       p.push(new THREE.Vector3(x, y, z));
@@ -33,7 +33,7 @@ const ThreadLine = ({ offsetSpeed = 1, thickness = 0.08 }) => {
 
   return (
     <mesh ref={meshRef}>
-      <tubeGeometry args={[curve, 150, thickness, 8, false]} />
+      <tubeGeometry args={[curve, 64, thickness, 8, false]} />
       <meshStandardMaterial 
         color="#D4AF37" 
         metalness={0.9} 
@@ -87,7 +87,7 @@ const AmbientDust = () => {
 const ThreeThread = () => {
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.6 }}>
-      <Canvas camera={{ position: [0, 0, 16], fov: 35 }} dpr={[1, 1.5]}>
+      <Canvas camera={{ position: [0, 0, 16], fov: 35 }} dpr={[1, 1]}>
         
         {/* Luxury Studio Lighting */}
         <ambientLight intensity={0.3} />

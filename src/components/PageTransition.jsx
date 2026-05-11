@@ -13,7 +13,7 @@ const PageTransition = () => {
           animate={{ y: "-100vh" }}
           exit={{ display: "none" }}
           transition={{ 
-            duration: 1.4, 
+            duration: 1.8, 
             ease: [0.76, 0, 0.24, 1], // Luxury snap curve
             delay: 1.2 
           }}

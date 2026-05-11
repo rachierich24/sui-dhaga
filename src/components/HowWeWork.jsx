@@ -37,8 +37,8 @@ const HowWeWork = () => {
                 initial={{ scale: 1.05, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "0px" }}
-                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{ borderRadius: '4px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.8)' }}
+                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                style={{ borderRadius: '4px', overflow: 'hidden' }}
               >
                 <img src={artisanStudio} alt="Our Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
               </motion.div>
@@ -51,9 +51,7 @@ const HowWeWork = () => {
                   position: 'absolute',
                   bottom: 'clamp(-30px, -5vw, -10px)',
                   right: 'clamp(-30px, -5vw, -10px)',
-                  backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
+                  backgroundColor: '#111',
                   border: '1px solid rgba(212, 175, 55, 0.5)',
                   color: 'var(--gold)',
                   padding: '1.5rem',
@@ -67,8 +65,7 @@ const HowWeWork = () => {
                   fontSize: 'clamp(0.6rem, 1vw, 0.8rem)',
                   fontWeight: '600',
                   letterSpacing: '0.1em',
-                  zIndex: 2,
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                  zIndex: 2
                 }}
               >
                 100%<br/>HANDMADE

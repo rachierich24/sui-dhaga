@@ -96,8 +96,7 @@ const HorizontalScrollProcess = () => {
                       WebkitTextStroke: '1px rgba(212, 175, 55, 0.3)',
                       lineHeight: 0.8,
                       display: 'block',
-                      marginBottom: '1rem',
-                      willChange: 'opacity, transform'
+                      marginBottom: '1rem'
                     }}>
                       {step.num}
                     </span>
@@ -113,15 +112,14 @@ const HorizontalScrollProcess = () => {
                   <motion.div 
                     initial={{ opacity: 0, y: 50, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, margin: "0px" }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                    viewport={{ once: true, margin: "100px" }}
+                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                     style={{ 
                       width: '100%', 
                       height: 'clamp(40vh, 60vh, 700px)', 
                       overflow: 'hidden', 
                       borderRadius: '8px', 
-                      boxShadow: '0 30px 60px rgba(0,0,0,0.6)',
-                      willChange: 'transform, opacity'
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
                     }}
                   >
                     <motion.img 
@@ -129,13 +127,12 @@ const HorizontalScrollProcess = () => {
                       alt={step.alt} 
                       initial={{ scale: 1.2 }}
                       whileInView={{ scale: 1 }}
-                      transition={{ duration: 2, ease: "easeOut" }}
-                      viewport={{ once: true }}
+                      transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                      viewport={{ once: true, margin: "100px" }}
                       style={{ 
                         width: '100%', 
                         height: '100%', 
-                        objectFit: 'cover',
-                        willChange: 'transform'
+                        objectFit: 'cover'
                       }} 
                     />
                   </motion.div>

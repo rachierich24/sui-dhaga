@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Viewer</title>
+<style>
+  body { font-family: sans-serif; background: #222; color: white; padding: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .card { background: #333; padding: 10px; border-radius: 8px; text-align: center; }
+  img { max-width: 100%; height: auto; border-radius: 4px; }
+  h3 { margin: 10px 0 0 0; font-size: 1rem; }
+</style>
+</head>
+<body>
+  <h1>Raw Photos</h1>
+  <div class="grid">
+    <script>
+      for(let i=1; i<=14; i++) {
+        document.write(`
+          <div class="card">
+            <img src="./public/raw_photo_${i}.jpeg" alt="raw_photo_${i}.jpeg">
+            <h3>raw_photo_${i}.jpeg</h3>
+          </div>
+        `);
+      }
+    </script>
+  </div>
+</body>
+</html>
