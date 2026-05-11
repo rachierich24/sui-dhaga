@@ -26,7 +26,7 @@ import logoImg from './assets/images/logo.png';
 
 import { FadeIn, FloatContainer, MassiveBackgroundText } from './components/MotionHelpers';
 
-const ParallaxMaskImage = ({ src, alt, className = "" }) => {
+const ParallaxMaskImage = ({ src, alt, className = "", imageStyle = {} }) => {
   const containerRef = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -40,7 +40,7 @@ const ParallaxMaskImage = ({ src, alt, className = "" }) => {
         src={src}
         alt={alt}
         className="image-cover"
-        style={{ y, scale: 1.1, willChange: 'transform' }}
+        style={{ y, scale: 1.1, willChange: 'transform', ...imageStyle }}
         decoding="async"
         loading="lazy"
       />
@@ -246,7 +246,7 @@ export default function App() {
               </div>
               <FadeIn delay={0.2} style={{ order: 1 }}>
                 <div style={{ height: '60vh' }}>
-                  <ParallaxMaskImage src={nishikantPortrait} alt="Nishikant" className="image-cover" />
+                  <ParallaxMaskImage src="/nishikant_whatsapp.jpeg" alt="Nishikant" className="image-cover" imageStyle={{ objectPosition: 'top' }} />
                 </div>
               </FadeIn>
             </div>
@@ -255,7 +255,7 @@ export default function App() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-responsive)', alignItems: 'center' }}>
               <FadeIn delay={0.2}>
                 <div style={{ height: '60vh' }}>
-                  <ParallaxMaskImage src="/cmo_camellia.jpeg" alt="Camellia" className="image-cover" />
+                  <ParallaxMaskImage src="/camellia_whatsapp.jpeg" alt="Camellia" className="image-cover" imageStyle={{ objectPosition: 'top' }} />
                 </div>
               </FadeIn>
               <div>
