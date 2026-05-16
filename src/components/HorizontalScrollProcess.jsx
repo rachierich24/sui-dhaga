@@ -1,8 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import TextReveal from './TextReveal';
-import { FadeIn } from './MotionHelpers';
-import ThreeThread from './ThreeThread';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 // Import generated images
 import consultationImg from '../assets/images/luxury_consultation_studio_1778357479386.png';
@@ -10,6 +7,47 @@ import stitchingImg from '../assets/images/artisans_stitching_detail_17783575021
 import deliveryImg from '../assets/images/luxury_garment_delivery_1778357531977.png';
 
 const HorizontalScrollProcess = () => {
+  const targetRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Map x translation smoothly across the entire 300vh scroll
+  // This uses percentages so it ignores scrollbar width differences
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.6666%"]);
+
+  // Elegant simple thread draw - draws exactly from 0 to 1
+  const threadDraw = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  // MATHEMATICAL LUXURY FOCUS PACING
+  // Step 1: Centered at 0.0. Dims and scales down as we scroll to 0.5 (where Step 2 is centered)
+  const step1Opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]);
+  const step1Scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+
+  // Step 2: Centered at 0.5. Scales/Fades up from 0.0, peaks at 0.5, dims to 1.0
+  const step2Opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.6]);
+  const step2Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
+
+  // Step 3: Centered at 1.0. Scales/Fades up from 0.5 to peak at 0.9 (so it's fully bright before the very end)
+  const step3Opacity = useTransform(scrollYProgress, [0.5, 0.9], [0.6, 1]);
+  const step3Scale = useTransform(scrollYProgress, [0.5, 0.9], [0.9, 1]);
+
+  const stepTransforms = [
+    { opacity: step1Opacity, scale: step1Scale },
+    { opacity: step2Opacity, scale: step2Scale },
+    { opacity: step3Opacity, scale: step3Scale }
+  ];
+
   const steps = [
     {
       num: "01",
@@ -35,113 +73,130 @@ const HorizontalScrollProcess = () => {
   ];
 
   return (
-    <section className="vertical-process-section" style={{ backgroundColor: '#030303', color: '#fff', position: 'relative', overflow: 'hidden', padding: 'var(--section-padding-y) 0' }}>
-      
-      {/* Scoped CSS for the new rock-solid layout */}
-      <style>{`
-        .process-row {
-          display: flex;
-          align-items: center;
-          gap: var(--gap-responsive);
-        }
-        .process-row.reverse {
-          flex-direction: row-reverse;
-        }
-        .process-col {
-          flex: 1;
-          min-width: 300px;
-          width: 100%;
-        }
-        @media (max-width: 768px) {
-          .process-row, .process-row.reverse {
-            flex-direction: column-reverse; /* Text on bottom, image on top */
-          }
-        }
-      `}</style>
+    <section
+      ref={targetRef}
+      className="horizontal-process-section"
+      style={{
+        position: 'relative',
+        height: isMobile ? 'auto' : '400vh',
+        backgroundColor: '#030303',
+        overflow: isMobile ? 'hidden' : 'clip' // Prevent horizontal scrollbar
+      }}
+    >
+      <div
+        style={{
+          position: isMobile ? 'relative' : 'sticky',
+          top: 0,
+          height: isMobile ? 'auto' : '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
 
-      {/* 3D Background */}
-      <div className="desktop-only" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.4 }}>
-        <ThreeThread />
-      </div>
+        <motion.div
+          style={{
+            x: isMobile ? "0%" : x,
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            width: isMobile ? '100%' : '300vw',
+            height: isMobile ? 'auto' : '100%',
+            position: 'relative',
+            zIndex: 1,
+            gap: isMobile ? 'var(--section-padding-y)' : '0'
+          }}
+          className="horizontal-wrapper"
+        >
+          {/* Elegant Single Scrolling Golden Thread */}
+          <div style={{ position: 'absolute', top: '20%', left: 0, width: '300vw', height: '60%', pointerEvents: 'none', zIndex: -1, opacity: 0.6 }}>
+            <svg viewBox="0 0 3000 600" fill="none" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        
-        <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--section-padding-y)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)' }}></div>
-              <p className="micro-typography" style={{ color: 'var(--gold)', letterSpacing: '0.2em', margin: 0 }}>THE JOURNEY</p>
-              <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)' }}></div>
-            </div>
-            <TextReveal className="display-2">
-              The Process
-            </TextReveal>
+              {/* Refined Single Core Thread */}
+              <motion.path
+                style={{ pathLength: threadDraw }}
+                d="M -100 50 C 400 500, 600 100, 1000 300 C 1400 500, 1600 100, 2000 300 C 2400 500, 2600 100, 3100 300"
+                stroke="#D4AF37"
+                strokeWidth="1.5"
+                vectorEffect="non-scaling-stroke"
+              />
+
+              {/* Very Subtle Glow Trace */}
+              <motion.path
+                style={{ pathLength: threadDraw }}
+                d="M -100 50 C 400 500, 600 100, 1000 300 C 1400 500, 1600 100, 2000 300 C 2400 500, 2600 100, 3100 300"
+                stroke="#D4AF37"
+                strokeWidth="0.5"
+                vectorEffect="non-scaling-stroke"
+                style={{ filter: 'blur(3px)' }}
+              />
+            </svg>
           </div>
-        </FadeIn>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-padding-y)' }}>
-          {steps.map((step, index) => {
-            const isReverse = index % 2 === 1;
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="horizontal-step"
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: isMobile ? '100%' : '100vw',
+                height: isMobile ? 'auto' : '100%',
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: isMobile ? 'calc(var(--section-padding-y) / 2) var(--section-padding-x)' : '0 10vw',
+                gap: '5vw'
+              }}
+            >
 
-            return (
-              <div key={index} className={`process-row ${isReverse ? 'reverse' : ''}`}>
-                
-                {/* Text Column */}
-                <div className="process-col">
-                  <FadeIn delay={0.2}>
-                    <span style={{ 
-                      fontSize: 'clamp(4rem, 10vw, 8rem)', 
-                      fontFamily: 'var(--font-serif)', 
-                      color: 'transparent',
-                      WebkitTextStroke: '1px rgba(212, 175, 55, 0.3)',
-                      lineHeight: 0.8,
-                      display: 'block',
-                      marginBottom: '1rem'
-                    }}>
-                      {step.num}
-                    </span>
-                    <h3 className="display-2" style={{ marginBottom: '1.5rem' }}>{step.title}</h3>
-                    <p className="lead text-muted" style={{ maxWidth: '500px', lineHeight: 1.8 }}>
-                      {step.desc}
-                    </p>
-                  </FadeIn>
-                </div>
+              {/* Text Column */}
+              <div style={{ flex: 1, width: '100%', minWidth: isMobile ? '100%' : '300px' }}>
+                <motion.div style={{ opacity: isMobile ? 1 : stepTransforms[index].opacity }}>
+                  {/* Luxury Typography Layout */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: '1rem', marginBottom: '2rem' }}>
+                    <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em' }}>{step.num}</span>
+                    <span style={{ fontSize: '1rem', color: '#fff', letterSpacing: '0.2em', textTransform: 'uppercase' }}>{step.title}</span>
+                  </div>
 
-                {/* Image Column */}
-                <div className="process-col">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, margin: "100px" }}
-                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ 
-                      width: '100%', 
-                      height: 'clamp(40vh, 60vh, 700px)', 
-                      overflow: 'hidden', 
-                      borderRadius: '8px', 
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-                    }}
-                  >
-                    <motion.img 
-                      src={step.img} 
-                      alt={step.alt} 
-                      initial={{ scale: 1.2 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-                      viewport={{ once: true, margin: "100px" }}
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }} 
-                    />
-                  </motion.div>
-                </div>
-
+                  <h3 className="display-2" style={{ marginBottom: '1.5rem', color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 300 }}>{step.title}</h3>
+                  <p className="lead text-muted" style={{ maxWidth: '500px', lineHeight: 1.8, fontWeight: 300, fontSize: '0.95rem' }}>
+                    {step.desc}
+                  </p>
+                </motion.div>
               </div>
-            );
-          })}
-        </div>
+
+              {/* Image Column */}
+              <div style={{ flex: 1, width: '100%', minWidth: isMobile ? '100%' : '300px' }}>
+                <motion.div
+                  style={{
+                    opacity: isMobile ? 1 : stepTransforms[index].opacity,
+                    width: '80%',
+                    margin: '0 auto',
+                    height: 'clamp(40vh, 60vh, 700px)',
+                    overflow: 'hidden',
+                    borderRadius: '8px',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                    filter: 'brightness(0.85) contrast(1.15)',
+                    aspectRatio: '3/4',
+                    scale: isMobile ? 1 : stepTransforms[index].scale
+                  }}
+                >
+                  <motion.img
+                    src={step.img}
+                    alt={step.alt}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                </motion.div>
+              </div>
+
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

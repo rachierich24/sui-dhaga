@@ -93,7 +93,7 @@ const Footer = () => {
               marginBottom: '4rem',
               letterSpacing: '-0.02em'
             }}>
-              Entra nel mondo
+              Enter the world of Sui Dhaga
             </h3>
 
             <p style={{
@@ -122,7 +122,7 @@ const Footer = () => {
                   }}
                 />
                 <button type="submit" className="footer-submit-btn">
-                  ISCRIVITI
+                  SUBSCRIBE
                 </button>
               </div>
             </form>
@@ -143,7 +143,7 @@ const Footer = () => {
                 }}
               />
               <label htmlFor="privacy" style={{ fontSize: '0.75rem', fontWeight: 300 }}>
-                I have read the <a href="#" style={{ color: '#fff', textDecoration: 'underline', textUnderlineOffset: '2px', fontWeight: 500 }}>privacy policy</a> provided by Sui Dhaga Global
+                I have read the <a href="#" style={{ color: '#fff', textDecoration: 'underline', textUnderlineOffset: '2px', fontWeight: 500 }}>Privacy Policy</a> provided by Sui Dhaga Global.
               </label>
             </div>
           </div>
@@ -159,10 +159,10 @@ const Footer = () => {
 
             {/* Column 2 */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-              <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em' }}>SERVIZIO CLIENTI</h4>
-              <a href="#" className="footer-link-exact">Contatti</a>
-              <a href="#" className="footer-link-exact">Termini e condizioni</a>
-              <a href="#" className="footer-link-exact">Spedizione e Resi</a>
+              <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em' }}>CUSTOMER SERVICE</h4>
+              <a href="#" className="footer-link-exact">Contact</a>
+              <a href="#" className="footer-link-exact">Terms & Conditions</a>
+              <a href="#" className="footer-link-exact">Shipping & Returns</a>
             </div>
 
             {/* Column 3 */}

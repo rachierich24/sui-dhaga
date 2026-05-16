@@ -31,10 +31,10 @@ const Navbar = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
           zIndex: 9999,
-          background: scrolled && !menuOpen ? 'rgba(3, 3, 3, 0.8)' : 'transparent',
+          background: scrolled && !menuOpen ? 'rgba(3, 3, 3, 0.8)' : 'rgba(3, 3, 3, 0)',
           backdropFilter: scrolled && !menuOpen ? 'blur(12px)' : 'none',
           WebkitBackdropFilter: scrolled && !menuOpen ? 'blur(12px)' : 'none',
-          borderBottom: scrolled && !menuOpen ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
+          borderBottom: scrolled && !menuOpen ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(255, 255, 255, 0)',
           transition: 'background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease',
         }}
       >
