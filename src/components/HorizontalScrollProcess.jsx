@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 // Import generated images
 import consultationImg from '../assets/images/luxury_consultation_studio_1778357479386.png';
@@ -22,33 +22,21 @@ const HorizontalScrollProcess = () => {
     offset: ["start start", "end end"]
   });
 
-  // Map x translation smoothly across the entire 300vh scroll
-  // This uses percentages so it ignores scrollbar width differences
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.6666%"]);
+  // CINEMATIC MOTION SMOOTHING
+  // Adds weight and fluid inertia to the scroll-linked animations
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 40,
+    damping: 20,
+    restDelta: 0.001
+  });
 
-  // Elegant simple thread draw - draws exactly from 0 to 1
-  const threadDraw = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  // LAYERED DEPTH HIERARCHY
+  // Background (Thread) moves slowest, cards move faster, typography has its own pace
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-66.666%"]);
+  const threadX = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]); // Subtle background drift
+  const threadDraw = useTransform(smoothProgress, [0, 0.9], [0, 1]);
 
-  // MATHEMATICAL LUXURY FOCUS PACING
-  // Step 1: Centered at 0.0. Dims and scales down as we scroll to 0.5 (where Step 2 is centered)
-  const step1Opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]);
-  const step1Scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-
-  // Step 2: Centered at 0.5. Scales/Fades up from 0.0, peaks at 0.5, dims to 1.0
-  const step2Opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.6]);
-  const step2Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
-
-  // Step 3: Centered at 1.0. Scales/Fades up from 0.5 to peak at 0.9 (so it's fully bright before the very end)
-  const step3Opacity = useTransform(scrollYProgress, [0.5, 0.9], [0.6, 1]);
-  const step3Scale = useTransform(scrollYProgress, [0.5, 0.9], [0.9, 1]);
-
-  const stepTransforms = [
-    { opacity: step1Opacity, scale: step1Scale },
-    { opacity: step2Opacity, scale: step2Scale },
-    { opacity: step3Opacity, scale: step3Scale }
-  ];
-
-  const steps = [
+  const steps = useMemo(() => [
     {
       num: "01",
       title: "Consultation",
@@ -70,7 +58,7 @@ const HorizontalScrollProcess = () => {
       img: deliveryImg,
       alt: "Luxury Reveal"
     }
-  ];
+  ], []);
 
   return (
     <section
@@ -78,9 +66,9 @@ const HorizontalScrollProcess = () => {
       className="horizontal-process-section"
       style={{
         position: 'relative',
-        height: isMobile ? 'auto' : '400vh',
+        height: isMobile ? 'auto' : '300vh', // Reduced height for better pacing
         backgroundColor: '#030303',
-        overflow: isMobile ? 'hidden' : 'clip' // Prevent horizontal scrollbar
+        overflow: isMobile ? 'visible' : 'clip'
       }}
     >
       <div
@@ -88,11 +76,47 @@ const HorizontalScrollProcess = () => {
           position: isMobile ? 'relative' : 'sticky',
           top: 0,
           height: isMobile ? 'auto' : '100vh',
+          width: '100%',
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center'
         }}
       >
+        {/* ASYMMETRICAL ORGANIC THREAD */}
+        {!isMobile && (
+          <motion.div 
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              width: '150vw', 
+              height: '100vh', 
+              pointerEvents: 'none', 
+              zIndex: 0, 
+              opacity: 0.4,
+              x: threadX 
+            }}
+          >
+            <svg viewBox="0 0 1500 800" fill="none" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+              <defs>
+                <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <motion.path
+                style={{ 
+                  pathLength: threadDraw,
+                  filter: 'url(#goldGlow)'
+                }}
+                d="M -100 600 C 200 500, 400 100, 600 300 C 800 500, 1000 200, 1200 400 C 1400 600, 1600 100, 1800 300"
+                stroke="#D4AF37"
+                strokeWidth="1.2"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          </motion.div>
+        )}
 
         <motion.div
           style={{
@@ -103,99 +127,132 @@ const HorizontalScrollProcess = () => {
             height: isMobile ? 'auto' : '100%',
             position: 'relative',
             zIndex: 1,
-            gap: isMobile ? 'var(--section-padding-y)' : '0'
+            gap: isMobile ? '4rem' : '0'
           }}
-          className="horizontal-wrapper"
         >
-          {/* Elegant Single Scrolling Golden Thread */}
-          <div style={{ position: 'absolute', top: '20%', left: 0, width: '300vw', height: '60%', pointerEvents: 'none', zIndex: -1, opacity: 0.6 }}>
-            <svg viewBox="0 0 3000 600" fill="none" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+          {steps.map((step, index) => {
+            const isEven = index % 2 !== 0;
+            
+            return (
+              <div
+                key={index}
+                className="horizontal-step"
+                style={{
+                  width: isMobile ? '100%' : '100vw',
+                  height: isMobile ? 'auto' : '100%',
+                  display: 'flex',
+                  flexDirection: isMobile ? 'column' : (isEven ? 'row-reverse' : 'row'), // Alternating Layout
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: isMobile ? '4rem 1.5rem' : '0 12vw',
+                  gap: isMobile ? '2.5rem' : '8vw'
+                }}
+              >
+                {/* Text Column - Premium Alignment */}
+                <div style={{ flex: 1, textAlign: isMobile ? 'left' : (isEven ? 'left' : 'left'), maxWidth: '500px' }}>
+                  <motion.div
+                    initial={isMobile ? { opacity: 0, y: 20 } : false}
+                    whileInView={isMobile ? { opacity: 1, y: 0 } : false}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <div style={{ 
+                      display: 'flex', 
+                      alignItems: 'baseline', 
+                      gap: '1.5rem', 
+                      marginBottom: '2.5rem',
+                      borderBottom: '1px solid rgba(255,255,255,0.1)',
+                      paddingBottom: '1rem'
+                    }}>
+                      <span style={{ 
+                        fontFamily: 'var(--font-serif)', 
+                        fontSize: '0.8rem', 
+                        color: 'var(--gold)', 
+                        letterSpacing: '0.3em' 
+                      }}>
+                        STEP {step.num}
+                      </span>
+                      <span style={{ 
+                        fontSize: '0.75rem', 
+                        color: 'rgba(255,255,255,0.4)', 
+                        letterSpacing: '0.2em', 
+                        textTransform: 'uppercase' 
+                      }}>
+                        Process
+                      </span>
+                    </div>
 
-              {/* Refined Single Core Thread */}
-              <motion.path
-                style={{ pathLength: threadDraw }}
-                d="M -100 50 C 400 500, 600 100, 1000 300 C 1400 500, 1600 100, 2000 300 C 2400 500, 2600 100, 3100 300"
-                stroke="#D4AF37"
-                strokeWidth="1.5"
-                vectorEffect="non-scaling-stroke"
-              />
+                    <h3 className="display-2" style={{ 
+                      marginBottom: '2rem', 
+                      color: '#fff', 
+                      fontFamily: 'var(--font-serif)', 
+                      fontWeight: 300,
+                      lineHeight: 1.1
+                    }}>
+                      {step.title}
+                    </h3>
+                    <p className="text-muted" style={{ 
+                      lineHeight: 1.9, 
+                      fontWeight: 300, 
+                      fontSize: '1rem',
+                      letterSpacing: '0.01em',
+                      opacity: 0.8
+                    }}>
+                      {step.desc}
+                    </p>
+                  </motion.div>
+                </div>
 
-              {/* Very Subtle Glow Trace */}
-              <motion.path
-                style={{ pathLength: threadDraw }}
-                d="M -100 50 C 400 500, 600 100, 1000 300 C 1400 500, 1600 100, 2000 300 C 2400 500, 2600 100, 3100 300"
-                stroke="#D4AF37"
-                strokeWidth="0.5"
-                vectorEffect="non-scaling-stroke"
-                style={{ filter: 'blur(3px)' }}
-              />
-            </svg>
-          </div>
-
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              className="horizontal-step"
-              style={{
-                position: 'relative',
-                zIndex: 1,
-                width: isMobile ? '100%' : '100vw',
-                height: isMobile ? 'auto' : '100%',
-                display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: isMobile ? 'calc(var(--section-padding-y) / 2) var(--section-padding-x)' : '0 10vw',
-                gap: '5vw'
-              }}
-            >
-
-              {/* Text Column */}
-              <div style={{ flex: 1, width: '100%', minWidth: isMobile ? '100%' : '300px' }}>
-                <motion.div style={{ opacity: isMobile ? 1 : stepTransforms[index].opacity }}>
-                  {/* Luxury Typography Layout */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: '1rem', marginBottom: '2rem' }}>
-                    <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em' }}>{step.num}</span>
-                    <span style={{ fontSize: '1rem', color: '#fff', letterSpacing: '0.2em', textTransform: 'uppercase' }}>{step.title}</span>
-                  </div>
-
-                  <h3 className="display-2" style={{ marginBottom: '1.5rem', color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 300 }}>{step.title}</h3>
-                  <p className="lead text-muted" style={{ maxWidth: '500px', lineHeight: 1.8, fontWeight: 300, fontSize: '0.95rem' }}>
-                    {step.desc}
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* Image Column */}
-              <div style={{ flex: 1, width: '100%', minWidth: isMobile ? '100%' : '300px' }}>
-                <motion.div
-                  style={{
-                    opacity: isMobile ? 1 : stepTransforms[index].opacity,
-                    width: '80%',
-                    margin: '0 auto',
-                    height: 'clamp(40vh, 60vh, 700px)',
-                    overflow: 'hidden',
-                    borderRadius: '8px',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-                    filter: 'brightness(0.85) contrast(1.15)',
-                    aspectRatio: '3/4',
-                    scale: isMobile ? 1 : stepTransforms[index].scale
-                  }}
-                >
-                  <motion.img
-                    src={step.img}
-                    alt={step.alt}
+                {/* Image Column - Editorial Proportions */}
+                <div style={{ 
+                  flex: 1.2, 
+                  width: '100%', 
+                  display: 'flex', 
+                  justifyContent: 'center',
+                  perspective: '1000px'
+                }}>
+                  <motion.div
                     style={{
                       width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
+                      maxWidth: isMobile ? '100%' : '550px',
+                      height: 'clamp(350px, 60vh, 750px)',
+                      overflow: 'hidden',
+                      borderRadius: '2px',
+                      boxShadow: '0 40px 100px rgba(0,0,0,0.6)',
+                      position: 'relative'
                     }}
-                  />
-                </motion.div>
+                  >
+                    <motion.img
+                      src={step.img}
+                      alt={step.alt}
+                      style={{
+                        width: '100%',
+                        height: '115%', // Extra height for internal parallax
+                        objectFit: 'cover',
+                        filter: 'brightness(0.9) contrast(1.05)'
+                      }}
+                      // Subtle internal image parallax
+                      animate={isMobile ? {} : {
+                        y: ["-5%", "5%"]
+                      }}
+                      transition={{ 
+                        duration: 10, 
+                        repeat: Infinity, 
+                        repeatType: "mirror", 
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3) 100%)',
+                      pointerEvents: 'none'
+                    }} />
+                  </motion.div>
+                </div>
               </div>
-
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>

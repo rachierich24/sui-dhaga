@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Import images
-import navneetPortrait from '../assets/images/navneet_editorial.png';
-import nishikantPortrait from '../assets/images/nishikant_editorial.png';
-import camelliaPortrait from '../assets/images/camellia_editorial.png';
+// New Visionary Images from Public Folder
+const navneetPortrait = '/navneet new.png';
+const nishikantPortrait = '/nishikant new.png';
+const camelliaPortrait = '/camellia new.png';
 
 const ParallaxPortrait = ({ src, alt, objectPosition = 'center' }) => {
   const ref = useRef(null);

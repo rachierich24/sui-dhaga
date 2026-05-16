@@ -17,19 +17,7 @@ export const FadeIn = ({ children, delay = 0, y = 50 }) => (
   </motion.div>
 );
 
-export const FloatContainer = ({ children }) => {
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  return (
-    <motion.div ref={ref} style={{ y, width: '100%', position: 'relative' }}>
-      {children}
-    </motion.div>
-  );
-};
+
 export const MassiveBackgroundText = ({ text }) => {
   const containerRef = React.useRef(null);
   const { scrollYProgress } = useScroll({

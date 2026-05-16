@@ -31,6 +31,7 @@ body {
 .main-wrapper {
   overflow: clip;
   width: 100%;
+  position: relative;
 }
 
 /* Re-enable default cursor on touch devices where custom cursor is hidden */

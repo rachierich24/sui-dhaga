@@ -17,37 +17,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
 
-// Import images directly for Vite bundling
-import navneetPortrait from './assets/images/navneet_portrait_1777827174428.png';
-import nishikantPortrait from './assets/images/nishikant_portrait_1777827198758.png';
-import craftImage from './assets/images/workspace_craft_1777827220745.png';
-import teamImage from './assets/images/workspace_team_1777827283644.png';
-import creativeImage from './assets/images/workspace_creative_1777827300802.png';
-import logoImg from './assets/images/logo.png';
-
-import { FadeIn, FloatContainer, MassiveBackgroundText } from './components/MotionHelpers';
-
-const ParallaxMaskImage = ({ src, alt, className = "", imageStyle = {} }) => {
-  const containerRef = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-
-  return (
-    <div ref={containerRef} className={`image-container editorial-mask ${className}`}>
-      <motion.img
-        src={src}
-        alt={alt}
-        className="image-cover"
-        style={{ y, scale: 1.1, willChange: 'transform', ...imageStyle }}
-        decoding="async"
-        loading="lazy"
-      />
-    </div>
-  );
-};
+import { FadeIn, MassiveBackgroundText } from './components/MotionHelpers';
 
 export default function App() {
   const lenisRef = React.useRef(null);
@@ -82,7 +52,6 @@ export default function App() {
 
   return (
     <main className="main-wrapper">
-      <div className="global-grain"></div>
       <PageTransition />
       <CustomCursor />
 
@@ -129,7 +98,7 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={0.4}>
               <a
-                href="https://wa.me/"
+                href="https://wa.me/910000000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="book-btn"
