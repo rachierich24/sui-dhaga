@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FadeIn } from './MotionHelpers';
+import { FadeIn, useMobile } from './MotionHelpers';
 import TextReveal from './TextReveal';
 
 import embroideryImg from '../assets/images/embroidery_hands.png';
@@ -8,6 +8,7 @@ import mannequinImg from '../assets/images/atelier_mannequin.png';
 
 const EssenceSections = () => {
   const wrapperRef = useRef(null);
+  const isMobile = useMobile();
 
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -20,7 +21,7 @@ const EssenceSections = () => {
   const bottomThreadDraw = useTransform(scrollYProgress, [0.6, 0.95], [0, 1]);
 
   // Physical motion for the needle
-  const needleY = useTransform(scrollYProgress, [0.05, 0.4], [-50, 150]);
+  const needleY = useTransform(scrollYProgress, [0.05, 0.4], [-50, isMobile ? 50 : 150]);
   const needleRotate = useTransform(scrollYProgress, [0.05, 0.4], [0, -15]);
 
   // Image reveal matching needle timing
@@ -37,17 +38,18 @@ const EssenceSections = () => {
     <div ref={wrapperRef} className="essence-wrapper" id="bespoke" style={{ backgroundColor: '#050505', color: '#fff', position: 'relative', overflow: 'hidden' }}>
 
       {/* 1. THE ESSENCE SECTION */}
-      <section className="section" style={{ position: 'relative', minHeight: '90vh' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8vw', alignItems: 'center' }}>
+      <section className="section" style={{ position: 'relative', minHeight: isMobile ? 'auto' : '90vh', padding: isMobile ? '15vh 1.5rem' : 'var(--section-padding-y) var(--section-padding-x)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr', gap: isMobile ? '4rem' : '8vw', alignItems: 'center' }}>
 
           <motion.div
             style={{
               opacity: imageOpacity,
               clipPath: imageClip,
               position: 'relative',
-              height: '70vh',
+              height: isMobile ? '50vh' : '70vh',
               overflow: 'hidden',
-              filter: 'brightness(0.8) contrast(1.1)'
+              filter: 'brightness(0.8) contrast(1.1)',
+              order: isMobile ? 1 : 0
             }}
           >
             <motion.img
@@ -58,9 +60,9 @@ const EssenceSections = () => {
             />
           </motion.div>
 
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', order: isMobile ? 2 : 1 }}>
             {/* Background Needle Graphic - Draws and Moves on Scroll */}
-            <motion.div style={{ position: 'absolute', top: '-20%', right: '-15%', width: '300px', pointerEvents: 'none', zIndex: 0, y: needleY, rotate: needleRotate }}>
+            <motion.div style={{ position: 'absolute', top: isMobile ? '-40%' : '-20%', right: isMobile ? '0' : '-15%', width: isMobile ? '120px' : '300px', pointerEvents: 'none', zIndex: 0, y: needleY, rotate: needleRotate, opacity: isMobile ? 0.3 : 1 }}>
               <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Needle */}
                 <motion.path
@@ -84,8 +86,8 @@ const EssenceSections = () => {
             </motion.div>
 
             <FadeIn delay={0.2} style={{ position: 'relative', zIndex: 1 }}>
-              <p className="micro-typography" style={{ color: 'var(--gold)', marginBottom: '2rem' }}>THE ESSENCE</p>
-              <TextReveal className="display-2" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, marginBottom: '2rem', lineHeight: 1.1, fontSize: 'clamp(2.5rem, 4vw, 4rem)' }}>
+              <p className="micro-typography" style={{ color: 'var(--gold)', marginBottom: isMobile ? '1rem' : '2rem' }}>THE ESSENCE</p>
+              <TextReveal className="display-2" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, marginBottom: '2rem', lineHeight: 1.1, fontSize: isMobile ? '2.5rem' : 'clamp(2.5rem, 4vw, 4rem)' }}>
                 Crafted by hand.<br />Rooted in purpose.
               </TextReveal>
               <p className="text-muted" style={{ marginBottom: '3rem', fontSize: '0.9rem', maxWidth: '400px', lineHeight: 1.8, fontWeight: 300 }}>
@@ -103,10 +105,10 @@ const EssenceSections = () => {
       <section style={{
         borderTop: '1px solid rgba(255,255,255,0.05)',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
-        padding: '6rem 0',
+        padding: isMobile ? '4rem 1.5rem' : '6rem 0',
         backgroundColor: '#070707'
       }}>
-        <div className="container" style={{ padding: '0 2vw' }}>
+        <div className="container" style={{ padding: isMobile ? '0' : '0 2vw' }}>
           <div className="essence-grid">
 
             {/* Item 1 */}
@@ -177,13 +179,13 @@ const EssenceSections = () => {
       </section>
 
       {/* 3. MADE FOR YOU SECTION */}
-      <section className="section" style={{ position: 'relative', minHeight: '100vh', paddingBottom: '15vh' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '8vw', alignItems: 'center' }}>
+      <section className="section" style={{ position: 'relative', minHeight: isMobile ? 'auto' : '100vh', paddingBottom: isMobile ? '10vh' : '15vh', padding: isMobile ? '10vh 1.5rem' : 'var(--section-padding-y) var(--section-padding-x)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.5fr', gap: isMobile ? '4rem' : '8vw', alignItems: 'center' }}>
 
           <div style={{ position: 'relative', zIndex: 2 }}>
             <FadeIn>
-              <p className="micro-typography" style={{ color: 'var(--gold)', marginBottom: '2rem' }}>MADE FOR YOU</p>
-              <TextReveal className="display-1" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, marginBottom: '2rem', lineHeight: 1.1, fontSize: 'clamp(3rem, 5vw, 5.5rem)' }}>
+              <p className="micro-typography" style={{ color: 'var(--gold)', marginBottom: isMobile ? '1rem' : '2rem' }}>MADE FOR YOU</p>
+              <TextReveal className="display-1" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, marginBottom: '2rem', lineHeight: 1.1, fontSize: isMobile ? '3rem' : 'clamp(3rem, 5vw, 5.5rem)' }}>
                 Not made.<br />Sculpted.<br />For you.
               </TextReveal>
               <p className="text-muted" style={{ marginBottom: '4rem', fontSize: '0.9rem', maxWidth: '300px', lineHeight: 1.8, fontWeight: 300 }}>
@@ -197,7 +199,7 @@ const EssenceSections = () => {
               opacity: image2Opacity,
               clipPath: image2Clip,
               position: 'relative',
-              height: '85vh',
+              height: isMobile ? '55vh' : '85vh',
               width: '100%',
               filter: 'brightness(0.8) contrast(1.15)',
               zIndex: 1

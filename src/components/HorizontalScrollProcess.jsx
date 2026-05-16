@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useMobile } from './MotionHelpers';
 
 // Import generated images
 import consultationImg from '../assets/images/luxury_consultation_studio_1778357479386.png';
@@ -8,14 +9,7 @@ import deliveryImg from '../assets/images/luxury_garment_delivery_1778357531977.
 
 const HorizontalScrollProcess = () => {
   const targetRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useMobile();
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -127,7 +121,7 @@ const HorizontalScrollProcess = () => {
             height: isMobile ? 'auto' : '100%',
             position: 'relative',
             zIndex: 1,
-            gap: isMobile ? '4rem' : '0'
+            gap: isMobile ? '2rem' : '0'
           }}
         >
           {steps.map((step, index) => {
@@ -149,10 +143,10 @@ const HorizontalScrollProcess = () => {
                 }}
               >
                 {/* Text Column - Premium Alignment */}
-                <div style={{ flex: 1, textAlign: isMobile ? 'left' : (isEven ? 'left' : 'left'), maxWidth: '500px' }}>
+                <div style={{ flex: 1, textAlign: 'left', maxWidth: '500px' }}>
                   <motion.div
-                    initial={isMobile ? { opacity: 0, y: 20 } : false}
-                    whileInView={isMobile ? { opacity: 1, y: 0 } : false}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                   >
@@ -187,7 +181,8 @@ const HorizontalScrollProcess = () => {
                       color: '#fff', 
                       fontFamily: 'var(--font-serif)', 
                       fontWeight: 300,
-                      lineHeight: 1.1
+                      lineHeight: 1.1,
+                      fontSize: isMobile ? '2.5rem' : '4rem'
                     }}>
                       {step.title}
                     </h3>
@@ -212,10 +207,14 @@ const HorizontalScrollProcess = () => {
                   perspective: '1000px'
                 }}>
                   <motion.div
+                    initial={isMobile ? { opacity: 0, scale: 0.95 } : false}
+                    whileInView={isMobile ? { opacity: 1, scale: 1 } : false}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
                     style={{
                       width: '100%',
                       maxWidth: isMobile ? '100%' : '550px',
-                      height: 'clamp(350px, 60vh, 750px)',
+                      height: isMobile ? '50vh' : 'clamp(350px, 60vh, 750px)',
                       overflow: 'hidden',
                       borderRadius: '2px',
                       boxShadow: '0 40px 100px rgba(0,0,0,0.6)',

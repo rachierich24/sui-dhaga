@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { FadeIn } from './MotionHelpers';
+import { FadeIn, useMobile } from './MotionHelpers';
 import TextReveal from './TextReveal';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -13,22 +13,15 @@ const CreativesAtWork = () => {
   const pathRef = useRef(null);
   const needleRef = useRef(null);
   const cardsRef = useRef([]);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useMobile();
 
   const creativeCards = [
-    { src: '/creative_2.jpeg', title: 'MOODBOARD 01', top: isMobile ? '10%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
-    { src: '/creative_4.jpeg', title: 'THE DRAPE', top: isMobile ? '25%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
-    { src: '/creative_5.jpeg', title: 'STITCHING DETAILS', top: isMobile ? '40%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
-    { src: '/creative_6.jpeg', title: 'FINAL FITTING', top: isMobile ? '55%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
-    { src: '/creative_7.jpeg', title: 'THE REFINEMENT', top: isMobile ? '70%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
-    { src: '/creative_8.jpeg', title: 'EDITORIAL', top: isMobile ? '85%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
+    { src: '/creative_2.jpeg', title: 'MOODBOARD 01', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
+    { src: '/creative_4.jpeg', title: 'THE DRAPE', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
+    { src: '/creative_5.jpeg', title: 'STITCHING DETAILS', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
+    { src: '/creative_6.jpeg', title: 'FINAL FITTING', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
+    { src: '/creative_7.jpeg', title: 'THE REFINEMENT', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
+    { src: '/creative_8.jpeg', title: 'EDITORIAL', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
   ];
 
   const svgPathD = isMobile 
@@ -93,7 +86,7 @@ const CreativesAtWork = () => {
         position: 'relative',
         backgroundColor: '#050505',
         color: 'var(--text)',
-        minHeight: isMobile ? 'auto' : '380vh',
+        minHeight: isMobile ? '300vh' : '380vh',
         overflow: 'hidden',
         paddingTop: isMobile ? '10vh' : '15vh'
       }}
@@ -136,7 +129,7 @@ const CreativesAtWork = () => {
         zIndex: 20, 
         pointerEvents: 'none', 
         maxWidth: isMobile ? '100%' : '450px',
-        padding: isMobile ? '0 1.5rem 3rem' : '0'
+        padding: isMobile ? '0 1.5rem 5vh' : '0'
       }}>
         <TextReveal className="display-2" style={{ color: '#fff', marginBottom: '1.5rem', lineHeight: 1.1, fontSize: isMobile ? '2.5rem' : '3.5rem' }}>
           Creatives at work.
@@ -170,13 +163,13 @@ const CreativesAtWork = () => {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: isMobile ? '20px' : '32px',
-            height: isMobile ? '120px' : '180px',
+            width: isMobile ? '12px' : '32px',
+            height: isMobile ? '80px' : '180px',
             zIndex: 10,
             willChange: 'transform'
           }}
         >
-          <svg width="40" height="200" viewBox="0 0 20 200" fill="none" style={{ overflow: 'visible' }}>
+          <svg width="100%" height="100%" viewBox="0 0 20 200" fill="none" style={{ overflow: 'visible' }}>
             <path d="M10 0 C 8.5 0, 8 3, 8 15 V 170 C 8 185, 9.5 195, 10 200 C 10.5 195, 12 185, 12 170 V 15 C 12 3, 11.5 0, 10 0 Z" fill="url(#needle-grad-luxury)" />
             <path d="M10 10 C 9.5 10, 9.2 12, 9.2 20 V 40 C 9.2 48, 9.5 50, 10 50 C 10.5 50, 10.8 48, 10.8 40 V 20 C 10.8 12, 10.5 10, 10 10 Z" fill="#050505" />
             <path d="M9 15 V 175" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" />

@@ -1,5 +1,18 @@
-import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+
+export const useMobile = (breakpoint = 768) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+
+  return isMobile;
+};
 
 export const FadeIn = ({ children, delay = 0, y = 50 }) => (
   <motion.div
@@ -19,7 +32,7 @@ export const FadeIn = ({ children, delay = 0, y = 50 }) => (
 
 
 export const MassiveBackgroundText = ({ text }) => {
-  const containerRef = React.useRef(null);
+  const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
