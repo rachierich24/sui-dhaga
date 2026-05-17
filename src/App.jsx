@@ -11,7 +11,6 @@ import CreativesAtWork from './components/CreativesAtWork';
 import PageTransition from './components/PageTransition';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import EssenceSections from './components/EssenceSections';
 import Visionaries from './components/Visionaries';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -64,9 +63,6 @@ export default function App() {
 
       {/* Content that slides over the hero */}
       <div style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--bg)' }}>
-
-        {/* The New Essence Layout */}
-        <EssenceSections />
 
         {/* Horizontal GSAP Process Section */}
         <div id="process">

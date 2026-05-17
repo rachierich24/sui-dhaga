@@ -115,7 +115,8 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             
             {/* Left/Top Side: SVG Animation */}
             <div style={{ 
-              flex: isMobile ? '0 0 40vh' : 1, 
+              flex: isMobile ? 'none' : 1, 
+              height: isMobile ? '260px' : 'auto',
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
@@ -198,9 +199,9 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
 
             {/* Right/Bottom Side: The List & Inputs */}
             <div style={{ flex: 1, position: 'relative' }}>
-              <div className="size-guide-scroll" style={{ position: 'absolute', inset: 0, overflowY: 'auto', padding: isMobile ? '5vh 1.5rem' : '10vh 5vw' }}>
+              <div className="size-guide-scroll" style={{ position: 'absolute', inset: 0, overflowY: 'auto', padding: isMobile ? '2rem 1.5rem' : '10vh 5vw' }}>
               
-              <div style={{ marginBottom: isMobile ? '4vh' : '6vh' }}>
+              <div style={{ marginBottom: isMobile ? '2rem' : '6vh' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 300, marginBottom: '1rem', lineHeight: 1.1 }}>
                   Bespoke Form
                 </h2>
