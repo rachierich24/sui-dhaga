@@ -16,12 +16,12 @@ const CreativesAtWork = () => {
   const isMobile = useMobile();
 
   const creativeCards = [
-    { src: '/creative_2.jpeg', title: '', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
-    { src: '/creative_4.jpeg', title: '', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
-    { src: '/creative_5.jpeg', title: '', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
-    { src: '/creative_6.jpeg', title: '', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
-    { src: '/creative_7.jpeg', title: '', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
-    { src: '/creative_8.jpeg', title: '', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
+    { src: '/creative_2.jpeg', title: 'The Strategy', desc: 'Behind every stitch is a strategy to create opportunity.', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
+    { src: '/creative_4.jpeg', title: 'Global Craft', desc: 'Partnerships that turn local craftsmanship into global possibility.', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
+    { src: '/creative_5.jpeg', title: 'Shared Stories', desc: 'Some relationships begin with a garment and continue as stories shared across generations.', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
+    { src: '/creative_6.jpeg', title: 'Beyond Borders', desc: 'From Punjab to the world, the narrative continues across borders.', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
+    { src: '/creative_7.jpeg', title: 'Quiet Beginnings', desc: 'Some of the strongest ideas begin over quiet conversations and unfinished coffee.', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
+    { src: '/creative_8.jpeg', title: 'The Collective', desc: 'The brand is built not only through design, but through the people gathered around the table.', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
   ];
 
   const svgPathD = isMobile 
@@ -219,13 +219,18 @@ const CreativesAtWork = () => {
                 bottom: 0,
                 left: 0,
                 width: '100%',
-                padding: isMobile ? '1rem' : '1.5rem',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
+                padding: isMobile ? '1.5rem 1rem' : '2rem 1.5rem',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%)',
                 display: 'flex',
-                alignItems: 'flex-end'
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-end'
               }}>
-                <p style={{ color: '#fff', letterSpacing: '0.2em', margin: 0, fontSize: isMobile ? '0.65rem' : '0.75rem', fontWeight: '500', textTransform: 'uppercase' }}>
+                <h4 style={{ color: '#fff', letterSpacing: '0.15em', margin: '0 0 0.5rem 0', fontSize: isMobile ? '0.65rem' : '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
                   {card.title}
+                </h4>
+                <p style={{ color: '#D4AF37', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: isMobile ? '0.95rem' : '1.15rem', lineHeight: 1.4, margin: 0, fontWeight: 600, textShadow: '0 2px 4px rgba(0,0,0,0.6)' }}>
+                  {card.desc}
                 </p>
               </div>
             </div>
