@@ -78,17 +78,17 @@ const HorizontalScrollProcess = () => {
       >
         {/* ASYMMETRICAL ORGANIC THREAD */}
         {!isMobile && (
-          <motion.div 
-            style={{ 
-              position: 'absolute', 
-              top: 0, 
-              left: 0, 
-              width: '150vw', 
-              height: '100vh', 
-              pointerEvents: 'none', 
-              zIndex: 0, 
+          <motion.div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '150vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 0,
               opacity: 0.4,
-              x: threadX 
+              x: threadX
             }}
           >
             <svg viewBox="0 0 1500 800" fill="none" preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
@@ -99,7 +99,7 @@ const HorizontalScrollProcess = () => {
                 </filter>
               </defs>
               <motion.path
-                style={{ 
+                style={{
                   pathLength: threadDraw,
                   filter: 'url(#goldGlow)'
                 }}
@@ -126,7 +126,7 @@ const HorizontalScrollProcess = () => {
         >
           {steps.map((step, index) => {
             const isEven = index % 2 !== 0;
-            
+
             return (
               <div
                 key={index}
@@ -150,45 +150,45 @@ const HorizontalScrollProcess = () => {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                   >
-                    <div style={{ 
-                      display: 'flex', 
-                      alignItems: 'baseline', 
-                      gap: '1.5rem', 
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '1.5rem',
                       marginBottom: '2.5rem',
                       borderBottom: '1px solid rgba(255,255,255,0.1)',
                       paddingBottom: '1rem'
                     }}>
-                      <span style={{ 
-                        fontFamily: 'var(--font-serif)', 
-                        fontSize: '0.8rem', 
-                        color: 'var(--gold)', 
-                        letterSpacing: '0.3em' 
+                      <span style={{
+                        fontFamily: 'var(--font-serif)',
+                        fontSize: '0.8rem',
+                        color: 'var(--gold)',
+                        letterSpacing: '0.3em'
                       }}>
                         STEP {step.num}
                       </span>
-                      <span style={{ 
-                        fontSize: '0.75rem', 
-                        color: 'rgba(255,255,255,0.4)', 
-                        letterSpacing: '0.2em', 
-                        textTransform: 'uppercase' 
+                      <span style={{
+                        fontSize: '0.75rem',
+                        color: 'rgba(255,255,255,0.4)',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase'
                       }}>
                         Process
                       </span>
                     </div>
 
-                    <h3 className="display-2" style={{ 
-                      marginBottom: '2rem', 
-                      color: '#fff', 
-                      fontFamily: 'var(--font-serif)', 
+                    <h3 className="display-2" style={{
+                      marginBottom: '2rem',
+                      color: '#fff',
+                      fontFamily: 'var(--font-serif)',
                       fontWeight: 300,
                       lineHeight: 1.1,
                       fontSize: isMobile ? '2.5rem' : '4rem'
                     }}>
                       {step.title}
                     </h3>
-                    <p className="text-muted" style={{ 
-                      lineHeight: 1.9, 
-                      fontWeight: 300, 
+                    <p className="text-muted" style={{
+                      lineHeight: 1.9,
+                      fontWeight: 300,
                       fontSize: '1rem',
                       letterSpacing: '0.01em',
                       opacity: 0.8
@@ -199,10 +199,10 @@ const HorizontalScrollProcess = () => {
                 </div>
 
                 {/* Image Column - Editorial Proportions */}
-                <div style={{ 
-                  flex: 1.2, 
-                  width: '100%', 
-                  display: 'flex', 
+                <div style={{
+                  flex: 1.2,
+                  width: '100%',
+                  display: 'flex',
                   justifyContent: 'center',
                   perspective: '1000px'
                 }}>
@@ -234,11 +234,11 @@ const HorizontalScrollProcess = () => {
                       animate={isMobile ? {} : {
                         y: ["-5%", "5%"]
                       }}
-                      transition={{ 
-                        duration: 10, 
-                        repeat: Infinity, 
-                        repeatType: "mirror", 
-                        ease: "easeInOut" 
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        ease: "easeInOut"
                       }}
                     />
                     <div style={{

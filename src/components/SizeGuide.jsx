@@ -21,6 +21,35 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
     setSizes(prev => ({ ...prev, [id]: value }));
   };
 
+  const handleSubmitToWhatsApp = () => {
+    const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    let message = `✂️ *SUI DHAGA — Bespoke Order Request*\n`;
+    message += `📅 Date: ${today}\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `Hello Sui Dhaga Team,\n\nI would like to place a bespoke order. Please find my measurements below:\n\n`;
+
+    message += `👗 *KAMEEZ MEASUREMENTS:*\n`;
+    measurements.kameez.forEach(item => {
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
+      message += `  • ${item.title}: *${val}*\n`;
+    });
+
+    message += `\n👖 *SALWAR MEASUREMENTS:*\n`;
+    measurements.salwar.forEach(item => {
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
+      message += `  • ${item.title}: *${val}*\n`;
+    });
+
+    message += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `I look forward to hearing from you regarding fabric options, timeline, and pricing.\n\nWarm regards 🙏`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/61470270478?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, '_blank');
+  };
+
   const overlayVariants = {
     closed: { 
       opacity: 0,
@@ -111,18 +140,26 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flex: 1, overflow: 'hidden' }}>
+          <div 
+            className={isMobile ? "size-guide-scroll" : ""}
+            style={{ 
+              display: 'flex', 
+              flexDirection: isMobile ? 'column' : 'row', 
+              flex: 1, 
+              overflowY: isMobile ? 'auto' : 'hidden' 
+            }}
+          >
             
             {/* Left/Top Side: SVG Animation */}
             <div style={{ 
               flex: isMobile ? 'none' : 1, 
-              height: isMobile ? '260px' : 'auto',
+              height: isMobile ? '50vh' : 'auto',
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
               borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)',
-              borderBottom: isMobile ? '1px solid rgba(255,255,255,0.05)' : 'none',
-              position: 'relative',
+              position: isMobile ? 'sticky' : 'relative',
+              top: 0,
               backgroundColor: '#020202',
               zIndex: 10
             }}>
@@ -198,12 +235,27 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             </div>
 
             {/* Right/Bottom Side: The List & Inputs */}
-            <div style={{ flex: 1, position: 'relative' }}>
-              <div className="size-guide-scroll" style={{ position: 'absolute', inset: 0, overflowY: 'auto', padding: isMobile ? '2rem 1.5rem' : '10vh 5vw' }}>
+            <div 
+               className={!isMobile ? "size-guide-scroll" : ""}
+               style={{ 
+                 flex: 1, 
+                 position: 'relative', 
+                 zIndex: 20,
+                 overflowY: isMobile ? 'visible' : 'auto'
+               }}
+            >
+              <div style={{ 
+                padding: isMobile ? '3rem 1.5rem 10vh' : '10vh 5vw',
+                borderTopLeftRadius: isMobile ? '24px' : '0',
+                borderTopRightRadius: isMobile ? '24px' : '0',
+                boxShadow: isMobile ? '0 -15px 40px rgba(0,0,0,0.9)' : 'none',
+                backgroundColor: isMobile ? '#050505' : 'transparent',
+                minHeight: isMobile ? '100vh' : 'auto',
+              }}>
               
               <div style={{ marginBottom: isMobile ? '2rem' : '6vh' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 300, marginBottom: '1rem', lineHeight: 1.1 }}>
-                  Bespoke Form
+                  Craft My Suit
                 </h2>
                 <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '400px', fontSize: '0.9rem', lineHeight: 1.8, fontWeight: 300 }}>
                   Select a measurement below to view the guide, and carefully enter your size.
@@ -384,28 +436,38 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
                       Next: Salwar Measurements →
                     </button>
                   ) : (
-                    <button style={{
-                      background: '#D4AF37',
-                      color: '#000',
-                      border: 'none',
-                      padding: '1rem 3rem',
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.8rem',
-                      letterSpacing: '0.2em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      borderRadius: '2px',
-                      fontWeight: 600,
-                      boxShadow: '0 10px 30px rgba(212, 175, 55, 0.2)'
-                    }}>
-                      Save Measurements
+                    <button 
+                      onClick={handleSubmitToWhatsApp}
+                      style={{
+                        background: 'linear-gradient(135deg, #D4AF37 0%, #B8962E 100%)',
+                        color: '#000',
+                        border: 'none',
+                        padding: '1.1rem 2.5rem',
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.75rem',
+                        letterSpacing: '0.25em',
+                        textTransform: 'uppercase',
+                        cursor: 'pointer',
+                        borderRadius: '2px',
+                        fontWeight: 700,
+                        boxShadow: '0 15px 40px rgba(212, 175, 55, 0.35)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.8rem',
+                      }}
+                    >
+                      {/* WhatsApp icon */}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                      </svg>
+                      Proceed to Book Order
                     </button>
                   )}
                 </div>
 
               </div>
+              </div>
             </div>
-          </div>
           </div>
         </motion.div>
       )}

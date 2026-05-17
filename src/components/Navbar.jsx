@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import logoImg from '../assets/images/logo.png';
 import SidebarMenu from './SidebarMenu';
 import SizeGuide from './SizeGuide';
+import { useMobile } from './MotionHelpers';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [sizeOpen, setSizeOpen] = useState(false);
+  const isMobile = useMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,23 +61,42 @@ const Navbar = () => {
         {/* Right Hamburger */}
         <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '2rem', zIndex: 10000 }}>
           
-          <button
+          <motion.button
             onClick={() => { setSizeOpen(true); setMenuOpen(false); }}
+            whileHover={{ 
+              borderColor: 'rgba(212, 175, 55, 0.9)',
+              boxShadow: '0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.05)',
+              color: '#D4AF37',
+            }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#fff',
+              background: 'rgba(0,0,0,0.3)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              border: '1px solid rgba(212, 175, 55, 0.35)',
+              color: 'rgba(255,255,255,0.9)',
               cursor: 'pointer',
               fontFamily: 'var(--font-sans)',
-              fontSize: '0.7rem',
-              letterSpacing: '0.2em',
+              fontSize: '0.65rem',
+              letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              display: menuOpen ? 'none' : 'block'
+              display: menuOpen ? 'none' : 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.6rem 1.2rem',
+              borderRadius: '30px',
             }}
-            className="size-guide-btn"
+            className="craft-my-suit-btn"
           >
-            SIZE GUIDE
-          </button>
+            {/* Tilted Needle icon */}
+            <svg width="12" height="12" viewBox="0 0 12 20" fill="none" style={{ opacity: 0.85, transform: 'rotate(-45deg)' }}>
+              <path d="M6 0 C5 0, 4.5 1.5, 4.5 4 V16 C4.5 18.5, 5.2 20, 6 20 C6.8 20, 7.5 18.5, 7.5 16 V4 C7.5 1.5, 7 0, 6 0Z" fill="currentColor"/>
+              <ellipse cx="6" cy="4.8" rx="1.2" ry="2" fill="#050505" opacity="0.9"/>
+              <circle cx="6" cy="19.2" r="0.8" fill="white" style={{ filter: 'drop-shadow(0 0 2px white)' }}/>
+            </svg>
+            CRAFT MY SUIT
+          </motion.button>
 
           <button
             onClick={() => { setMenuOpen(!menuOpen); setSizeOpen(false); }}
@@ -92,6 +113,7 @@ const Navbar = () => {
             }}
             className="hamburger-btn"
           >
+{!isMobile && (
             <motion.span
               animate={{ opacity: menuOpen ? 0 : 1 }}
               style={{
@@ -104,6 +126,7 @@ const Navbar = () => {
             >
               MENU
             </motion.span>
+            )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '35px' }}>
               <motion.div
                 animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 9 : 0 }}

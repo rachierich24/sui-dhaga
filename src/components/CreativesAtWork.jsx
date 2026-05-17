@@ -16,15 +16,15 @@ const CreativesAtWork = () => {
   const isMobile = useMobile();
 
   const creativeCards = [
-    { src: '/creative_2.jpeg', title: 'The Strategy', desc: 'Behind every stitch is a strategy to create opportunity.', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
-    { src: '/creative_4.jpeg', title: 'Global Craft', desc: 'Partnerships that turn local craftsmanship into global possibility.', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
-    { src: '/creative_5.jpeg', title: 'Shared Stories', desc: 'Some relationships begin with a garment and continue as stories shared across generations.', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
-    { src: '/creative_6.jpeg', title: 'Beyond Borders', desc: 'From Punjab to the world, the narrative continues across borders.', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
-    { src: '/creative_7.jpeg', title: 'Quiet Beginnings', desc: 'Some of the strongest ideas begin over quiet conversations and unfinished coffee.', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
-    { src: '/creative_8.jpeg', title: 'The Collective', desc: 'The brand is built not only through design, but through the people gathered around the table.', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
+    { src: '/creative_2.jpeg', title: 'The Strategy', desc: 'Behind every stitch is a strategy to create opportunity.', top: isMobile ? '15%' : '12%', left: isMobile ? '35%' : '8%', progress: 0.15, rotation: -3 },
+    { src: '/creative_4.jpeg', title: 'Global Craft', desc: 'Partnerships that turn local craftsmanship into global possibility.', top: isMobile ? '30%' : '20%', left: isMobile ? '10%' : '55%', progress: 0.30, rotation: 2 },
+    { src: '/creative_5.jpeg', title: 'Shared Stories', desc: 'Some relationships begin with a garment and continue as stories shared across generations.', top: isMobile ? '45%' : '38%', left: isMobile ? '35%' : '12%', progress: 0.45, rotation: -1.5 },
+    { src: '/creative_6.jpeg', title: 'Beyond Borders', desc: 'From Punjab to the world, the narrative continues across borders.', top: isMobile ? '60%' : '52%', left: isMobile ? '10%' : '60%', progress: 0.60, rotation: 3 },
+    { src: '/creative_7.jpeg', title: 'Quiet Beginnings', desc: 'Some of the strongest ideas begin over quiet conversations and unfinished coffee.', top: isMobile ? '75%' : '72%', left: isMobile ? '35%' : '10%', progress: 0.75, rotation: -2.5 },
+    { src: '/creative_8.jpeg', title: 'The Collective', desc: 'The brand is built not only through design, but through the people gathered around the table.', top: isMobile ? '90%' : '82%', left: isMobile ? '25%' : '52%', progress: 0.90, rotation: 1.5 },
   ];
 
-  const svgPathD = isMobile 
+  const svgPathD = isMobile
     ? "M 50,-50 C 150,150 450,250 450,500 C 450,750 50,850 50,1100 C 50,1350 450,1450 450,1700 C 450,1950 50,2050 50,2300 C 50,2550 450,2650 450,2900 C 450,3150 250,3250 300,3400"
     : "M 100,-50 C 200,300 850,400 850,800 C 850,1200 150,1300 150,1700 C 150,2100 850,2200 850,2600 C 850,3000 150,3100 150,3500 C 150,3800 600,3850 800,3950";
 
@@ -122,14 +122,14 @@ const CreativesAtWork = () => {
         }}></div>
       </div>
 
-      <div style={{ 
-        position: isMobile ? 'relative' : 'absolute', 
-        top: isMobile ? '0' : '8%', 
-        left: isMobile ? '0' : '55%', 
-        zIndex: 20, 
-        pointerEvents: 'none', 
+      <div style={{
+        position: 'absolute',
+        top: isMobile ? '4%' : '8%',
+        left: isMobile ? '5%' : '55%',
+        width: isMobile ? '90%' : 'auto',
+        zIndex: 20,
+        pointerEvents: 'none',
         maxWidth: isMobile ? '100%' : '450px',
-        padding: isMobile ? '0 1.5rem 5vh' : '0'
       }}>
         <TextReveal className="display-2" style={{ color: '#fff', marginBottom: '1.5rem', lineHeight: 1.1, fontSize: isMobile ? '2.5rem' : '3.5rem' }}>
           Creatives at work.
@@ -198,8 +198,8 @@ const CreativesAtWork = () => {
               position: 'absolute',
               top: card.top,
               left: card.left,
-              width: isMobile ? '42vw' : '25vw',
-              minWidth: isMobile ? '160px' : '280px',
+              width: isMobile ? '52vw' : '25vw',
+              minWidth: isMobile ? '190px' : '280px',
               maxWidth: '420px',
               padding: isMobile ? '0.5rem' : '0.8rem',
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
