@@ -173,7 +173,7 @@ const Visionaries = () => {
 
         <VisionaryBlock 
           name="Nishi Kant Grover"
-          role="Global Ecosystems"
+          role="Co-Founder & Global Ecosystems"
           watermark="NISHIKANT"
           src={nishikantPortrait}
           objectPos="center"
