@@ -16,12 +16,12 @@ const CreativesAtWork = () => {
   const isMobile = useMobile();
 
   const creativeCards = [
-    { src: '/creative_2.jpeg', title: 'MOODBOARD 01', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
-    { src: '/creative_4.jpeg', title: 'THE DRAPE', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
-    { src: '/creative_5.jpeg', title: 'STITCHING DETAILS', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
-    { src: '/creative_6.jpeg', title: 'FINAL FITTING', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
-    { src: '/creative_7.jpeg', title: 'THE REFINEMENT', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
-    { src: '/creative_8.jpeg', title: 'EDITORIAL', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
+    { src: '/creative_2.jpeg', title: '', top: isMobile ? '15%' : '12%', left: isMobile ? '5%' : '8%', progress: 0.15, rotation: -3 },
+    { src: '/creative_4.jpeg', title: '', top: isMobile ? '30%' : '20%', left: isMobile ? '45%' : '55%', progress: 0.30, rotation: 2 },
+    { src: '/creative_5.jpeg', title: '', top: isMobile ? '45%' : '38%', left: isMobile ? '8%' : '12%', progress: 0.45, rotation: -1.5 },
+    { src: '/creative_6.jpeg', title: '', top: isMobile ? '60%' : '52%', left: isMobile ? '50%' : '60%', progress: 0.60, rotation: 3 },
+    { src: '/creative_7.jpeg', title: '', top: isMobile ? '75%' : '72%', left: isMobile ? '5%' : '10%', progress: 0.75, rotation: -2.5 },
+    { src: '/creative_8.jpeg', title: '', top: isMobile ? '90%' : '82%', left: isMobile ? '45%' : '52%', progress: 0.90, rotation: 1.5 },
   ];
 
   const svgPathD = isMobile 

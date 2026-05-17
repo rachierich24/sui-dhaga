@@ -172,7 +172,7 @@ const Visionaries = () => {
         />
 
         <VisionaryBlock 
-          name="Nishikant Grover"
+          name="Nishi Kant Grover"
           role="Global Ecosystems"
           watermark="NISHIKANT"
           src={nishikantPortrait}

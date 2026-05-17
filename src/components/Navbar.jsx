@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import logoImg from '../assets/images/logo.png';
 import SidebarMenu from './SidebarMenu';
+import SizeGuide from './SizeGuide';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [sizeOpen, setSizeOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,64 +33,15 @@ const Navbar = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
           zIndex: 9999,
-          background: scrolled && !menuOpen ? 'rgba(3, 3, 3, 0.8)' : 'rgba(3, 3, 3, 0)',
-          backdropFilter: scrolled && !menuOpen ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled && !menuOpen ? 'blur(12px)' : 'none',
-          borderBottom: scrolled && !menuOpen ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(255, 255, 255, 0)',
+          background: scrolled && !menuOpen && !sizeOpen ? 'rgba(3, 3, 3, 0.8)' : 'rgba(3, 3, 3, 0)',
+          backdropFilter: scrolled && !menuOpen && !sizeOpen ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: scrolled && !menuOpen && !sizeOpen ? 'blur(12px)' : 'none',
+          borderBottom: scrolled && !menuOpen && !sizeOpen ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(255, 255, 255, 0)',
           transition: 'background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease',
         }}
       >
-        {/* Left Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#fff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              padding: '0.5rem',
-              zIndex: 10000
-            }}
-            className="hamburger-btn"
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '35px' }}>
-              <motion.div
-                animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 9 : 0 }}
-                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-                style={{ width: '100%', height: '1px', backgroundColor: '#fff', originX: 0.5 }}
-              />
-              <motion.div
-                animate={{ opacity: menuOpen ? 0 : 1, width: menuOpen ? '100%' : '70%' }}
-                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-                style={{ height: '1px', backgroundColor: '#fff' }}
-              />
-              <motion.div
-                animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -9 : 0 }}
-                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-                style={{ width: '100%', height: '1px', backgroundColor: '#fff', originX: 0.5 }}
-              />
-            </div>
-            <motion.span
-              animate={{ opacity: menuOpen ? 0 : 1 }}
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.7rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                display: menuOpen ? 'none' : 'block' // hide completely when open so X is centered-ish
-              }}
-            >
-              MENU
-            </motion.span>
-          </button>
-        </div>
-
-        {/* right Logo */}
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'right', zIndex: 10000 }}>
+        {/* Left Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', flex: 1, zIndex: 10000 }}>
           <a href="#" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <img src={logoImg} alt="Sui Dhaga Logo" style={{ height: '30px', objectFit: 'contain' }} />
             <span style={{
@@ -103,9 +56,78 @@ const Navbar = () => {
           </a>
         </div>
 
+        {/* Right Hamburger */}
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '2rem', zIndex: 10000 }}>
+          
+          <button
+            onClick={() => { setSizeOpen(true); setMenuOpen(false); }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#fff',
+              cursor: 'pointer',
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.7rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              display: menuOpen ? 'none' : 'block'
+            }}
+            className="size-guide-btn"
+          >
+            SIZE GUIDE
+          </button>
+
+          <button
+            onClick={() => { setMenuOpen(!menuOpen); setSizeOpen(false); }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#fff',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              padding: '0.5rem',
+              zIndex: 10000
+            }}
+            className="hamburger-btn"
+          >
+            <motion.span
+              animate={{ opacity: menuOpen ? 0 : 1 }}
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.7rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                display: menuOpen ? 'none' : 'block'
+              }}
+            >
+              MENU
+            </motion.span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '35px' }}>
+              <motion.div
+                animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 9 : 0 }}
+                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+                style={{ width: '100%', height: '1px', backgroundColor: '#fff', originX: 0.5 }}
+              />
+              <motion.div
+                animate={{ opacity: menuOpen ? 0 : 1, width: menuOpen ? '100%' : '70%' }}
+                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+                style={{ height: '1px', backgroundColor: '#fff', marginLeft: 'auto' }}
+              />
+              <motion.div
+                animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -9 : 0 }}
+                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+                style={{ width: '100%', height: '1px', backgroundColor: '#fff', originX: 0.5 }}
+              />
+            </div>
+          </button>
+        </div>
+
       </motion.nav>
 
       <SidebarMenu isOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <SizeGuide isOpen={sizeOpen} setSizeOpen={setSizeOpen} />
     </>
   );
 };
