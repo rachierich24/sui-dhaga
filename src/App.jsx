@@ -94,7 +94,7 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={0.4}>
               <a
-                href="https://wa.me/61470270478"
+                href="https://wa.me/910000000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="book-btn"

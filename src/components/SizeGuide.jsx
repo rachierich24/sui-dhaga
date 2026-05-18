@@ -22,44 +22,38 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
   };
 
   const handleSubmitToWhatsApp = () => {
-    const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+    let message = "Hello SUI DHAGA,\n\nI would like to submit my bespoke suit measurements:\n\n";
 
-    let message = `✂️ *SUI DHAGA — Bespoke Order Request*\n`;
-    message += `📅 Date: ${today}\n`;
-    message += `━━━━━━━━━━━━━━━━━━━━\n\n`;
-    message += `Hello Sui Dhaga Team,\n\nI would like to place a bespoke order. Please find my measurements below:\n\n`;
-
-    message += `👗 *KAMEEZ MEASUREMENTS:*\n`;
+    message += "*KAMEEZ MEASUREMENTS:*\n";
     measurements.kameez.forEach(item => {
-      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
-      message += `  • ${item.title}: *${val}*\n`;
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : 'Not provided';
+      message += `- ${item.title}: ${val}\n`;
     });
 
-    message += `\n👖 *SALWAR MEASUREMENTS:*\n`;
+    message += "\n*SALWAR MEASUREMENTS:*\n";
     measurements.salwar.forEach(item => {
-      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
-      message += `  • ${item.title}: *${val}*\n`;
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : 'Not provided';
+      message += `- ${item.title}: ${val}\n`;
     });
 
-    message += `\n━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `I look forward to hearing from you regarding fabric options, timeline, and pricing.\n\nWarm regards 🙏`;
+    message += "\nThank you!";
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/61470270478?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/910000000000?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
   };
 
   const overlayVariants = {
-    closed: { 
+    closed: {
       opacity: 0,
       y: '100%',
-      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } 
+      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
     },
-    open: { 
+    open: {
       opacity: 1,
       y: '0%',
-      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } 
+      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
     }
   };
 
@@ -140,30 +134,31 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             </button>
           </div>
 
-          <div 
-            className={isMobile ? "size-guide-scroll" : ""}
-            style={{ 
-              display: 'flex', 
-              flexDirection: isMobile ? 'column' : 'row', 
-              flex: 1, 
-              overflowY: isMobile ? 'auto' : 'hidden' 
+          <div
+            data-lenis-prevent="true"
+            style={{
+              display: 'flex',
+              flexDirection: isMobile ? 'column' : 'row',
+              flex: 1,
+              overflowY: 'hidden',
+              outline: 'none'
             }}
           >
-            
+
             {/* Left/Top Side: SVG Animation */}
-            <div style={{ 
-              flex: isMobile ? 'none' : 1, 
-              height: isMobile ? '50vh' : 'auto',
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
+            <div style={{
+              flex: isMobile ? 'none' : 1,
+              height: isMobile ? '45vh' : 'auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)',
-              position: isMobile ? 'sticky' : 'relative',
-              top: 0,
+              position: 'relative',
               backgroundColor: '#020202',
-              zIndex: 10
+              zIndex: 10,
+              overflow: 'hidden'
             }}>
-              
+
               {/* Radial gradient glow behind silhouette */}
               <div style={{
                 position: 'absolute',
@@ -186,14 +181,14 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
                   transition={{ duration: 0.8, ease: "easeInOut" }}
                   style={{ width: '100%', height: '85%', maxWidth: '400px', position: 'relative', zIndex: 1 }}
                 >
-                  <svg viewBox="0 0 400 800" style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5))' }}>
-                    
+                  <svg viewBox="0 0 400 800" style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5))', transform: isMobile ? 'scale(1.35)' : 'none', transformOrigin: 'center center', transition: 'transform 0.4s ease' }}>
+
                     {/* Base Silhouette */}
-                    <path 
-                      d={baseSvgPaths[activeTab]} 
-                      fill="rgba(255, 255, 255, 0.01)" 
-                      stroke="rgba(212, 175, 55, 0.3)" 
-                      strokeWidth="1.5" 
+                    <path
+                      d={baseSvgPaths[activeTab]}
+                      fill="rgba(255, 255, 255, 0.01)"
+                      stroke="rgba(212, 175, 55, 0.3)"
+                      strokeWidth="1.5"
                       strokeLinejoin="round"
                     />
 
@@ -203,14 +198,14 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
                       return (
                         <motion.g key={item.num}>
                           {/* Faint guide line (always visible) */}
-                          <path 
-                            d={item.svgPath} 
-                            stroke="rgba(255,255,255,0.05)" 
-                            strokeWidth="1" 
-                            fill="none" 
+                          <path
+                            d={item.svgPath}
+                            stroke="rgba(255,255,255,0.05)"
+                            strokeWidth="1"
+                            fill="none"
                             strokeDasharray="4 4"
                           />
-                          
+
                           {/* Animated Golden Thread */}
                           <motion.path
                             d={item.svgPath}
@@ -219,9 +214,9 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
                             fill="none"
                             strokeLinecap="round"
                             initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ 
-                              pathLength: isHovered ? 1 : 0, 
-                              opacity: isHovered ? 1 : 0 
+                            animate={{
+                              pathLength: isHovered ? 1 : 0,
+                              opacity: isHovered ? 1 : 0
                             }}
                             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                             style={{ filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.6))' }}
@@ -235,237 +230,237 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             </div>
 
             {/* Right/Bottom Side: The List & Inputs */}
-            <div 
-               className={!isMobile ? "size-guide-scroll" : ""}
-               style={{ 
-                 flex: 1, 
-                 position: 'relative', 
-                 zIndex: 20,
-                 overflowY: isMobile ? 'visible' : 'auto'
-               }}
+            <div
+              className="size-guide-scroll"
+              data-lenis-prevent="true"
+              tabIndex={0}
+              style={{
+                flex: 1,
+                minHeight: 0,
+                position: 'relative',
+                zIndex: 20,
+                overflowY: 'auto',
+                outline: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
             >
-              <div style={{ 
+              <div style={{
                 padding: isMobile ? '3rem 1.5rem 10vh' : '10vh 5vw',
-                borderTopLeftRadius: isMobile ? '24px' : '0',
-                borderTopRightRadius: isMobile ? '24px' : '0',
-                boxShadow: isMobile ? '0 -15px 40px rgba(0,0,0,0.9)' : 'none',
+                borderTopLeftRadius: isMobile ? '30px' : '0',
+                borderTopRightRadius: isMobile ? '30px' : '0',
+                boxShadow: isMobile ? '0 -20px 50px rgba(0,0,0,1)' : 'none',
                 backgroundColor: isMobile ? '#050505' : 'transparent',
-                minHeight: isMobile ? '100vh' : 'auto',
+                marginTop: isMobile ? '-5vh' : '0',
+                position: 'relative',
+                zIndex: 25
               }}>
-              
-              <div style={{ marginBottom: isMobile ? '2rem' : '6vh' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 300, marginBottom: '1rem', lineHeight: 1.1 }}>
-                  Craft My Suit
-                </h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '400px', fontSize: '0.9rem', lineHeight: 1.8, fontWeight: 300 }}>
-                  Select a measurement below to view the guide, and carefully enter your size.
-                </p>
-              </div>
 
-              {/* Tabs */}
-              <div style={{ display: 'flex', gap: '3rem', marginBottom: '4vh', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                {['kameez', 'salwar'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => { setActiveTab(tab); setActiveId(null); }}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: activeTab === tab ? '#D4AF37' : 'rgba(255,255,255,0.4)',
-                      padding: '1rem 0',
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.8rem',
-                      letterSpacing: '0.25em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      transition: 'color 0.3s ease'
-                    }}
-                  >
-                    {tab}
-                    {activeTab === tab && (
-                      <motion.div
-                        layoutId="activeTabUnderline"
-                        style={{
-                          position: 'absolute',
-                          bottom: '-1px',
-                          left: 0,
-                          right: 0,
-                          height: '1px',
-                          backgroundColor: '#D4AF37'
-                        }}
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
+                <div style={{ marginBottom: isMobile ? '2rem' : '6vh' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 300, marginBottom: '1rem', lineHeight: 1.1 }}>
+                    Craft My Suit
+                  </h2>
+                  <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '400px', fontSize: '0.9rem', lineHeight: 1.8, fontWeight: 300 }}>
+                    Select a measurement below to view the guide, and carefully enter your size.
+                  </p>
+                </div>
 
-              {/* Measurement List & Form */}
-              <div style={{ width: '100%', paddingBottom: '15vh' }}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.4 }}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-                  >
-                    {measurements[activeTab].map((item) => {
-                      const isActive = activeId === item.num;
-                      return (
-                        <div 
-                          key={item.num} 
-                          onClick={() => setActiveId(isActive ? null : item.num)}
-                          style={{ 
-                            display: 'flex', 
-                            alignItems: 'flex-start', 
-                            gap: isMobile ? '1.5rem' : '2rem', 
-                            padding: '1.5rem',
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                            transition: 'all 0.4s ease',
-                            backgroundColor: isActive ? 'rgba(255,255,255,0.03)' : 'transparent',
-                            borderLeft: isActive ? '2px solid #D4AF37' : '2px solid transparent',
-                            boxShadow: isActive ? '0 10px 30px rgba(0,0,0,0.2)' : 'none'
-                          }}
-                        >
-                          <div style={{ 
-                            fontFamily: 'var(--font-serif)', 
-                            fontSize: '1.5rem', 
-                            color: isActive ? '#D4AF37' : 'rgba(212, 175, 55, 0.4)', 
-                            fontWeight: 300,
-                            transition: 'color 0.4s ease',
-                            marginTop: '0.2rem'
-                          }}>
-                            {item.num}
-                          </div>
-                          <div style={{ flex: 1 }}>
-                            <h4 style={{ 
-                              fontFamily: 'var(--font-serif)', 
-                              fontSize: '1.2rem', 
-                              fontWeight: 400, 
-                              marginBottom: '0.2rem', 
-                              letterSpacing: '0.05em',
-                              color: isActive ? '#fff' : 'rgba(255,255,255,0.8)',
-                              transition: 'color 0.4s ease'
-                            }}>
-                              {item.title}
-                            </h4>
-                            <motion.p 
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ 
-                                height: isActive ? 'auto' : 0, 
-                                opacity: isActive ? 1 : 0,
-                                marginTop: isActive ? '0.5rem' : 0,
-                                marginBottom: isActive ? '1rem' : 0
-                              }}
-                              style={{ 
-                                color: 'rgba(255,255,255,0.5)', 
-                                fontSize: '0.85rem', 
-                                lineHeight: 1.6, 
-                                fontWeight: 300, 
-                                overflow: 'hidden'
-                              }}
-                            >
-                              {item.desc}
-                            </motion.p>
-                            
-                            {/* Input Field */}
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ 
-                                height: isActive ? 'auto' : 0, 
-                                opacity: isActive ? 1 : 0
-                              }}
-                              style={{ overflow: 'hidden' }}
-                            >
-                              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem' }}>
-                                <input
-                                  type="number"
-                                  placeholder="0.0"
-                                  value={sizes[item.num] || ''}
-                                  onChange={(e) => handleSizeChange(item.num, e.target.value)}
-                                  onClick={(e) => e.stopPropagation()}
-                                  style={{
-                                    background: 'transparent',
-                                    border: 'none',
-                                    borderBottom: '1px solid rgba(212, 175, 55, 0.5)',
-                                    color: '#D4AF37',
-                                    fontFamily: 'var(--font-sans)',
-                                    fontSize: '1.2rem',
-                                    width: '80px',
-                                    padding: '0.5rem 0',
-                                    outline: 'none',
-                                    textAlign: 'center',
-                                    transition: 'border-color 0.3s ease'
-                                  }}
-                                />
-                                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', fontFamily: 'var(--font-sans)', paddingBottom: '0.5rem' }}>
-                                  inches
-                                </span>
-                              </div>
-                            </motion.div>
-
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Submit Button */}
-                <div style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center' }}>
-                  {activeTab === 'kameez' ? (
-                    <button 
-                      onClick={() => { setActiveTab('salwar'); setActiveId(null); }}
+                {/* Tabs */}
+                <div style={{ display: 'flex', gap: '3rem', marginBottom: '4vh', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                  {['kameez', 'salwar'].map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => { setActiveTab(tab); setActiveId(null); }}
                       style={{
                         background: 'transparent',
-                        color: '#D4AF37',
-                        border: '1px solid rgba(212, 175, 55, 0.5)',
-                        padding: '1rem 3rem',
+                        border: 'none',
+                        color: activeTab === tab ? '#D4AF37' : 'rgba(255,255,255,0.4)',
+                        padding: '1rem 0',
                         fontFamily: 'var(--font-sans)',
                         fontSize: '0.8rem',
-                        letterSpacing: '0.2em',
-                        textTransform: 'uppercase',
-                        cursor: 'pointer',
-                        borderRadius: '2px',
-                        transition: 'background 0.3s ease'
-                      }}
-                    >
-                      Next: Salwar Measurements →
-                    </button>
-                  ) : (
-                    <button 
-                      onClick={handleSubmitToWhatsApp}
-                      style={{
-                        background: 'linear-gradient(135deg, #D4AF37 0%, #B8962E 100%)',
-                        color: '#000',
-                        border: 'none',
-                        padding: '1.1rem 2.5rem',
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: '0.75rem',
                         letterSpacing: '0.25em',
                         textTransform: 'uppercase',
                         cursor: 'pointer',
-                        borderRadius: '2px',
-                        fontWeight: 700,
-                        boxShadow: '0 15px 40px rgba(212, 175, 55, 0.35)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.8rem',
+                        position: 'relative',
+                        transition: 'color 0.3s ease'
                       }}
                     >
-                      {/* WhatsApp icon */}
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                      </svg>
-                      Proceed to Book Order
+                      {tab}
+                      {activeTab === tab && (
+                        <motion.div
+                          layoutId="activeTabUnderline"
+                          style={{
+                            position: 'absolute',
+                            bottom: '-1px',
+                            left: 0,
+                            right: 0,
+                            height: '1px',
+                            backgroundColor: '#D4AF37'
+                          }}
+                        />
+                      )}
                     </button>
-                  )}
+                  ))}
                 </div>
 
-              </div>
+                {/* Measurement List & Form */}
+                <div style={{ width: '100%', paddingBottom: '15vh' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTab}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.4 }}
+                      style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+                    >
+                      {measurements[activeTab].map((item) => {
+                        const isActive = activeId === item.num;
+                        return (
+                          <div
+                            key={item.num}
+                            onClick={() => setActiveId(isActive ? null : item.num)}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'flex-start',
+                              gap: isMobile ? '1.5rem' : '2rem',
+                              padding: '1.5rem',
+                              borderRadius: '8px',
+                              cursor: 'pointer',
+                              transition: 'all 0.4s ease',
+                              backgroundColor: isActive ? 'rgba(255,255,255,0.03)' : 'transparent',
+                              borderLeft: isActive ? '2px solid #D4AF37' : '2px solid transparent',
+                              boxShadow: isActive ? '0 10px 30px rgba(0,0,0,0.2)' : 'none'
+                            }}
+                          >
+                            <div style={{
+                              fontFamily: 'var(--font-serif)',
+                              fontSize: '1.5rem',
+                              color: isActive ? '#D4AF37' : 'rgba(212, 175, 55, 0.4)',
+                              fontWeight: 300,
+                              transition: 'color 0.4s ease',
+                              marginTop: '0.2rem'
+                            }}>
+                              {item.num}
+                            </div>
+                            <div style={{ flex: 1 }}>
+                              <h4 style={{
+                                fontFamily: 'var(--font-serif)',
+                                fontSize: '1.2rem',
+                                fontWeight: 400,
+                                marginBottom: '0.2rem',
+                                letterSpacing: '0.05em',
+                                color: isActive ? '#fff' : 'rgba(255,255,255,0.8)',
+                                transition: 'color 0.4s ease'
+                              }}>
+                                {item.title}
+                              </h4>
+                              <motion.p
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{
+                                  height: isActive ? 'auto' : 0,
+                                  opacity: isActive ? 1 : 0,
+                                  marginTop: isActive ? '0.5rem' : 0,
+                                  marginBottom: isActive ? '1rem' : 0
+                                }}
+                                style={{
+                                  color: 'rgba(255,255,255,0.5)',
+                                  fontSize: '0.85rem',
+                                  lineHeight: 1.6,
+                                  fontWeight: 300,
+                                  overflow: 'hidden'
+                                }}
+                              >
+                                {item.desc}
+                              </motion.p>
+
+                              {/* Input Field */}
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{
+                                  height: isActive ? 'auto' : 0,
+                                  opacity: isActive ? 1 : 0
+                                }}
+                                style={{ overflow: 'hidden' }}
+                              >
+                                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem' }}>
+                                  <input
+                                    type="number"
+                                    placeholder="0.0"
+                                    value={sizes[item.num] || ''}
+                                    onChange={(e) => handleSizeChange(item.num, e.target.value)}
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{
+                                      background: 'transparent',
+                                      border: 'none',
+                                      borderBottom: '1px solid rgba(212, 175, 55, 0.5)',
+                                      color: '#D4AF37',
+                                      fontFamily: 'var(--font-sans)',
+                                      fontSize: '1.2rem',
+                                      width: '80px',
+                                      padding: '0.5rem 0',
+                                      outline: 'none',
+                                      textAlign: 'center',
+                                      transition: 'border-color 0.3s ease'
+                                    }}
+                                  />
+                                  <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', fontFamily: 'var(--font-sans)', paddingBottom: '0.5rem' }}>
+                                    inches
+                                  </span>
+                                </div>
+                              </motion.div>
+
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Submit Button */}
+                  <div style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center' }}>
+                    {activeTab === 'kameez' ? (
+                      <button
+                        onClick={() => { setActiveTab('salwar'); setActiveId(null); }}
+                        style={{
+                          background: 'transparent',
+                          color: '#D4AF37',
+                          border: '1px solid rgba(212, 175, 55, 0.5)',
+                          padding: '1rem 3rem',
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.8rem',
+                          letterSpacing: '0.2em',
+                          textTransform: 'uppercase',
+                          cursor: 'pointer',
+                          borderRadius: '2px',
+                          transition: 'background 0.3s ease'
+                        }}
+                      >
+                        Next: Salwar Measurements →
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleSubmitToWhatsApp}
+                        style={{
+                          background: '#D4AF37',
+                          color: '#000',
+                          border: 'none',
+                          padding: '1rem 3rem',
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.8rem',
+                          letterSpacing: '0.2em',
+                          textTransform: 'uppercase',
+                          cursor: 'pointer',
+                          borderRadius: '2px',
+                          fontWeight: 600,
+                          boxShadow: '0 10px 30px rgba(212, 175, 55, 0.2)'
+                        }}
+                      >
+                        Submit to WhatsApp
+                      </button>
+                    )}
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>

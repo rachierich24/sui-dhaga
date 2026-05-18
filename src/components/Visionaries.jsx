@@ -6,6 +6,7 @@ import { useMobile } from './MotionHelpers';
 const navneetPortrait = '/navneet_new.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
+const ctoPortrait = '/cto.jpeg';
 
 const ParallaxPortrait = ({ src, alt, objectPosition = 'center' }) => {
   const ref = useRef(null);
@@ -192,6 +193,18 @@ const Visionaries = () => {
           isReversed={false}
           quotes={[
             { text: `Driving the narrative of Sui Dhaga to the world, merging the art of storytelling with the business of empowerment.` }
+          ]}
+        />
+
+        <VisionaryBlock 
+          name="Rachit Vij"
+          role="Chief Technology Officer"
+          watermark="RACHIT"
+          src={ctoPortrait}
+          objectPos="center"
+          isReversed={true}
+          quotes={[
+            { text: `Architecting the digital foundation and global ecosystem to bring bespoke experiences directly to our community.` }
           ]}
         />
 
