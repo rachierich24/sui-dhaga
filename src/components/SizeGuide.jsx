@@ -22,24 +22,30 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
   };
 
   const handleSubmitToWhatsApp = () => {
-    let message = "Hello SUI DHAGA,\n\nI would like to submit my bespoke suit measurements:\n\n";
+    const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    message += "*KAMEEZ MEASUREMENTS:*\n";
+    let message = `✂️ *SUI DHAGA — Bespoke Order Request*\n`;
+    message += `📅 Date: ${today}\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `Hello Sui Dhaga Team,\n\nI would like to place a bespoke order. Please find my measurements below:\n\n`;
+
+    message += `👗 *KAMEEZ MEASUREMENTS:*\n`;
     measurements.kameez.forEach(item => {
-      const val = sizes[item.num] ? `${sizes[item.num]} inches` : 'Not provided';
-      message += `- ${item.title}: ${val}\n`;
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
+      message += `  • ${item.title}: *${val}*\n`;
     });
 
-    message += "\n*SALWAR MEASUREMENTS:*\n";
+    message += `\n👖 *SALWAR MEASUREMENTS:*\n`;
     measurements.salwar.forEach(item => {
-      const val = sizes[item.num] ? `${sizes[item.num]} inches` : 'Not provided';
-      message += `- ${item.title}: ${val}\n`;
+      const val = sizes[item.num] ? `${sizes[item.num]} inches` : '—';
+      message += `  • ${item.title}: *${val}*\n`;
     });
 
-    message += "\nThank you!";
+    message += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `I look forward to hearing from you regarding fabric options, timeline, and pricing.\n\nWarm regards 🙏`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/910000000000?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/61470270478?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
   };
