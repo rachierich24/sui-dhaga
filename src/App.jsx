@@ -22,6 +22,8 @@ export default function App() {
   const lenisRef = React.useRef(null);
 
   useEffect(() => {
+    let rafId;
+
     // Initialize Lenis with optimal settings
     if (!lenisRef.current) {
       lenisRef.current = new Lenis({
@@ -35,13 +37,16 @@ export default function App() {
 
       function raf(time) {
         lenisRef.current?.raf(time);
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
       }
 
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
     return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;

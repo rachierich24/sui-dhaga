@@ -16,19 +16,15 @@ const HorizontalScrollProcess = () => {
     offset: ["start start", "end end"]
   });
 
-  // CINEMATIC MOTION SMOOTHING
-  // Adds weight and fluid inertia to the scroll-linked animations
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 20,
-    restDelta: 0.001
-  });
+  // Removed useSpring to prevent lag on fast scrolls
 
   // LAYERED DEPTH HIERARCHY
   // Background (Thread) moves slowest, cards move faster, typography has its own pace
-  const x = useTransform(smoothProgress, [0, 1], ["0%", "-66.666%"]);
-  const threadX = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]); // Subtle background drift
-  const threadDraw = useTransform(smoothProgress, [0, 0.9], [0, 1]);
+  // Added [0.1, 0.9] to create a buffer so it pauses before unpinning (gliding down/up)
+  // Mapping directly to scrollYProgress avoids spring lag on fast scrolls
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "-66.666%"]);
+  const threadX = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "-20%"]); // Subtle background drift
+  const threadDraw = useTransform(scrollYProgress, [0.1, 0.8], [0, 1]);
 
   const steps = useMemo(() => [
     {
@@ -145,10 +141,10 @@ const HorizontalScrollProcess = () => {
                 {/* Text Column - Premium Alignment */}
                 <div style={{ flex: 1, textAlign: 'left', maxWidth: '500px' }}>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8 }}
+                    viewport={{ once: false, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                   >
                     <div style={{
                       display: 'flex',
@@ -207,10 +203,10 @@ const HorizontalScrollProcess = () => {
                   perspective: '1000px'
                 }}>
                   <motion.div
-                    initial={isMobile ? { opacity: 0, scale: 0.95 } : false}
-                    whileInView={isMobile ? { opacity: 1, scale: 1 } : false}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false, margin: "-50px" }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                     style={{
                       width: '100%',
                       maxWidth: isMobile ? '100%' : '550px',

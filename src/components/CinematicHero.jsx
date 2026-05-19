@@ -150,23 +150,6 @@ const CinematicHero = () => {
 
       </motion.div>
 
-      {/* Floating vertical numbering (right side accent) */}
-      {/* <motion.div
-        className="desktop-only"
-        style={{ position: 'absolute', right: '4vw', top: '50%', transform: 'translateY(-50%)', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 1.2 } }
-        }}
-      >
-        <motion.span variants={{ hidden: { opacity: 0, y: -20 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } }} style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--gold)', letterSpacing: '0.1em' }}>01</motion.span>
-        <motion.div variants={{ hidden: { scaleY: 0 }, visible: { scaleY: 1, transition: { duration: 1 } } }} style={{ height: '40px', width: '1px', backgroundColor: 'rgba(255,255,255,0.1)', transformOrigin: 'top' }}></motion.div>
-        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } }} style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--text-muted)', letterSpacing: '0.1em' }}>02</motion.span>
-        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } }} style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--text-muted)', letterSpacing: '0.1em' }}>03</motion.span>
-      </motion.div> */}
-
       {/* Scroll Indicator */}
       <motion.div
         style={{ position: 'absolute', bottom: '3vw', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', zIndex: 10 }}
@@ -174,7 +157,13 @@ const CinematicHero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 1.5 }}
       >
-        <div className="scroll-line" style={{ height: '60px' }}></div>
+        <div style={{ height: '60px', width: '1px', backgroundColor: 'rgba(255,255,255,0.2)', position: 'relative', overflow: 'hidden' }}>
+          <motion.div 
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '30%', backgroundColor: '#D4AF37' }}
+            animate={{ top: ['-30%', '100%'] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+          />
+        </div>
       </motion.div>
 
     </section>

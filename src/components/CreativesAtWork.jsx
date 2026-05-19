@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
@@ -14,6 +14,22 @@ const CreativesAtWork = () => {
   const needleRef = useRef(null);
   const cardsRef = useRef([]);
   const isMobile = useMobile();
+  const [dimensions, setDimensions] = useState({ width: typeof window !== 'undefined' ? window.innerWidth : 0, height: typeof window !== 'undefined' ? window.innerHeight : 0 });
+
+  useEffect(() => {
+    let timeoutId;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setDimensions({ width: window.innerWidth, height: window.innerHeight });
+      }, 150);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const creativeCards = [
     { src: '/creative_2.jpeg', title: 'The Strategy', desc: 'Behind every stitch is a strategy to create opportunity.', top: isMobile ? '15%' : '12%', left: isMobile ? '35%' : '8%', progress: 0.15, rotation: -3 },
@@ -76,7 +92,7 @@ const CreativesAtWork = () => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, [isMobile, dimensions]);
 
   return (
     <section
