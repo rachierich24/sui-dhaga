@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import logoImg from '../assets/images/logo.png';
 import SidebarMenu from './SidebarMenu';
 import SizeGuide from './SizeGuide';
 
@@ -53,11 +52,11 @@ const Navbar = () => {
       >
         {/* Left Logo */}
         <div style={{ display: 'flex', alignItems: 'center', flex: 1, zIndex: 10000 }}>
-          <a href="#" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <img src={logoImg} alt="Sui Dhaga Logo" style={{ height: '30px', objectFit: 'contain' }} />
+          <a href="#" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <img src="/finalsuidhagalogo.png" alt="Sui Dhaga Logo" style={{ height: '48px', objectFit: 'contain' }} />
             <span style={{
               fontFamily: 'var(--font-sans)',
-              fontSize: '14px',
+              fontSize: '18px',
               letterSpacing: '0.25em',
               textTransform: 'uppercase',
               fontWeight: 400
