@@ -32,7 +32,7 @@ const HowWeWork = () => {
   const badgeScale = useTransform(scrollYProgress, [0.4, 0.7], [0.5, 1]);
 
   return (
-    <section ref={containerRef} className="how-we-work-section" style={{ padding: '10rem 5vw', backgroundColor: '#050505', position: 'relative', zIndex: 10 }}>
+    <section id="how-we-work" ref={containerRef} className="how-we-work-section" style={{ padding: '10rem 5vw', backgroundColor: '#050505', position: 'relative', zIndex: 10 }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center' }}>
           

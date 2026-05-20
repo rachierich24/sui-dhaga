@@ -27,6 +27,17 @@ const Navbar = () => {
     };
   }, [menuOpen, sizeOpen]);
 
+  useEffect(() => {
+    const handleOpenSize = () => {
+      setSizeOpen(true);
+      setMenuOpen(false);
+    };
+    window.addEventListener('open-size-guide', handleOpenSize);
+    return () => {
+      window.removeEventListener('open-size-guide', handleOpenSize);
+    };
+  }, []);
+
   return (
     <>
       <motion.nav
