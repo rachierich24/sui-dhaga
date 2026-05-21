@@ -121,7 +121,11 @@ const CinematicHero = () => {
             </svg>
           </div>
 
-          <div className="massive-center-text" style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', lineHeight: 1, mixBlendMode: 'normal', color: '#fff', textTransform: 'none', position: 'relative', zIndex: 1 }}>
+          <h1 className="massive-center-text" style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', lineHeight: 1, mixBlendMode: 'normal', color: '#fff', textTransform: 'none', position: 'relative', zIndex: 1, margin: 0, fontWeight: 300 }}>
+            {/* Screen Reader and AI search bot accessible fallback */}
+            <span style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0 }}>
+              Sui Dhaga Global - Bespoke is our Language. Premium Luxury Bespoke Tailoring & Custom Garments.
+            </span>
             <div style={{ display: 'block', overflow: 'hidden' }}>
               <Text3DFlip rotateDirection="top">Bespoke</Text3DFlip>
             </div>
@@ -133,7 +137,7 @@ const CinematicHero = () => {
             <div style={{ display: 'block', overflow: 'hidden', marginBottom: '2rem', paddingBottom: '1.5rem' }}>
               <Text3DFlip rotateDirection="top">Language</Text3DFlip>
             </div>
-          </div>
+          </h1>
 
           <FadeIn delay={0.8}>
             <p className="lead" style={{ marginTop: '2rem', marginBottom: '3rem', maxWidth: '500px', color: 'rgba(255,255,255,0.7)', fontSize: '1.2rem' }}>

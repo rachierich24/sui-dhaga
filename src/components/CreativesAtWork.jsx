@@ -147,9 +147,11 @@ const CreativesAtWork = () => {
         pointerEvents: 'none',
         maxWidth: isMobile ? '100%' : '450px',
       }}>
-        <TextReveal className="display-2" style={{ color: '#fff', marginBottom: '1.5rem', lineHeight: 1.1, fontSize: isMobile ? '2.5rem' : '3.5rem' }}>
-          Creatives at work.
-        </TextReveal>
+        <h2 className="display-2" style={{ color: '#fff', marginBottom: '1.5rem', lineHeight: 1.1, fontSize: isMobile ? '2.5rem' : '3.5rem', fontFamily: 'var(--font-serif)', fontWeight: 300 }}>
+          <TextReveal>
+            Creatives at work.
+          </TextReveal>
+        </h2>
         <FadeIn delay={0.2}>
           <p style={{ color: 'rgba(255,255,255,0.4)', maxWidth: '380px', fontSize: '1rem', lineHeight: 1.8, fontWeight: 300 }}>
             The SUI DHAGA atelier is where technical precision meets high-fashion artistry, crafting stories that endure.
@@ -229,7 +231,13 @@ const CreativesAtWork = () => {
             }}
           >
             <div style={{ overflow: 'hidden', position: 'relative', width: '100%', paddingTop: '140%', borderRadius: '2px' }}>
-              <img src={card.src} alt={card.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img 
+                src={card.src} 
+                alt={`${card.title} - Sui Dhaga Atelier Craftsmanship`} 
+                loading="lazy"
+                decoding="async"
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
               <div style={{
                 position: 'absolute',
                 bottom: 0,

@@ -217,29 +217,29 @@ const Footer = () => {
           {/* Right: Links Columns */}
           <div className="footer-links-grid">
             {/* Column 1: Brand navigation */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <nav aria-label="Footer Brand Navigation" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em', color: '#D4AF37' }}>BRAND</h4>
-              <a href="#how-we-work" className="footer-link-exact">About Us</a>
-              <a href="#collection" className="footer-link-exact">The Collection</a>
-              <a href="#process" className="footer-link-exact">Our Process</a>
-              <a href="#visionaries" className="footer-link-exact">The Visionaries</a>
-            </div>
+              <a href="#how-we-work" className="footer-link-exact" aria-label="Read about our empowerment and fair trade studio">About Us</a>
+              <a href="#collection" className="footer-link-exact" aria-label="View our bespoke luxury garments collection">The Collection</a>
+              <a href="#process" className="footer-link-exact" aria-label="Explore our three-step custom crafting process">Our Process</a>
+              <a href="#visionaries" className="footer-link-exact" aria-label="Meet the founders of Sui Dhaga Global">The Visionaries</a>
+            </nav>
 
             {/* Column 2: Customer Service */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <nav aria-label="Footer Customer Service Navigation" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em', color: '#D4AF37' }}>CUSTOMER SERVICE</h4>
-              <a href="#book" className="footer-link-exact">Book Consultation</a>
-              <a href="#" onClick={handleOpenSizeGuide} className="footer-link-exact">Size Guide & Crafting</a>
-              <a href="https://wa.me/61470270478" target="_blank" rel="noopener noreferrer" className="footer-link-exact">Contact via WhatsApp</a>
-            </div>
+              <a href="#book" className="footer-link-exact" aria-label="Book a bespoke tailoring consultation">Book Consultation</a>
+              <a href="#" onClick={handleOpenSizeGuide} className="footer-link-exact" aria-label="Open our size guide and tailoring details">Size Guide & Crafting</a>
+              <a href="https://wa.me/61470270478" target="_blank" rel="noopener noreferrer" className="footer-link-exact" aria-label="Contact our customer service directly via WhatsApp">Contact via WhatsApp</a>
+            </nav>
 
             {/* Column 3: Follow Us */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <nav aria-label="Footer Social Connections" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em', color: '#D4AF37' }}>FOLLOW US</h4>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-link-exact">Facebook</a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-link-exact">Instagram</a>
-              <a href="https://wa.me/61470270478" target="_blank" rel="noopener noreferrer" className="footer-link-exact">WhatsApp Chat</a>
-            </div>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-link-exact" aria-label="Follow Sui Dhaga Global on Facebook">Facebook</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-link-exact" aria-label="Follow Sui Dhaga Global on Instagram">Instagram</a>
+              <a href="https://wa.me/61470270478" target="_blank" rel="noopener noreferrer" className="footer-link-exact" aria-label="Chat with our master designers on WhatsApp">WhatsApp Chat</a>
+            </nav>
           </div>
         </div>
 

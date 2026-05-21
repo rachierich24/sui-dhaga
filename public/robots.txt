@@ -1,0 +1,24 @@
+# Robots.txt for Sui Dhaga Global
+# Optimized for search engines and modern AI models
+
+User-agent: *
+Allow: /
+
+# Explicitly ensure AI search bots have search access to index brand context
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.suidhagaglobal.com/sitemap.xml

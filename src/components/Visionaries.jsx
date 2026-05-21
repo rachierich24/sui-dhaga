@@ -23,7 +23,9 @@ const ParallaxPortrait = ({ src, alt, objectPosition = 'center' }) => {
     <div ref={ref} style={{ width: '100%', height: '100%', overflow: 'hidden', borderRadius: '4px', boxShadow: '0 30px 60px rgba(0,0,0,0.5)' }}>
       <motion.img
         src={src}
-        alt={alt}
+        alt={`Sui Dhaga Founder Portrait - ${alt}`}
+        loading="lazy"
+        decoding="async"
         style={{
           width: '100%',
           height: '130%',

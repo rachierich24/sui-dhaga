@@ -76,7 +76,9 @@ const HowWeWork = () => {
             >
               <motion.img 
                 src={artisanStudio} 
-                alt="Our Studio" 
+                alt="Sui Dhaga Artisan Tailoring Studio - Fair Trade Custom Couture" 
+                loading="lazy"
+                decoding="async"
                 style={{ 
                   width: '100%', 
                   height: 'auto', 

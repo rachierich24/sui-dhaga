@@ -219,7 +219,9 @@ const HorizontalScrollProcess = () => {
                   >
                     <motion.img
                       src={step.img}
-                      alt={step.alt}
+                      alt={`${step.alt} - Sui Dhaga Custom Garment Creation`}
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         width: '100%',
                         height: '115%', // Extra height for internal parallax

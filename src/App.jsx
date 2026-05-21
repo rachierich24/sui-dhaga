@@ -12,6 +12,7 @@ import PageTransition from './components/PageTransition';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Visionaries from './components/Visionaries';
+import SEO from './components/SEO';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -56,6 +57,7 @@ export default function App() {
 
   return (
     <main className="main-wrapper">
+      <SEO />
       <PageTransition />
       <CustomCursor />
 
