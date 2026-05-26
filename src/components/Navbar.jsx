@@ -64,7 +64,7 @@ const Navbar = () => {
         {/* Left Logo */}
         <div style={{ display: 'flex', alignItems: 'center', flex: 1, zIndex: 10000 }}>
           <a href="#" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <img src="/finalsuidhagalogo.png" alt="Sui Dhaga Logo" style={{ height: '48px', objectFit: 'contain' }} />
+            <img src="/navbar-logo.png" alt="Sui Dhaga Logo" style={{ height: '48px', objectFit: 'contain' }} />
             <span style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '18px',
