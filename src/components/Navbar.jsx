@@ -65,13 +65,16 @@ const Navbar = () => {
         <div style={{ display: 'flex', alignItems: 'center', flex: 1, zIndex: 10000 }}>
           <a href="#" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <img src="/navbar-logo.png" alt="Sui Dhaga Logo" style={{ height: '48px', objectFit: 'contain' }} />
-            <span style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '18px',
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase',
-              fontWeight: 400
-            }}>
+            <span 
+              className="logo-text"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '18px',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                fontWeight: 400
+              }}
+            >
               Sui Dhaga
             </span>
           </a>
@@ -93,7 +96,7 @@ const Navbar = () => {
               textTransform: 'uppercase',
               display: menuOpen ? 'none' : 'block'
             }}
-            className="craft-my-suit-btn"
+            className="craft-my-suit-btn desktop-only"
           >
             CRAFT MY SUIT
           </button>
@@ -107,7 +110,7 @@ const Navbar = () => {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem',
+              gap: 'var(--hamburger-gap, 1rem)',
               padding: '0.5rem',
               zIndex: 10000
             }}
@@ -115,6 +118,7 @@ const Navbar = () => {
           >
             <motion.span
               animate={{ opacity: menuOpen ? 0 : 1 }}
+              className="desktop-only"
               style={{
                 fontFamily: 'var(--font-sans)',
                 fontSize: '0.7rem',
@@ -147,7 +151,7 @@ const Navbar = () => {
 
       </motion.nav>
 
-      <SidebarMenu isOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <SidebarMenu isOpen={menuOpen} setMenuOpen={setMenuOpen} setSizeOpen={setSizeOpen} />
       <SizeGuide isOpen={sizeOpen} setSizeOpen={setSizeOpen} />
     </>
   );
