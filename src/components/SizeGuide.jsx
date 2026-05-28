@@ -506,6 +506,7 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
               </div>
             </div>
           </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
