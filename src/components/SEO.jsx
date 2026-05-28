@@ -2,34 +2,34 @@ import React, { useEffect } from 'react';
 
 const sectionMetadata = {
   default: {
-    title: "Sui Dhaga Global | Bespoke Luxury Tailoring & Custom Garments",
-    description: "Sui Dhaga Global - Premium bespoke tailoring and luxury fashion. Experience high-fashion artistry, master craftsmanship, and social empowerment.",
-    keywords: "bespoke luxury tailoring, premium custom suits, artisanal handmade couture, women-empowered tailoring, fair trade fashion, Sui Dhaga Global"
+    title: "Sui Dhaga Global | Premium Bespoke Indian Couture & Custom Tailoring",
+    description: "Sui Dhaga Global delivers premium bespoke Indian wear and custom tailoring worldwide. Handcrafted luxury silks & velvets for NRIs and premium global clients.",
+    keywords: "bespoke Indian wear, NRI custom tailoring, luxury custom suits, premium sherwanis worldwide, silk salwar suits, handmade couture, Sui Dhaga Global"
   },
   process: {
-    title: "The Bespoke Process | Sui Dhaga Global Custom Tailoring",
-    description: "From digital consultation to the final seam, explore the three-step digital luxury journey of crafting your bespoke garment with Sui Dhaga.",
-    keywords: "bespoke tailoring process, digital custom styling, premium silk draping, luxury apparel reveal"
+    title: "The Bespoke Process | Sui Dhaga Global Online Custom Styling",
+    description: "From video styling consultation to final master-artisan stitching, explore the three-step digital luxury journey of crafting your bespoke garment.",
+    keywords: "online bespoke tailoring, NRI wardrobe consultation, custom sizing system, premium garment reveal"
   },
   "how-we-work": {
-    title: "Artisan Impact & Fair Trade Craftsmanship | Sui Dhaga Global",
-    description: "Empowering artisans from rural Punjab. Discover how Sui Dhaga builds a fair-trade tailoring movement providing full financial autonomy and dignity.",
-    keywords: "women empowered atelier, fair trade luxury, rural Punjab artisans, ethical fashion craftsmanship"
+    title: "Artisan Impact & Ethical Tailoring | Sui Dhaga Global",
+    description: "Discover our fair-trade atelier in Punjab providing master women artisans with absolute financial dignity to craft world-class premium couture.",
+    keywords: "women empowered atelier, fair trade luxury, rural Punjab artisans, ethical custom tailoring"
   },
   collection: {
-    title: "Atelier Artistry & The Collection | Sui Dhaga Global",
-    description: "Explore the premium visual gallery of Sui Dhaga Global bespoke garments, where high-fashion strategy meets global opportunity.",
-    keywords: "custom couture gallery, premium fashion collection, bespoke velvet strategy, luxury clothing design"
+    title: "The Luxury Collection & Visual Gallery | Sui Dhaga Global",
+    description: "Explore our premium gallery of hand-finished silk sherwanis, velvet suits, and custom bridal wear designed for selective global clients.",
+    keywords: "custom sherwani gallery, luxury velvet suit, premium silk dresses, elite custom fashion"
   },
   visionaries: {
-    title: "Meet the Visionaries & Founders | Sui Dhaga Global",
-    description: "Meet the founders NavneetJit Kaur and Nishi Kant Grover, and the digital team bridging cultural heritage with modern tech bespoke systems.",
-    keywords: "Sui Dhaga founders, fashion entrepreneurs, Clare's Law ecosystem, clothing tech visionaries"
+    title: "Meet the Visionaries & Tech Founders | Sui Dhaga Global",
+    description: "Meet the founders NavneetJit Kaur and Nishi Kant Grover, bridging master Punjabi handcrafts with modern global digital sizing ecosystems.",
+    keywords: "Sui Dhaga founders, fashion entrepreneurs, Clare's Law ecosystem, digital clothing systems"
   },
   book: {
-    title: "Book a Luxury Bespoke Consultation | Sui Dhaga Global",
-    description: "Ready to elevate your wardrobe? Schedule a personalized fitting and style consultation with our master designers via WhatsApp.",
-    keywords: "book custom tailoring, WhatsApp bespoke fitting, schedule luxury moodboard"
+    title: "Book a Global Bespoke Design Consultation | Sui Dhaga Global",
+    description: "Elevate your wardrobe. Schedule a digital measurement and personal moodboard styling consultation via WhatsApp with our designers.",
+    keywords: "book custom tailoring, WhatsApp bespoke fitting, NRI styling consultation, premium wardrobe session"
   }
 };
 
@@ -179,21 +179,43 @@ const SEO = () => {
       "priceRange": "$$$$",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "London",
-        "addressCountry": "UK"
+        "addressLocality": "Punjab",
+        "addressRegion": "Punjab",
+        "addressCountry": "IN"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "51.5074",
-        "longitude": "-0.1278"
-      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        },
+        {
+          "@type": "Country",
+          "name": "Canada"
+        },
+        {
+          "@type": "Country",
+          "name": "Australia"
+        },
+        {
+          "@type": "Country",
+          "name": "India"
+        },
+        {
+          "@type": "Country",
+          "name": "United Arab Emirates"
+        }
+      ],
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
-          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
         ],
-        "opens": "09:00",
-        "closes": "18:00"
+        "opens": "10:00",
+        "closes": "19:00"
       }
     };
     injectSchema('seo-tailor-schema', tailorSchema);

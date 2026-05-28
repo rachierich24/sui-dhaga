@@ -204,7 +204,7 @@ const Navbar = () => {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: isMobile ? '0rem' : '1rem',
+              gap: isMobile ? '0rem' : 'var(--hamburger-gap, 1rem)',
               padding: '0.5rem',
               zIndex: 10000
             }}
@@ -390,11 +390,10 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      <SidebarMenu isOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <SidebarMenu isOpen={menuOpen} setMenuOpen={setMenuOpen} setSizeOpen={setSizeOpen} />
       <SizeGuide isOpen={sizeOpen} setSizeOpen={setSizeOpen} />
     </>
   );
 };
 
 export default Navbar;
-

@@ -921,3 +921,90 @@ a:hover {
     padding: 0 1rem;
   }
 }
+
+/* ==========================================================================
+   Premium Mobile Navigation Redesign Upgrades
+   ========================================================================== */
+
+/* 1. Global Custom Variables for Hamburgers */
+:root {
+  --hamburger-gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hamburger-gap: 0.5rem;
+  }
+}
+
+/* 2. Brand logo text responsiveness */
+@media (max-width: 480px) {
+  .logo-text {
+    display: none !important;
+  }
+}
+
+/* 3. Hide elements across breakpoints */
+@media (min-width: 769px) {
+  .mobile-only-bg {
+    display: none !important;
+  }
+  .mobile-roman-numeral {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-only-marquee {
+    display: none !important;
+  }
+  
+  /* 4. Touch-optimized navigation drawer layout */
+  .menu-links-container {
+    flex: none !important;
+    gap: 1rem !important; /* Stack them with elegant luxury padding */
+    margin: auto 0 !important; /* Center the links container vertically */
+    padding-top: 14vh !important;
+  }
+  
+  .menu-item-row {
+    flex: none !important;
+    height: auto !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  .menu-item-text-wrapper {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+  }
+  
+  .mobile-roman-numeral {
+    display: inline-block !important;
+    font-family: var(--font-serif);
+    font-size: 0.8rem !important;
+    color: var(--gold);
+    margin-right: 0.8rem;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    transform: translateY(-0.6rem); /* Align nicely as a superscript */
+  }
+
+  /* 5. Mobile drawer cta and footer spacing */
+  .menu-cta-container {
+    margin: 1.5rem auto 1rem !important;
+  }
+
+  .menu-footer {
+    padding: 1.5rem var(--section-padding-x) !important;
+  }
+}
+
+/* 6. Hover effects for full-screen CTA button */
+.menu-cta-btn:hover {
+  background: var(--gold) !important;
+  color: #030303 !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
+}
+
+.menu-cta-btn:active {
+  transform: scale(0.98);
+}
