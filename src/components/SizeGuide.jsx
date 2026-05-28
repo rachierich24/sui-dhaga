@@ -7,7 +7,6 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
   const [activeId, setActiveId] = useState(null);
   const [sizes, setSizes] = useState({});
   const [clientName, setClientName] = useState('');
-  const [orderRef, setOrderRef] = useState('');
   const isMobile = useMobile();
 
   // Lock body scroll when modal is open
@@ -28,7 +27,6 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
 
     let message = `✂️ *SUI DHAGA — Bespoke Order Request*\n`;
     if (clientName) message += `👤 Client: *${clientName}*\n`;
-    if (orderRef) message += `🔢 Ref: *${orderRef}*\n`;
     message += `📅 Date: ${today}\n`;
     message += `━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `Hello Sui Dhaga Team,\n\nI would like to place a bespoke order. Please find my measurements below:\n\n`;
@@ -52,10 +50,6 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
     const whatsappUrl = `https://wa.me/61470270478?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
-  };
-
-  const handlePrintLabel = () => {
-    window.print();
   };
 
   const overlayVariants = {
@@ -117,41 +111,6 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
             .size-guide-scroll::-webkit-scrollbar { width: 4px; }
             .size-guide-scroll::-webkit-scrollbar-track { background: transparent; }
             .size-guide-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 4px; }
-            
-            @media print {
-              html, body, #root {
-                background-color: #ffffff !important;
-                color: #000000 !important;
-                width: 100% !important;
-                height: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
-              }
-              
-              /* Hide everything */
-              body > *, #root > *, .main-wrapper, div[style*="position: fixed"] {
-                display: none !important;
-                visibility: hidden !important;
-              }
-
-              /* Show only the printable suit label */
-              #printable-suit-label {
-                display: flex !important;
-                visibility: visible !important;
-                position: fixed !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                background-color: #ffffff !important;
-                z-index: 9999999 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                align-items: center !important;
-                justify-content: center !important;
-              }
-            }
           `}</style>
 
           {/* Close Button Overlay */}
@@ -315,48 +274,21 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
 
                 {/* Order Information Inputs */}
                 <div style={{
-                  display: 'flex',
-                  flexDirection: isMobile ? 'column' : 'row',
-                  gap: '1.5rem',
                   marginBottom: '4vh',
                   padding: '1.5rem',
                   borderRadius: '8px',
                   backgroundColor: 'rgba(255, 255, 255, 0.02)',
                   border: '1px solid rgba(212, 175, 55, 0.15)',
                 }}>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>
                       Client Name
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. John Doe"
+                      placeholder="Your Name"
                       value={clientName}
                       onChange={(e) => setClientName(e.target.value)}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        borderBottom: '1px solid rgba(255,255,255,0.1)',
-                        color: '#fff',
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: '0.95rem',
-                        padding: '0.4rem 0',
-                        outline: 'none',
-                        transition: 'border-color 0.3s ease',
-                      }}
-                      onFocus={(e) => e.target.style.borderBottomColor = 'var(--gold)'}
-                      onBlur={(e) => e.target.style.borderBottomColor = 'rgba(255,255,255,0.1)'}
-                    />
-                  </div>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <label style={{ fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>
-                      Order Reference
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. SD-8942"
-                      value={orderRef}
-                      onChange={(e) => setOrderRef(e.target.value)}
                       style={{
                         background: 'transparent',
                         border: 'none',
@@ -548,53 +480,25 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
                         Next: Salwar Measurements →
                       </button>
                     ) : (
-                      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                        <button
-                          onClick={handleSubmitToWhatsApp}
-                          style={{
-                            background: '#D4AF37',
-                            color: '#000',
-                            border: 'none',
-                            padding: '1rem 3rem',
-                            fontFamily: 'var(--font-sans)',
-                            fontSize: '0.8rem',
-                            letterSpacing: '0.2em',
-                            textTransform: 'uppercase',
-                            cursor: 'pointer',
-                            borderRadius: '2px',
-                            fontWeight: 600,
-                            boxShadow: '0 10px 30px rgba(212, 175, 55, 0.2)'
-                          }}
-                        >
-                          Submit to WhatsApp
-                        </button>
-                        <button
-                          onClick={handlePrintLabel}
-                          style={{
-                            background: 'transparent',
-                            color: '#fff',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            padding: '1rem 3rem',
-                            fontFamily: 'var(--font-sans)',
-                            fontSize: '0.8rem',
-                            letterSpacing: '0.2em',
-                            textTransform: 'uppercase',
-                            cursor: 'pointer',
-                            borderRadius: '2px',
-                            transition: 'all 0.3s ease'
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.borderColor = 'var(--gold)';
-                            e.target.style.color = 'var(--gold)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.borderColor = 'rgba(255,255,255,0.2)';
-                            e.target.style.color = '#fff';
-                          }}
-                        >
-                          Print Suit Label
-                        </button>
-                      </div>
+                      <button
+                        onClick={handleSubmitToWhatsApp}
+                        style={{
+                          background: '#D4AF37',
+                          color: '#000',
+                          border: 'none',
+                          padding: '1rem 3rem',
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.8rem',
+                          letterSpacing: '0.2em',
+                          textTransform: 'uppercase',
+                          cursor: 'pointer',
+                          borderRadius: '2px',
+                          fontWeight: 600,
+                          boxShadow: '0 10px 30px rgba(212, 175, 55, 0.2)'
+                        }}
+                      >
+                        Submit to WhatsApp
+                      </button>
                     )}
                   </div>
 
@@ -602,90 +506,6 @@ const SizeGuide = ({ isOpen, setSizeOpen }) => {
               </div>
             </div>
           </div>
-
-          {/* Print-Only Suit Label Template */}
-          <div id="printable-suit-label" style={{ display: 'none' }}>
-            <div style={{
-              width: '4.5in',
-              height: '7in',
-              border: '4px double #000',
-              padding: '2rem',
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              fontFamily: 'Georgia, serif',
-              textAlign: 'center',
-              backgroundColor: '#fff',
-              color: '#000',
-              margin: 'auto'
-            }}>
-              <div>
-                <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.8rem', letterSpacing: '0.15em', fontWeight: 'bold', margin: '0 0 0.2rem 0', textTransform: 'uppercase' }}>
-                  SUI DHAGA
-                </h1>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 1.5rem 0', borderBottom: '1px solid #000', paddingBottom: '0.8rem' }}>
-                  Bespoke Luxury Atelier
-                </p>
-                
-                <table style={{ width: '100%', fontSize: '0.75rem', textAlign: 'left', marginBottom: '1.5rem', borderCollapse: 'collapse' }}>
-                  <tbody>
-                    <tr>
-                      <td style={{ fontWeight: 'bold', padding: '0.2rem 0', width: '35%', textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '0.1em' }}>Client Name:</td>
-                      <td style={{ borderBottom: '1px solid #000', padding: '0.2rem 0' }}>{clientName || '__________________'}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ fontWeight: 'bold', padding: '0.2rem 0', textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '0.1em' }}>Date:</td>
-                      <td style={{ borderBottom: '1px solid #000', padding: '0.2rem 0' }}>{new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ fontWeight: 'bold', padding: '0.2rem 0', textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '0.1em' }}>Order Ref:</td>
-                      <td style={{ borderBottom: '1px solid #000', padding: '0.2rem 0' }}>{orderRef || '__________________'}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                  <h5 style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '0 0 0.5rem 0', borderBottom: '1px solid #ccc', paddingBottom: '0.2rem', fontWeight: 'bold' }}>
-                    Kameez Details
-                  </h5>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem 1rem', fontSize: '0.75rem' }}>
-                    {measurements.kameez.map(item => (
-                      <div key={item.num} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dotted #ccc' }}>
-                        <span>{item.title}:</span>
-                        <span style={{ fontWeight: 'bold' }}>{sizes[item.num] ? `${sizes[item.num]}"` : '—'}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
-                  <h5 style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '0 0 0.5rem 0', borderBottom: '1px solid #ccc', paddingBottom: '0.2rem', fontWeight: 'bold' }}>
-                    Salwar Details
-                  </h5>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem 1rem', fontSize: '0.75rem' }}>
-                    {measurements.salwar.map(item => (
-                      <div key={item.num} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dotted #ccc' }}>
-                        <span>{item.title}:</span>
-                        <span style={{ fontWeight: 'bold' }}>{sizes[item.num] ? `${sizes[item.num]}"` : '—'}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <p style={{ fontStyle: 'italic', fontSize: '0.7rem', color: '#555', margin: '0 0 1rem 0' }}>
-                  "Every stitch is an opportunity"
-                </p>
-                <div style={{ borderTop: '1px solid #000', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>MD Signature</span>
-                  <span style={{ fontSize: '0.55rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 'bold' }}>HAND-CRAFTED</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       )}
     </AnimatePresence>
   );
