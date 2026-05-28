@@ -168,9 +168,9 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={false}
           quotes={[
-            { text: `"Growing up in rural Punjab, I understand the challenges of every woman facing domestic violence and drug abuse by men."` },
-            { text: `"I’m passionate about making people feel great about themselves by designing their wardrobes. I welcome you to explore the opportunities and the possibilities!"` },
-            { text: `"We make you look great where every stitch is an opportunity!"`, highlight: true }
+            { text: `"Growing up in rural Punjab, I witnessed the quiet resilience of women who lacked only opportunity. Sui Dhaga was born to transform a humble needle and thread into a powerful instrument of independence and pride."` },
+            { text: `"We are not merely designing wardrobes; we are weaving safety, self-reliance, and dignity into the very fabric of our communities. I welcome you to explore a world where fashion carries a deep, lasting purpose."` },
+            { text: `"At Sui Dhaga, we make you look exceptional where every single stitch is an opportunity to rebuild a life."`, highlight: true }
           ]}
         />
 
@@ -182,7 +182,9 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={true}
           quotes={[
-            { text: `Inspired by frameworks like Clare's Law, he builds ecosystems that support women entrepreneurs, ensuring empowerment is enabled by global opportunity.` }
+            { text: `"True empowerment demands a robust global ecosystem. Inspired by safety frameworks like Clare's Law, we are stitching together a protective network that turns local craftsmanship into sustainable global enterprises."` },
+            { text: `"Our mission is to ensure that every woman artisan in our collective can thread her own path to financial sovereignty and global success."`
+            }
           ]}
         />
 
@@ -194,7 +196,8 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={false}
           quotes={[
-            { text: `Driving the narrative of Sui Dhaga to the world, merging the art of storytelling with the business of empowerment.` }
+            { text: `"Every hand-tailored garment holds a legacy, and every artisan has a voice. My mission is to carry the soulful narrative of Sui Dhaga to the global stage—weaving the art of luxury bespoke tailoring with the business of human empowerment."` },
+            { text: `"We are building a narrative where true luxury is defined not just by how it looks, but by the lives it uplifts."` }
           ]}
         />
 
@@ -206,7 +209,8 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={true}
           quotes={[
-            { text: `Architecting the digital foundation and global ecosystem to bring bespoke experiences directly to our community.` }
+            { text: `"We are bringing a timeless, physical craft into the digital vanguard. By architecting an ultra-premium digital foundation, we seamlessly connect our discerning global clientele directly to the skilled hands of our artisans."` },
+            { text: `"Technology is the invisible thread that scales our impact—ensuring that every bespoke luxury experience is highly personalized, borderless, and meaningful."` }
           ]}
         />
 
