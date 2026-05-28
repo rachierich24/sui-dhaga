@@ -12,6 +12,7 @@ import PageTransition from './components/PageTransition';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Visionaries from './components/Visionaries';
+import GlobalMap from './components/GlobalMap';
 import SEO from './components/SEO';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -86,6 +87,9 @@ export default function App() {
 
         {/* Founders & Visionaries - Upgraded to Cinematic Luxury Component */}
         <Visionaries />
+
+        {/* Global Presence Map */}
+        <GlobalMap />
 
         {/* Book an Order (Conversion Section) */}
         <section id="book" className="section inverted-section" style={{ minHeight: '80vh', textAlign: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
