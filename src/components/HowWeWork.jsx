@@ -4,7 +4,7 @@ import artisanStudio from '../assets/images/modern_artisan_studio_1778357555845.
 
 const HowWeWork = () => {
   const containerRef = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -35,26 +35,26 @@ const HowWeWork = () => {
     <section id="how-we-work" ref={containerRef} className="how-we-work-section" style={{ padding: '10rem 5vw', backgroundColor: '#050505', position: 'relative', zIndex: 10 }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw', alignItems: 'center' }}>
-          
+
           {/* Text Content */}
           <motion.div style={{ opacity: textOpacity, y: textY }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
               <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--gold)' }}></div>
               <p className="micro-typography" style={{ color: 'var(--gold)', letterSpacing: '0.2em', margin: 0 }}>THE COLLECTIVE</p>
             </div>
-            
+
             <h2 className="display-2" style={{ marginBottom: '2rem', fontFamily: 'var(--font-serif)', fontWeight: 300, color: '#fff' }}>How We Work</h2>
-            
+
             <p className="lead text-muted" style={{ marginBottom: '3rem', lineHeight: 1.8, fontSize: '1.1rem', fontWeight: 300 }}>
               Our work is more than tailoring; it is a movement. Every garment is crafted by women who have reclaimed their independence. We provide a safe, empowering environment where skill meets dignity.
             </p>
-            
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
               <motion.div className="glass-card" style={{ padding: '2rem', opacity: card1Opacity, y: card1Y, border: '1px solid rgba(255,255,255,0.05)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
                 <h4 className="text-gold" style={{ fontSize: '1rem', marginBottom: '1rem', fontFamily: 'var(--font-sans)', fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.2em' }}>Fair Trade</h4>
                 <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, fontWeight: 300 }}>Ensuring every artisan receives more than a living wage, with complete financial autonomy.</p>
               </motion.div>
-              
+
               <motion.div className="glass-card" style={{ padding: '2rem', opacity: card2Opacity, y: card2Y, border: '1px solid rgba(255,255,255,0.05)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
                 <h4 className="text-gold" style={{ fontSize: '1rem', marginBottom: '1rem', fontFamily: 'var(--font-sans)', fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.2em' }}>Education</h4>
                 <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, fontWeight: 300 }}>Continuous skill-building and leadership workshops to empower the next generation.</p>
@@ -65,30 +65,30 @@ const HowWeWork = () => {
           {/* Image Content */}
           <div style={{ position: 'relative', width: '100%', maxWidth: '700px', justifySelf: 'center' }}>
             <motion.div
-              style={{ 
+              style={{
                 opacity: imageOpacity,
                 clipPath: imageClip,
-                borderRadius: '4px', 
+                borderRadius: '4px',
                 overflow: 'hidden',
                 boxShadow: '0 30px 60px rgba(0,0,0,0.5)',
                 filter: 'brightness(0.9) contrast(1.1)'
               }}
             >
-              <motion.img 
-                src={artisanStudio} 
-                alt="Sui Dhaga Artisan Tailoring Studio - Fair Trade Custom Couture" 
+              <motion.img
+                src={artisanStudio}
+                alt="Sui Dhaga Artisan Tailoring Studio - Fair Trade Custom Couture"
                 loading="lazy"
                 decoding="async"
-                style={{ 
-                  width: '100%', 
-                  height: 'auto', 
+                style={{
+                  width: '100%',
+                  height: 'auto',
                   display: 'block',
                   scale: imageScale,
                   transformOrigin: 'bottom center'
-                }} 
+                }}
               />
             </motion.div>
-            
+
             {/* Floating Detail Badge */}
             <motion.div
               style={{
@@ -119,7 +119,7 @@ const HowWeWork = () => {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               >
-                100%<br/>HANDMADE
+                100%<br />HANDMADE
               </motion.div>
             </motion.div>
           </div>

@@ -6,7 +6,7 @@ import { useMobile } from './MotionHelpers';
 const navneetPortrait = '/navneet_new.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
-const ctoPortrait = '/cto.jpeg';
+const ctoPortrait = '/cto.png';
 
 const ParallaxPortrait = ({ src, alt, objectPosition = 'center' }) => {
   const ref = useRef(null);
