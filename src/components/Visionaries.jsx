@@ -182,9 +182,9 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={true}
           quotes={[
-            { text: `"True empowerment demands a robust global ecosystem. Inspired by safety frameworks like Clare's Law, we are stitching together a protective network that turns local craftsmanship into sustainable global enterprises."` },
-            { text: `"Our mission is to ensure that every woman artisan in our collective can thread her own path to financial sovereignty and global success."`
-            }
+            { text: `A decorated Indian Navy Commander, philanthropist, and women’s empowerment advocate, Commander Nishi Kant Grover has dedicated his life to service in all its forms. After more than two decades defending the nation and earning two Chief of Naval Staff Commendations for Distinguished Service, he turned his focus toward a different mission. Inspired by the realities of domestic violence witnessed within his close circles, he became a catalyst for change, championing initiatives that empower women through safety, dignity, and economic independence.` },
+            { text: `Honored with the Legacy of Excellence 2025 Women Empowerment Advocacy Award, his journey reflects a rare blend of courage, compassion, and purpose.` },
+            { text: `Through Sui Dhaga Global, he now works to empower women artisans by connecting their craftsmanship to global opportunities, helping them achieve financial independence while preserving traditional skills. His vision is simple: transform talent into sustainable livelihoods and create a future where every woman can thrive with dignity and confidence`, highlight: true }
           ]}
         />
 
