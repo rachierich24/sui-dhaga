@@ -15,6 +15,12 @@ const markers = [
     role: "Bespoke Studio", 
     left: "67.7%", 
     top: "42.5%" 
+  },
+  { 
+    name: "Mauritius", 
+    role: "International Branch", 
+    left: "62.2%", 
+    top: "58.5%" 
   }
 ];
 
