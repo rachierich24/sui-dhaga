@@ -949,6 +949,7 @@ a:hover {
   .mobile-only-bg {
     display: none !important;
   }
+
   .mobile-roman-numeral {
     display: none !important;
   }
@@ -958,15 +959,17 @@ a:hover {
   .desktop-only-marquee {
     display: none !important;
   }
-  
+
   /* 4. Touch-optimized navigation drawer layout */
   .menu-links-container {
     flex: none !important;
-    gap: 1rem !important; /* Stack them with elegant luxury padding */
-    margin: auto 0 !important; /* Center the links container vertically */
+    gap: 1rem !important;
+    /* Stack them with elegant luxury padding */
+    margin: auto 0 !important;
+    /* Center the links container vertically */
     padding-top: 14vh !important;
   }
-  
+
   .menu-item-row {
     flex: none !important;
     height: auto !important;
@@ -976,7 +979,7 @@ a:hover {
   .menu-item-text-wrapper {
     font-size: clamp(2rem, 8vw, 2.8rem) !important;
   }
-  
+
   .mobile-roman-numeral {
     display: inline-block !important;
     font-family: var(--font-serif);
@@ -985,7 +988,8 @@ a:hover {
     margin-right: 0.8rem;
     letter-spacing: 0.1em;
     opacity: 0.75;
-    transform: translateY(-0.6rem); /* Align nicely as a superscript */
+    transform: translateY(-0.6rem);
+    /* Align nicely as a superscript */
   }
 
   /* 5. Mobile drawer cta and footer spacing */
@@ -1007,4 +1011,85 @@ a:hover {
 
 .menu-cta-btn:active {
   transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Luxury Navigation Drawer Scroll & Animation Enhancements
+   ========================================================================== */
+
+/* Hide scrollbar for premium scrollable menu container */
+.menu-scroll-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.menu-scroll-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Tactile text hover effects with gold drop-shadow/glow */
+.menu-item-row {
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item-row:hover {
+  transform: scale(1.02);
+}
+
+.menu-item-row:hover .menu-item-text-wrapper {
+  color: var(--gold) !important;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.45);
+  letter-spacing: 0.08em !important;
+}
+
+.menu-item-row:active {
+  transform: scale(0.98);
+}
+
+/* Gold button shimmer transition */
+.menu-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: none;
+}
+
+.menu-cta-btn:hover::before {
+  left: 150%;
+  transition: all 0.8s ease-in-out;
+}
+
+/* Footer link underline micro-animations */
+.menu-footer-link {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.menu-footer-link:hover {
+  color: var(--gold) !important;
+}
+
+.menu-footer-link:hover::after {
+  width: 100%;
 }

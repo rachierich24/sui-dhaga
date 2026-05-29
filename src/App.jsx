@@ -18,6 +18,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
 
+import EssenceSections from './components/EssenceSections';
 import { FadeIn, MassiveBackgroundText } from './components/MotionHelpers';
 
 export default function App() {
@@ -84,6 +85,9 @@ export default function App() {
         <div id="collection">
           <CreativesAtWork />
         </div>
+
+        {/* Essence of Bespoke Luxury */}
+        <EssenceSections />
 
         {/* Founders & Visionaries - Upgraded to Cinematic Luxury Component */}
         <Visionaries />

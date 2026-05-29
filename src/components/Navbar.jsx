@@ -11,6 +11,7 @@ const Navbar = () => {
   const isMobile = useMobile();
   const [showFab, setShowFab] = useState(false);
   const [fabDismissed, setFabDismissed] = useState(false);
+  const [menuHovered, setMenuHovered] = useState(false);
 
   // Smart Reveal State: hides on scroll down, shows on scroll up
   const [visible, setVisible] = useState(true);
@@ -26,6 +27,12 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // If the menu or size guide is open, bypass scroll hide logic and force sticky visible state
+      if (menuOpen || sizeOpen) {
+        setVisible(true);
+        return;
+      }
+
       const currentScrollY = window.scrollY;
 
       // Scrolled state for background blur
@@ -48,7 +55,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, menuOpen, sizeOpen]);
 
   // Lock scroll when overlays are open
   useEffect(() => {
@@ -106,20 +113,22 @@ const Navbar = () => {
           alignItems: 'center',
           zIndex: 9999,
           background: menuOpen || sizeOpen
-            ? 'rgba(3, 3, 3, 0)'
+            ? 'rgba(3, 3, 3, 0.95)'
             : scrolled
               ? 'rgba(3, 3, 3, 0.85)'
               : 'rgba(3, 3, 3, 0)',
           backdropFilter: menuOpen || sizeOpen
-            ? 'none'
+            ? 'blur(16px)'
             : scrolled ? 'blur(16px)' : 'none',
           WebkitBackdropFilter: menuOpen || sizeOpen
-            ? 'none'
+            ? 'blur(16px)'
             : scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled && !menuOpen && !sizeOpen
+          borderBottom: menuOpen || sizeOpen
             ? '1px solid rgba(214, 175, 55, 0.15)'
-            : '1px solid rgba(255, 255, 255, 0)',
-          boxShadow: scrolled && !menuOpen && !sizeOpen
+            : scrolled
+              ? '1px solid rgba(214, 175, 55, 0.15)'
+              : '1px solid rgba(255, 255, 255, 0)',
+          boxShadow: menuOpen || sizeOpen || scrolled
             ? '0 10px 30px rgba(0, 0, 0, 0.4)'
             : 'none',
           transition: 'background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease',
@@ -195,48 +204,62 @@ const Navbar = () => {
           </motion.button>
 
           {/* Premium Hamburger Toggle */}
-          <button
+          <motion.button
             onClick={() => { setMenuOpen(!menuOpen); setSizeOpen(false); }}
+            onMouseEnter={() => setMenuHovered(true)}
+            onMouseLeave={() => setMenuHovered(false)}
+            aria-label="Toggle Menu"
+            aria-expanded={menuOpen}
+            tabIndex={0}
             style={{
               background: 'transparent',
-              border: 'none',
+              border: '1px solid rgba(255, 255, 255, 0)',
               color: '#fff',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: isMobile ? '0rem' : 'var(--hamburger-gap, 1rem)',
-              padding: '0.5rem',
-              zIndex: 10000
+              gap: isMobile ? '0.5rem' : '1rem',
+              padding: '0.55rem 1.1rem',
+              borderRadius: '30px',
+              zIndex: 10000,
+              outline: 'none',
+              transition: 'background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease'
             }}
+            whileHover={{
+              backgroundColor: 'rgba(255, 255, 255, 0.04)',
+              borderColor: menuOpen ? 'rgba(214, 175, 55, 0.3)' : 'rgba(255, 255, 255, 0.08)',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+            }}
+            whileTap={{ scale: 0.97 }}
             className="hamburger-btn"
           >
             <AnimatePresence mode="wait">
-              {!isMobile && (
-                <motion.span
-                  key={menuOpen ? "close" : "menu"}
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '0.7rem',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: menuOpen ? 'var(--gold)' : '#fff'
-                  }}
-                >
-                  {menuOpen ? "CLOSE" : "MENU"}
-                </motion.span>
-              )}
+              <motion.span
+                key={menuOpen ? "close" : "menu"}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: isMobile ? '0.55rem' : '0.7rem',
+                  letterSpacing: isMobile ? '0.15rem' : '0.2rem',
+                  textTransform: 'uppercase',
+                  color: menuOpen ? 'var(--gold)' : '#fff',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {menuOpen ? "CLOSE" : "MENU"}
+              </motion.span>
             </AnimatePresence>
 
-            {/* Hamburger Icon with brand open animations */}
+            {/* Hamburger Icon with luxury "Sewing Stitch" hover animations */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: isMobile ? '28px' : '35px' }}>
               <motion.div
                 animate={{
                   rotate: menuOpen ? 45 : 0,
                   y: menuOpen ? (isMobile ? 9 : 9) : 0,
+                  x: !menuOpen && menuHovered ? -4 : 0,
                   backgroundColor: menuOpen ? 'var(--gold)' : '#fff'
                 }}
                 transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
@@ -245,7 +268,8 @@ const Navbar = () => {
               <motion.div
                 animate={{
                   opacity: menuOpen ? 0 : 1,
-                  width: menuOpen ? '100%' : '70%',
+                  width: menuOpen ? '100%' : (menuHovered ? '90%' : '70%'),
+                  x: !menuOpen && menuHovered ? 3 : 0,
                   backgroundColor: menuOpen ? 'var(--gold)' : '#fff'
                 }}
                 transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
@@ -255,13 +279,14 @@ const Navbar = () => {
                 animate={{
                   rotate: menuOpen ? -45 : 0,
                   y: menuOpen ? (isMobile ? -9 : -9) : 0,
+                  x: !menuOpen && menuHovered ? -2 : 0,
                   backgroundColor: menuOpen ? 'var(--gold)' : '#fff'
                 }}
                 transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
                 style={{ width: '100%', height: '1px', originX: 0.5 }}
               />
             </div>
-          </button>
+          </motion.button>
         </div>
 
         {/* Brand Thematic "Sewing Thread" Scroll Progress Indicator */}
