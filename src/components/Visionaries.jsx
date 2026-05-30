@@ -182,9 +182,9 @@ const Visionaries = () => {
           objectPos="center"
           isReversed={true}
           quotes={[
-            { text: `A decorated Indian Navy Commander, philanthropist, and women’s empowerment advocate, Commander Nishi Kant Grover has dedicated his life to service in all its forms. After more than two decades defending the nation and earning two Chief of Naval Staff Commendations for Distinguished Service, he turned his focus toward a different mission. Inspired by the realities of domestic violence witnessed within his close circles, he became a catalyst for change, championing initiatives that empower women through safety, dignity, and economic independence.` },
+            { text: `A decorated Indian Navy Commander, philanthropist, and women’s empowerment advocate, Commander Nishi Kant Grover has dedicated over four decades to leadership and service, including two decades in the Indian Navy and two decades of global corporate experience. After earning two Chief of Naval Staff Commendations for Distinguished Service, he turned his focus toward a different mission. Inspired by the realities of domestic violence witnessed within his close circles, he became a catalyst for change, championing initiatives that empower women through safety, dignity, and economic independence.` },
             { text: `Honored with the Legacy of Excellence 2025 Women Empowerment Advocacy Award, his journey reflects a rare blend of courage, compassion, and purpose.` },
-            { text: `Through Sui Dhaga Global, he now works to empower women artisans by connecting their craftsmanship to global opportunities, helping them achieve financial independence while preserving traditional skills. His vision is simple: transform talent into sustainable livelihoods and create a future where every woman can thrive with dignity and confidence`, highlight: true }
+            { text: `Through Sui Dhaga Global, he now works to empower women artisans by connecting their craftsmanship to global opportunities, helping them achieve financial independence while preserving traditional skills. His vision is to transform talent into sustainable livelihoods and create a future where every woman can thrive with dignity and confidence.`, highlight: true }
           ]}
         />
 
