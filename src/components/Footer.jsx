@@ -220,7 +220,7 @@ const Footer = () => {
             <nav aria-label="Footer Brand Navigation" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <h4 style={{ fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.05em', color: '#D4AF37' }}>BRAND</h4>
               <a href="#how-we-work" className="footer-link-exact" aria-label="Read about our empowerment and fair trade studio">About Us</a>
-              <a href="#collection" className="footer-link-exact" aria-label="View our bespoke luxury garments collection">The Collection</a>
+              <a href="#archives" className="footer-link-exact" aria-label="View our bespoke luxury archives">The Archives</a>
               <a href="#process" className="footer-link-exact" aria-label="Explore our three-step custom crafting process">Our Process</a>
               <a href="#visionaries" className="footer-link-exact" aria-label="Meet the founders of Sui Dhaga Global">The Visionaries</a>
             </nav>

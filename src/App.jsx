@@ -20,9 +20,11 @@ import 'lenis/dist/lenis.css';
 
 import EssenceSections from './components/EssenceSections';
 import { FadeIn, MassiveBackgroundText } from './components/MotionHelpers';
+import Archives from './components/Archives';
 
 export default function App() {
   const lenisRef = React.useRef(null);
+  const [activeView, setActiveView] = React.useState('home');
 
   useEffect(() => {
     let rafId;
@@ -56,6 +58,55 @@ export default function App() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#archives') {
+        setActiveView('archives');
+        // Reset scroll instantly using Lenis when navigating to archives
+        setTimeout(() => {
+          if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true });
+          else window.scrollTo(0, 0);
+        }, 50);
+      } else {
+        setActiveView('home');
+        if (hash && hash !== '#' && hash !== '#home') {
+          setTimeout(() => {
+            const targetElement = document.querySelector(hash);
+            if (targetElement) {
+              if (lenisRef.current) lenisRef.current.scrollTo(targetElement);
+              else targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        } else {
+          // If navigating to home top
+          setTimeout(() => {
+            if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true });
+            else window.scrollTo(0, 0);
+          }, 50);
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange(); // Check on mount
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (activeView === 'archives') {
+    return (
+      <main className="main-wrapper">
+        <SEO />
+        <PageTransition />
+        <CustomCursor />
+        <Navbar />
+        <Archives />
+        <Footer />
+      </main>
+    );
+  }
 
   return (
     <main className="main-wrapper">

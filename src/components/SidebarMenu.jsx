@@ -9,7 +9,7 @@ import craftImage from '../assets/images/workspace_craft_1777827220745.png';
 import navneetPortrait from '../assets/images/navneet_portrait_1777827174428.png';
 
 const navLinks = [
-  { name: 'Collection', image: creativeImage },
+  { name: 'Archives', image: '/WhatsApp Image 2026-06-01 at 1.26.05 AM.jpeg' },
   { name: 'Bespoke', image: craftImage },
   { name: 'Visionaries', image: navneetPortrait },
   { name: 'Process', image: teamImage },
@@ -40,17 +40,14 @@ const SidebarMenu = ({ isOpen, setMenuOpen, setSizeOpen }) => {
     return () => clearInterval(interval);
   }, [isOpen]);
 
-  // Custom click handler for robust smooth scrolling
+  // Custom click handler for robust smooth scrolling via App routing
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
     setMenuOpen(false);
     
     // Smooth scroll with premium delay to let the sidebar exit animation complete
     setTimeout(() => {
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      window.location.hash = `#${targetId}`;
     }, 400); // matches stagger close transition duration
   };
 

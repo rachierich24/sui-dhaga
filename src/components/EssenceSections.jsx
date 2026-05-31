@@ -219,7 +219,7 @@ const EssenceSections = () => {
         <div style={{ position: 'absolute', bottom: '10%', left: 0, width: '100%', height: '200px', pointerEvents: 'none', opacity: 1, zIndex: 0 }}>
           <svg viewBox="0 0 1440 200" fill="none" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
             <motion.path style={{ pathLength: bottomThreadDraw, opacity: bottomThreadDraw }} d="M0,100 C300,200 500,0 800,100 C1100,200 1300,50 1440,150" stroke="#D4AF37" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-            <motion.path style={{ pathLength: bottomThreadDraw, opacity: bottomThreadDraw }} d="M0,100 C300,200 500,0 800,100 C1100,200 1300,50 1440,150" stroke="#D4AF37" strokeWidth="0.3" vectorEffect="non-scaling-stroke" style={{ filter: 'blur(4px)' }} />
+            <motion.path style={{ pathLength: bottomThreadDraw, opacity: bottomThreadDraw, filter: 'blur(4px)' }} d="M0,100 C300,200 500,0 800,100 C1100,200 1300,50 1440,150" stroke="#D4AF37" strokeWidth="0.3" vectorEffect="non-scaling-stroke" />
           </svg>
         </div>
       </section>
