@@ -6,12 +6,12 @@ import { useMobile } from './MotionHelpers';
 import creativeImage from '../assets/images/workspace_creative_1777827300802.png';
 import teamImage from '../assets/images/workspace_team_1777827283644.png';
 import craftImage from '../assets/images/workspace_craft_1777827220745.png';
-import navneetPortrait from '../assets/images/navneet_portrait_1777827174428.png';
+import nishikantPortrait from '../assets/images/nishikant_portrait_1777827198758.png';
 
 const navLinks = [
   { name: 'Archives', image: '/WhatsApp Image 2026-06-01 at 1.26.05 AM.jpeg' },
   { name: 'Bespoke', image: craftImage },
-  { name: 'Visionaries', image: navneetPortrait },
+  { name: 'Visionaries', image: nishikantPortrait },
   { name: 'Process', image: teamImage },
 ];
 

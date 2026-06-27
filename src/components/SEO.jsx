@@ -23,7 +23,7 @@ const sectionMetadata = {
   },
   visionaries: {
     title: "Meet the Visionaries & Tech Founders | Sui Dhaga Global",
-    description: "Meet the founders NavneetJit Kaur and Nishi Kant Grover, bridging master Punjabi handcrafts with modern global digital sizing ecosystems.",
+    description: "Meet the visionaries behind Sui Dhaga Global, bridging master Punjabi handcrafts with modern global digital sizing ecosystems.",
     keywords: "Sui Dhaga founders, fashion entrepreneurs, Clare's Law ecosystem, digital clothing systems"
   },
   book: {
