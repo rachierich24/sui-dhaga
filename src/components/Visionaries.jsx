@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useMobile } from './MotionHelpers';
 
 // Visionary Images
-
+const navneetPortrait = '/navneet_new.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
 const ctoPortrait = '/cto.png';
@@ -160,7 +160,19 @@ const Visionaries = () => {
           </h2>
         </motion.div>
 
-
+        <VisionaryBlock
+          name="NavneetJit Kaur"
+          role="Founder & Managing Director"
+          watermark="NAVNEET"
+          src={navneetPortrait}
+          objectPos="center"
+          isReversed={false}
+          quotes={[
+            { text: `"Growing up in rural Punjab, I witnessed the quiet resilience of women who lacked only opportunity. Sui Dhaga was born to transform a humble needle and thread into a powerful instrument of independence and pride."` },
+            { text: `"We are not merely designing wardrobes; we are weaving safety, self-reliance, and dignity into the very fabric of our communities. I welcome you to explore a world where fashion carries a deep, lasting purpose."` },
+            { text: `"At Sui Dhaga, we make you look exceptional where every single stitch is an opportunity to rebuild a life."`, highlight: true }
+          ]}
+        />
 
         <VisionaryBlock
           name="Nishi Kant Grover"
