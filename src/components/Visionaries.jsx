@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useMobile } from './MotionHelpers';
 
 // Visionary Images
-const navneetPortrait = '/navneet_new.png';
+const renukaPortrait = '/Renuka.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
 const ctoPortrait = '/cto.png';
@@ -161,22 +161,22 @@ const Visionaries = () => {
         </motion.div>
 
         <VisionaryBlock
-          name="NavneetJit Kaur"
-          role="Founder & Managing Director"
-          watermark="NAVNEET"
-          src={navneetPortrait}
+          name="Renuka Rani"
+          role="Operations Director"
+          watermark="RENUKA"
+          src={renukaPortrait}
           objectPos="center"
           isReversed={false}
           quotes={[
-            { text: `"Growing up in rural Punjab, I witnessed the quiet resilience of women who lacked only opportunity. Sui Dhaga was born to transform a humble needle and thread into a powerful instrument of independence and pride."` },
-            { text: `"We are not merely designing wardrobes; we are weaving safety, self-reliance, and dignity into the very fabric of our communities. I welcome you to explore a world where fashion carries a deep, lasting purpose."` },
-            { text: `"At Sui Dhaga, we make you look exceptional where every single stitch is an opportunity to rebuild a life."`, highlight: true }
+            { text: `"Empowering rural women goes beyond providing opportunities; it’s about equipping them with the tools to build their own futures. My journey with the Haryana State Rural Livelihoods Mission taught me that when you guide a woman to start her own business, you uplift an entire community."` },
+            { text: `"Working closely with women’s Self-Help Groups across more than 15 villages, my focus has been on transforming entrepreneurial dreams into sustainable realities. From grassroots business planning to securing financial independence, our mission is to cultivate self-reliant leaders."` },
+            { text: `"We are not just teaching financial management or marketing; we are instilling confidence. I envision a world where every rural entrepreneur has the knowledge and support to turn their grassroots ideas into thriving, independent enterprises."`, highlight: true }
           ]}
         />
 
         <VisionaryBlock
           name="Nishi Kant Grover"
-          role="Co-Founder & Global Ecosystems"
+          role="Founder & Global Ecosystems"
           watermark="NISHIKANT"
           src={nishikantPortrait}
           objectPos="center"
