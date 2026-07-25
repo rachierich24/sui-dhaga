@@ -32,12 +32,12 @@ const CreativesAtWork = () => {
   }, []);
 
   const creativeCards = [
-    { src: '/creative_2.jpeg', title: 'The Strategy', desc: 'Behind every stitch is a strategy to create opportunity.', top: isMobile ? '15%' : '12%', left: isMobile ? '35%' : '8%', progress: 0.15, rotation: -3 },
-    { src: '/creative_4.jpeg', title: 'Global Craft', desc: 'Partnerships that turn local craftsmanship into global possibility.', top: isMobile ? '30%' : '20%', left: isMobile ? '10%' : '55%', progress: 0.30, rotation: 2 },
-    { src: '/creative_5.jpeg', title: 'Shared Stories', desc: 'Some relationships begin with a garment and continue as stories shared across generations.', top: isMobile ? '45%' : '38%', left: isMobile ? '35%' : '12%', progress: 0.45, rotation: -1.5 },
+    { src: '/WhatsApp Image 2026-06-01 at 1.26.05 AM.jpeg', title: 'Vibrant Horizons', desc: 'Connecting creative vision with purposeful direction.', top: isMobile ? '15%' : '12%', left: isMobile ? '35%' : '8%', progress: 0.15, rotation: -3 },
+    { src: '/creative_9.jpeg', title: 'Cultural Craft', desc: 'Partnerships that turn local craftsmanship into global possibility.', top: isMobile ? '30%' : '20%', left: isMobile ? '10%' : '55%', progress: 0.30, rotation: 2 },
+    { src: '/WhatsApp Image 2026-06-01 at 1.26.07 AM (1).jpeg', title: 'Global Journey', desc: 'Building bridges and carrying artisanal stories across continents.', top: isMobile ? '45%' : '38%', left: isMobile ? '35%' : '12%', progress: 0.45, rotation: -1.5 },
     { src: '/creative_6.jpeg', title: 'Beyond Borders', desc: 'From Punjab to the world, the narrative continues across borders.', top: isMobile ? '60%' : '52%', left: isMobile ? '10%' : '60%', progress: 0.60, rotation: 3 },
     { src: '/creative_7.jpeg', title: 'Quiet Beginnings', desc: 'Some of the strongest ideas begin over quiet conversations and unfinished coffee.', top: isMobile ? '75%' : '72%', left: isMobile ? '35%' : '10%', progress: 0.75, rotation: -2.5 },
-    { src: '/creative_8.jpeg', title: 'The Collective', desc: 'The brand is built not only through design, but through the people gathered around the table.', top: isMobile ? '90%' : '82%', left: isMobile ? '25%' : '52%', progress: 0.90, rotation: 1.5 },
+    { src: '/creative_10.jpeg', title: 'The Collective', desc: 'The brand is built not only through design, but through meaningful human connections.', top: isMobile ? '90%' : '82%', left: isMobile ? '25%' : '52%', progress: 0.90, rotation: 1.5 },
   ];
 
   const svgPathD = isMobile

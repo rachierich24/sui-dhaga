@@ -161,26 +161,12 @@ const Visionaries = () => {
         </motion.div>
 
         <VisionaryBlock
-          name="Renuka Rani"
-          role="Operations Director"
-          watermark="RENUKA"
-          src={renukaPortrait}
-          objectPos="center"
-          isReversed={false}
-          quotes={[
-            { text: `"Empowering rural women goes beyond providing opportunities; it’s about equipping them with the tools to build their own futures. My journey with the Haryana State Rural Livelihoods Mission taught me that when you guide a woman to start her own business, you uplift an entire community."` },
-            { text: `"Working closely with women’s Self-Help Groups across more than 15 villages, my focus has been on transforming entrepreneurial dreams into sustainable realities. From grassroots business planning to securing financial independence, our mission is to cultivate self-reliant leaders."` },
-            { text: `"We are not just teaching financial management or marketing; we are instilling confidence. I envision a world where every rural entrepreneur has the knowledge and support to turn their grassroots ideas into thriving, independent enterprises."`, highlight: true }
-          ]}
-        />
-
-        <VisionaryBlock
           name="Nishi Kant Grover"
           role="Founder & Global Ecosystems"
           watermark="NISHIKANT"
           src={nishikantPortrait}
           objectPos="center"
-          isReversed={true}
+          isReversed={false}
           quotes={[
             { text: `A decorated Indian Navy Commander, philanthropist, and women’s empowerment advocate, Commander Nishi Kant Grover has dedicated over four decades to leadership and service, including two decades in the Indian Navy and two decades of global corporate experience. After earning two Chief of Naval Staff Commendations for Distinguished Service, he turned his focus toward a different mission. Inspired by the realities of domestic violence witnessed within his close circles, he became a catalyst for change, championing initiatives that empower women through safety, dignity, and economic independence.` },
             { text: `Honored with the Legacy of Excellence 2025 Women Empowerment Advocacy Award, his journey reflects a rare blend of courage, compassion, and purpose.` },
@@ -194,10 +180,24 @@ const Visionaries = () => {
           watermark="CAMELLIA"
           src={camelliaPortrait}
           objectPos="center"
-          isReversed={false}
+          isReversed={true}
           quotes={[
             { text: `"Every hand-tailored garment holds a legacy, and every artisan has a voice. My mission is to carry the soulful narrative of Sui Dhaga to the global stage—weaving the art of luxury bespoke tailoring with the business of human empowerment."` },
             { text: `"We are building a narrative where true luxury is defined not just by how it looks, but by the lives it uplifts."` }
+          ]}
+        />
+
+        <VisionaryBlock
+          name="Renuka Rani"
+          role="Operations Manager"
+          watermark="RENUKA"
+          src={renukaPortrait}
+          objectPos="center"
+          isReversed={false}
+          quotes={[
+            { text: `"Empowering rural women goes beyond providing opportunities; it’s about equipping them with the tools to build their own futures. My journey with the Haryana State Rural Livelihoods Mission taught me that when you guide a woman to start her own business, you uplift an entire community."` },
+            { text: `"Working closely with women’s Self-Help Groups across more than 15 villages, my focus has been on transforming entrepreneurial dreams into sustainable realities. From grassroots business planning to securing financial independence, our mission is to cultivate self-reliant leaders."` },
+            { text: `"We are not just teaching financial management or marketing; we are instilling confidence. I envision a world where every rural entrepreneur has the knowledge and support to turn their grassroots ideas into thriving, independent enterprises."`, highlight: true }
           ]}
         />
 
