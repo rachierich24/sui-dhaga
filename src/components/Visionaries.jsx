@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useMobile } from './MotionHelpers';
 
 // Visionary Images
-const renukaPortrait = '/Renuka.png';
+const naveenjeetPortrait = '/navneet_new.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
 const ctoPortrait = '/cto.png';
@@ -188,16 +188,16 @@ const Visionaries = () => {
         />
 
         <VisionaryBlock
-          name="Renuka Rani"
+          name="Naveenjeet Kaur"
           role="Operations Manager"
-          watermark="RENUKA"
-          src={renukaPortrait}
+          watermark="NAVEENJEET"
+          src={naveenjeetPortrait}
           objectPos="center"
           isReversed={false}
           quotes={[
-            { text: `"Empowering rural women goes beyond providing opportunities; it’s about equipping them with the tools to build their own futures. My journey with the Haryana State Rural Livelihoods Mission taught me that when you guide a woman to start her own business, you uplift an entire community."` },
-            { text: `"Working closely with women’s Self-Help Groups across more than 15 villages, my focus has been on transforming entrepreneurial dreams into sustainable realities. From grassroots business planning to securing financial independence, our mission is to cultivate self-reliant leaders."` },
-            { text: `"We are not just teaching financial management or marketing; we are instilling confidence. I envision a world where every rural entrepreneur has the knowledge and support to turn their grassroots ideas into thriving, independent enterprises."`, highlight: true }
+            { text: `"Growing up in rural Punjab, I understand the challenges of every woman facing domestic violence and drug abuse by men."` },
+            { text: `"I’m passionate about making people feel great about themselves by designing their wardrobes. I welcome you to explore the opportunities and the possibilities!"` },
+            { text: `"We make you look great where every stitch is an opportunity!"`, highlight: true }
           ]}
         />
 
