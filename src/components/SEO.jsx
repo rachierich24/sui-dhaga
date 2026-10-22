@@ -22,9 +22,9 @@ const sectionMetadata = {
     keywords: "custom sherwani gallery, luxury velvet suit, premium silk dresses, elite custom fashion"
   },
   visionaries: {
-    title: "Meet the Visionaries & Tech Founders | Sui Dhaga Global",
-    description: "Meet the founders NavneetJit Kaur and Nishi Kant Grover, bridging master Punjabi handcrafts with modern global digital sizing ecosystems.",
-    keywords: "Sui Dhaga founders, fashion entrepreneurs, Clare's Law ecosystem, digital clothing systems"
+    title: "Meet the Visionaries & Leadership | Sui Dhaga Global",
+    description: "Meet the visionary leadership team behind Sui Dhaga Global, bridging master Punjabi handcrafts, international creative direction, and digital ecosystems.",
+    keywords: "Sui Dhaga founders, fashion entrepreneurs, creative director, digital clothing systems"
   },
   book: {
     title: "Book a Global Bespoke Design Consultation | Sui Dhaga Global",
