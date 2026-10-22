@@ -7,7 +7,6 @@ const naveenjeetPortrait = '/navneet_new.png';
 const nishikantPortrait = '/nishikant_new.png';
 const camelliaPortrait = '/camellia_new.png';
 const nouhadPortrait = '/nouhad.png';
-const ctoPortrait = '/cto.png';
 
 const ParallaxPortrait = ({ src, alt, objectPosition = 'center' }) => {
   const ref = useRef(null);
@@ -136,10 +135,10 @@ const Visionaries = () => {
     >
       {!isMobile && (
         <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '100vw', height: '100%', pointerEvents: 'none', zIndex: 0, opacity: 0.3 }}>
-          <svg viewBox="0 0 1000 5000" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
+          <svg viewBox="0 0 1000 4000" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
             <motion.path
               style={{ pathLength: threadDraw }}
-              d="M 500 0 C 800 333, 800 666, 500 1000 C 200 1333, 200 1666, 500 2000 C 800 2333, 800 2666, 500 3000 C 200 3333, 200 3666, 500 4000 C 800 4333, 800 4666, 500 5000"
+              d="M 500 0 C 800 333, 800 666, 500 1000 C 200 1333, 200 1666, 500 2000 C 800 2333, 800 2666, 500 3000 C 200 3333, 200 3666, 500 4000"
               stroke="#D4AF37"
               strokeWidth="1"
               fill="none"
@@ -213,19 +212,6 @@ const Visionaries = () => {
             { text: `"A Moroccan mechanical engineer, international entrepreneur, and visionary artist, Nouhad unites the rigor of advanced technology with the timeless soul of world heritage and haute couture."` },
             { text: `"Through her international artistic endeavor 'Needles of Time,' she explores civilizations through handcrafted miniature collections—championing the needle as a universal vessel of history, beauty, and female empowerment."` },
             { text: `"Engineering, entrepreneurship, and art are expressions of the same passion: to imagine, design, and transform human potential into reality. At Sui Dhaga, our craft weaves a legacy that transcends borders."`, highlight: true }
-          ]}
-        />
-
-        <VisionaryBlock
-          name="Rachit Vij"
-          role="Chief Technology Officer"
-          watermark="RACHIT"
-          src={ctoPortrait}
-          objectPos="center"
-          isReversed={false}
-          quotes={[
-            { text: `"We are bringing a timeless, physical craft into the digital vanguard. By architecting an ultra-premium digital foundation, we seamlessly connect our discerning global clientele directly to the skilled hands of our artisans."` },
-            { text: `"Technology is the invisible thread that scales our impact—ensuring that every bespoke luxury experience is highly personalized, borderless, and meaningful."` }
           ]}
         />
 
